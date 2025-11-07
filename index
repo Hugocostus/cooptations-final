@@ -6,9 +6,34 @@
     <title>Portail Principal</title>
 </head>
 <body>
-    <h1>Portail Principal</h1>
-    <button onclick="location.href='inscriptions/inscriptions.html'">Inscriptions</button>
-    <button onclick="location.href='voeux etudiants/voeux etudiants.html'">Vœux Étudiants</button>
-    <button onclick="location.href='voeux asso/voeux asso.html'">Vœux Associations</button>
+    <header>
+        <h1>Portail Principal des Étudiants et Associations</h1>
+        <p>Bienvenue sur le portail. Choisissez une section pour continuer :</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Gestion des inscriptions</h2>
+            <p>Accédez à la page pour inscrire de nouveaux étudiants.</p>
+            <button onclick="location.href='inscriptions/inscriptions.html'">Inscriptions</button>
+        </section>
+
+        <section>
+            <h2>Vœux des étudiants</h2>
+            <p>Visualisez et gérez les vœux des étudiants pour les différentes associations.</p>
+            <button onclick="location.href='voeux etudiants/voeux etudiants.html'">Vœux Étudiants</button>
+        </section>
+
+        <section>
+            <h2>Vœux des associations</h2>
+            <p>Accédez aux vœux soumis par les associations et suivez leur statut.</p>
+            <button onclick="location.href='voeux asso/voeux asso.html'">Vœux Associations</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> Portail des associations et étudiants</p>
+        <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    </footer>
 </body>
 </html>
