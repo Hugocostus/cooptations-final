@@ -8,7 +8,7 @@
 <body>
     <h1>Portail Principal</h1>
     <button onclick="location.href='inscription.html'">Inscriptions</button>
-    <button onclick="location.href='etudiant.html'">Vœux Étudiants</button>
-    <button onclick="location.href='asso.html'">Vœux Associations</button>
+    <button onclick="location.href='voeux etudiants/voeux etudiants.html'">Vœux Étudiants</button>
+    <button onclick="location.href='voeux asso/voeux asso.html'">Vœux Associations</button>
 </body>
 </html>
