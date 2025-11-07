@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail des Vœux - Associations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Portail des Vœux - Associations</h1>
+    </header>
+
+    <main>
+        <!-- Formulaire simplifié -->
+        <section class="formulaire-etudiant">
+            <h2>Informations Étudiant</h2>
+            <form id="form-etudiant">
+                <div>
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+                <div>
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                <div>
+                    <label for="numero">Numéro étudiant :</label>
+                    <input type="text" id="numero" name="numero" required>
+                </div>
+            </form>
+        </section>
+        <button id="export-csv">Envoyer</button>
+        <p id="status-msg"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> Portail des associations</p>
+    </footer>
+
+    <script src="script inscription.js"></script>
+</body>
+
+</html>
