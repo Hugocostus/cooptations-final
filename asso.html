@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail des Associations</title>
+</head>
+
+<body>
+
+    <h1>Portail des Associations</h1>
+
+    <div>
+        <label>Association :
+    <select id="select-asso">
+      <option value="">-- Sélectionnez une association --</option>
+      <option>Astuce</option>
+      <option>BDA</option>
+      <option>BDE</option>
+      <option>BDI</option>
+      <option>BDS</option>
+      <option>Cheer'up</option>
+      <option>Forum</option>
+      <option>Noise</option>
+      <option>Raid</option>
+      <option>Transac</option>
+    </select>
+  </label>
+
+        <label>Numéro :
+    <input type="number" id="num-libre" placeholder="Ex : 42">
+  </label>
+
+        <button id="envoyer">Envoyer</button>
+    </div>
+
+    <h2>Tableau des Étudiants</h2>
+    <table id="table-etudiants">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom Étudiant</th>
+                <th>Recherche</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 150 lignes pré-remplies -->
+            <!-- Chaque ligne a : td pour numéro, td pour nom, input + div pour résultats -->
+            <!-- Généré automatiquement ici pour simplifier -->
+            <script>
+                for (let i = 1; i <= 150; i++) {
+                    document.write(`
+          <tr>
+            <td>${i}</td>
+            <td id="nom-${i}">—</td>
+            <td>
+              <input type="text" id="search-${i}" placeholder="Rechercher étudiant...">
+              <div id="resultats-${i}"></div>
+            </td>
+          </tr>
+        `);
+                }
+            </script>
+        </tbody>
+    </table>
+
+    <script src="script asso.js"></script>
+</body>
+
+</html>
