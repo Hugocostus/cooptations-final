@@ -54,4 +54,3 @@ document.getElementById("export-csv").addEventListener("click", function (e) {
 
 // Affichage de l'année dans le footer
 document.getElementById('year').textContent = new Date().getFullYear();
-
