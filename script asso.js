@@ -91,3 +91,4 @@ document.getElementById("envoyer").addEventListener("click", async () => {
 });
 
 window.onload = chargerEtudiants;
+
