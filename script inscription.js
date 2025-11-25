@@ -1,12 +1,16 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwOzUN89SrhsRlOBoDrc7UKjJFgEh9ojMFZmc89G4EM0tcpR_aZ-VxIzaYzO7R8hpvv/exec";
+// === API URLs ===
+const API_COOPT_URL = "https://script.google.com/macros/s/AKfycbwOzUN89SrhsRlOBoDrc7UKjJFgEh9ojMFZmc89G4EM0tcpR_aZ-VxIzaYzO7R8hpvv/exec";
+const API_AUTH_URL  = "https://script.google.com/macros/s/AKfycbzyjCOYz95BM_0xxU5u7bJDzc4SdpedLu6IfDE4BrINrvLr-x_FK89kQn6BYqBbxeH2Kg/exec";
 
-async function envoyerInfos(prenom, nom, numero) {
+
+// === Fonction principale ===
+async function envoyerInfos(prenom, nom, numero, email) {
     const now = new Date();
     const statusMsg = document.getElementById("status-msg");
-
     statusMsg.textContent = "⏳ Envoi en cours...";
 
-    const payload = {
+    // 1️⃣ Envoi vers cooptations_etudiant
+    const payloadCoopt = {
         action: "addStudent",
         Prenom: prenom,
         Nom: nom,
@@ -15,18 +19,31 @@ async function envoyerInfos(prenom, nom, numero) {
         Heure: now.toLocaleTimeString("fr-FR")
     };
 
+    // 2️⃣ Envoi vers authentification
+    const payloadAuth = {
+        action: "addAuthentification",
+        Adresse: email,
+        Numero: numero
+    };
+
     try {
-        const response = await fetch(API_URL, {
+        // --- POST 1 : cooptation ---
+        await fetch(API_COOPT_URL, {
             method: "POST",
-            mode: "no-cors", // 🔥 FIX CORS
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payloadCoopt)
         });
 
-        // Avec no-cors, on ne peut pas lire la réponse → on assume que ça marche
-        statusMsg.textContent = "✅ Informations envoyées avec succès !";
+        // --- POST 2 : authentification ---
+        await fetch(API_AUTH_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payloadAuth)
+        });
+
+        statusMsg.textContent = "✅ Inscription enregistrée avec succès !";
 
     } catch (err) {
         console.error(err);
@@ -34,20 +51,23 @@ async function envoyerInfos(prenom, nom, numero) {
     }
 }
 
-document.getElementById("export-csv").addEventListener("click", function (e) {
+
+// === Gestion du bouton d'envoi ===
+document.getElementById("export-csv").addEventListener("click", (e) => {
     e.preventDefault();
 
     const prenom = document.getElementById("prenom").value.trim();
     const nom = document.getElementById("nom").value.trim();
     const numero = document.getElementById("numero").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-    if (!prenom || !nom || !numero) {
+    if (!prenom || !nom || !numero || !email) {
         alert("Veuillez remplir tous les champs.");
         return;
     }
 
-    envoyerInfos(prenom, nom, numero);
+    envoyerInfos(prenom, nom, numero, email);
 });
 
+// === Footer année ===
 document.getElementById('year').textContent = new Date().getFullYear();
-
