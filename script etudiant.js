@@ -79,7 +79,9 @@ async function sauvegarderVoeux(etudiant1, etudiant2, voeux) {
         Voeu4: voeux[3] || "",
         Voeu5: voeux[4] || "",
         Date: now.toLocaleDateString('fr-FR'),
-        Heure: now.toLocaleTimeString('fr-FR')
+        Heure: now.toLocaleTimeString('fr-FR'),
+
+        Email: localStorage.getItem("userEmail")   // 🆕 L’email du login
     };
 
     const statusMsg = document.getElementById("status-msg");
@@ -107,15 +109,23 @@ document.getElementById("export-csv").addEventListener("click", () => {
     const e2 = etudiantSelectionne[2];
 
     if (!e1 || !e2) {
-        alert("Veuillez sélectionner deux étudiants.");
+        alert("Veuillez sélectionner deux fois le même étudiant.");
         return;
     }
 
     const etudiant1 = `${e1.Prenom} ${e1.Nom} (${e1.Numero})`;
     const etudiant2 = `${e2.Prenom} ${e2.Nom} (${e2.Numero})`;
 
+    // Vérification : les deux doivent être identiques
+    if (etudiant1 !== etudiant2) {
+        alert("Les deux sélections doivent correspondre.");
+        return;
+    }
+
     const voeux = [];
-    for (let i = 1; i <= 5; i++) voeux.push(document.getElementById(`voeu${i}`).value);
+    for (let i = 1; i <= 5; i++) {
+        voeux.push(document.getElementById(`voeu${i}`).value);
+    }
 
     sauvegarderVoeux(etudiant1, etudiant2, voeux);
 });
