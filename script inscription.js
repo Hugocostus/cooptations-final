@@ -1,6 +1,6 @@
 // === Version Google Apps Script — Migration SheetDB → GAS API ===
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxMZlkQLW2UKR-a5sdlv68nyBt2kzBJRORL9Lxc9yDMdBw5p31vrJmIoCeFSa0_C4hDkw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbygClRBG2emNVau11J94IMDLq7qHdiuHTnAdQhlhNngt4BHlM9CYkjTTwkHocZIF_Ks/exec";
 
 async function envoyerInfos(prenom, nom, numero) {
     const now = new Date();
@@ -54,3 +54,4 @@ document.getElementById("export-csv").addEventListener("click", function (e) {
 
 // Affichage de l'année dans le footer
 document.getElementById('year').textContent = new Date().getFullYear();
+
