@@ -45,8 +45,10 @@ function chercherEtudiants(num) {
 // === Sélection d'un étudiant ===
 function selectionnerEtudiant(num, etudiant) {
     etudiantSelectionne[num] = etudiant;
+
     document.getElementById(`etudiant-selectionne${num}`).textContent =
         `${etudiant.Prenom} ${etudiant.Nom}`;
+
     document.getElementById(`resultats${num}`).innerHTML = "";
     document.getElementById(`search${num}`).value = "";
 }
@@ -81,7 +83,8 @@ async function sauvegarderVoeux(etudiant1, etudiant2, voeux) {
         Date: now.toLocaleDateString('fr-FR'),
         Heure: now.toLocaleTimeString('fr-FR'),
 
-        Email: localStorage.getItem("userEmail")   // 🆕 L’email du login
+        // 🆕 l’adresse email stockée au login
+        Email: localStorage.getItem("userEmail")
     };
 
     const statusMsg = document.getElementById("status-msg");
@@ -103,8 +106,9 @@ async function sauvegarderVoeux(etudiant1, etudiant2, voeux) {
     }
 }
 
-// === Export CSV + sauvegarde ===
+// === Export + sauvegarde ===
 document.getElementById("export-csv").addEventListener("click", () => {
+
     const e1 = etudiantSelectionne[1];
     const e2 = etudiantSelectionne[2];
 
@@ -130,7 +134,7 @@ document.getElementById("export-csv").addEventListener("click", () => {
     sauvegarderVoeux(etudiant1, etudiant2, voeux);
 });
 
-// === Chargement ===
+// === Lance le chargement ===
 window.onload = () => {
     chargerEtudiants();
     document.getElementById("search1").addEventListener("keyup", () => chercherEtudiants(1));
