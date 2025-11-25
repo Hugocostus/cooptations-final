@@ -12,7 +12,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
 
     try {
         const res = await fetch(
-            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(email)}&numero=${encodeURIComponent(numero)}`
+            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
         );
 
         // 🔥 IMPORTANT : On lit en TEXTE, pas en JSON
