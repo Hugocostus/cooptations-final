@@ -1,38 +1,38 @@
-// === Variables globales ===
+// === Version Supabase — Migration SheetDB → Supabase ===
 
-const SHEETDB_URL = "https://sheetdb.io/api/v1/wjhlemnaekk57"; // URL POST SheetDB
+// Le script HTML aura déjà créé window.supabase
 
-// Fonction pour envoyer les données à SheetDB
 async function envoyerInfos(prenom, nom, numero) {
     const now = new Date();
-    const data = {
-        data: {
-            Prenom: prenom,
-            Nom: nom,
-            Numero: numero,
-            Date: now.toLocaleDateString('fr-FR'),
-            Heure: now.toLocaleTimeString('fr-FR')
-        }
-    };
-
     const statusMsg = document.getElementById("status-msg");
+
     statusMsg.textContent = "⏳ Envoi en cours...";
-    try {
-        const response = await fetch(SHEETDB_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error("Erreur lors de l'envoi");
-        statusMsg.textContent = "✅ Informations envoyées avec succès !";
-    } catch (error) {
+
+    // 🟢 Insertion dans la table Supabase
+    const { error } = await window.supabase
+        .from("cooptations_etudiant")
+        .insert([
+            {
+                Prenom: prenom,
+                Nom: nom,
+                Numero: numero,
+                Date: now.toLocaleDateString('fr-FR'),
+                Heure: now.toLocaleTimeString('fr-FR')
+            }
+        ]);
+
+    if (error) {
+        console.error("Erreur Supabase :", error);
         statusMsg.textContent = "❌ Erreur lors de l'envoi.";
+    } else {
+        statusMsg.textContent = "✅ Informations envoyées avec succès !";
     }
 }
 
 // Gestion du bouton d'envoi
 document.getElementById("export-csv").addEventListener("click", function (e) {
     e.preventDefault();
+
     const prenom = document.getElementById("prenom").value.trim();
     const nom = document.getElementById("nom").value.trim();
     const numero = document.getElementById("numero").value.trim();
@@ -47,3 +47,4 @@ document.getElementById("export-csv").addEventListener("click", function (e) {
 
 // Affichage de l'année dans le footer
 document.getElementById('year').textContent = new Date().getFullYear();
+
