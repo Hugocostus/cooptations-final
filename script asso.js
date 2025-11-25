@@ -1,56 +1,61 @@
-const API_URL = "https://sheetdb.io/api/v1/wjhlemnaekk57";
-const SHEETDB_URL = "https://sheetdb.io/api/v1/1dwjpmukb3j0p"; // Ton endpoint pour POST
+// === Variables globales ===
+const API_URL = "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec";
 let etudiants = [];
 
-// Charger les étudiants depuis SheetDB
+// Charger les étudiants (pour recherche dynamique)
 async function chargerEtudiants() {
     try {
-        const res = await fetch(API_URL);
+        const res = await fetch(API_URL + "?action=getStudents");
         if (!res.ok) throw new Error("Erreur API");
+
         etudiants = await res.json();
 
-        // Attacher la recherche dynamique sur tous les inputs
+        // Attacher la recherche dynamique à chaque champ
         document.querySelectorAll('input[id^="search-"]').forEach(input => {
-            const num = input.id.split('-')[1];
-            input.addEventListener('input', () => rechercher(num));
+            const num = input.id.split("-")[1];
+            input.addEventListener("input", () => rechercher(num));
         });
 
     } catch (err) {
         console.error(err);
-        alert("Erreur lors du chargement de la base d’étudiants.");
+        alert("Erreur lors du chargement des étudiants.");
     }
 }
 
-// Recherche dynamique (sans numéro étudiant)
+// Recherche dynamique
 function rechercher(num) {
     const input = document.getElementById(`search-${num}`);
-    const resultsDiv = document.getElementById(`resultats-${num}`);
-    resultsDiv.innerHTML = "";
-    const recherche = input.value.toLowerCase();
-    if (!recherche) return;
+    const results = document.getElementById(`resultats-${num}`);
+    results.innerHTML = "";
 
-    const matches = etudiants.filter(e =>
-        (`${e.Prenom} ${e.Nom}`).toLowerCase().includes(recherche)
-    ).slice(0, 10);
+    const q = input.value.toLowerCase();
+    if (!q) return;
 
-    matches.forEach(e => {
+    const liste = etudiants
+        .filter(e => (`${e.Prenom} ${e.Nom}`).toLowerCase().includes(q))
+        .slice(0, 10);
+
+    liste.forEach(e => {
         const div = document.createElement("div");
         div.textContent = `${e.Prenom} ${e.Nom}`;
         div.style.cursor = "pointer";
+
         div.onclick = () => {
             document.getElementById(`nom-${num}`).textContent = `${e.Prenom} ${e.Nom}`;
             input.value = "";
-            resultsDiv.innerHTML = "";
+            results.innerHTML = "";
         };
-        resultsDiv.appendChild(div);
+
+        results.appendChild(div);
     });
 }
 
-document.getElementById('envoyer').addEventListener('click', async() => {
-    const asso = document.getElementById('select-asso').value || "";
-    const numero = document.getElementById('num-libre').value || "";
+// Envoi des vœux asso
+document.getElementById("envoyer").addEventListener("click", async () => {
+    const asso = document.getElementById("select-asso").value;
+    const numero = document.getElementById("num-libre").value;
 
-    // Récupérer tous les étudiants sélectionnés
+    // Collecte des étudiants sélectionnés
     const noms = [];
     document.querySelectorAll('td[id^="nom-"]').forEach(td => {
         if (td.textContent && td.textContent !== "—") {
@@ -58,37 +63,30 @@ document.getElementById('envoyer').addEventListener('click', async() => {
         }
     });
 
-    // Concaténer tous les noms en CSV dans une seule cellule
     const etudiantsCSV = noms.join(", ");
 
-    // Obtenir la date et l'heure locales du navigateur séparément
     const now = new Date();
-    const date = now.toLocaleDateString('fr-FR');
-    const heure = now.toLocaleTimeString('fr-FR');
-
-    // Créer l'objet pour SheetDB
-    const dataToSend = {
+    const payload = {
+        action: "addVoeuxAsso",
         Association: asso,
         Numero: numero,
-        Etudiant: etudiantsCSV,
-        Date: date,
-        Heure: heure
+        Etudiants: etudiantsCSV,
+        Date: now.toLocaleDateString("fr-FR"),
+        Heure: now.toLocaleTimeString("fr-FR")
     };
 
-    console.log("Données à envoyer :", dataToSend);
-
     try {
-        const res = await fetch(SHEETDB_URL, {
+        await fetch(API_URL, {
             method: "POST",
+            mode: "no-cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ data: [dataToSend] })
+            body: JSON.stringify(payload)
         });
 
-        if (!res.ok) throw new Error(`Erreur API : ${res.status}`);
-        alert("✅ Données envoyées avec succès !");
+        alert("✅ Vœux association envoyés !");
     } catch (err) {
         console.error(err);
-        alert("⚠️ Impossible d'envoyer les données. Vérifie l'URL et les colonnes SheetDB !");
+        alert("⚠️ Impossible d'envoyer les données.");
     }
 });
 
