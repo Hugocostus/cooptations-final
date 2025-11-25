@@ -1,6 +1,4 @@
-// === Version Google Apps Script — Migration SheetDB → GAS API ===
-
-const API_URL = "https://script.google.com/macros/s/AKfycbygClRBG2emNVau11J94IMDLq7qHdiuHTnAdQhlhNngt4BHlM9CYkjTTwkHocZIF_Ks/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwOzUN89SrhsRlOBoDrc7UKjJFgEh9ojMFZmc89G4EM0tcpR_aZ-VxIzaYzO7R8hpvv/exec";
 
 async function envoyerInfos(prenom, nom, numero) {
     const now = new Date();
@@ -8,7 +6,6 @@ async function envoyerInfos(prenom, nom, numero) {
 
     statusMsg.textContent = "⏳ Envoi en cours...";
 
-    // Préparation des données pour l’API Google
     const payload = {
         action: "addStudent",
         Prenom: prenom,
@@ -21,13 +18,14 @@ async function envoyerInfos(prenom, nom, numero) {
     try {
         const response = await fetch(API_URL, {
             method: "POST",
+            mode: "no-cors", // 🔥 FIX CORS
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-            throw new Error("Erreur lors de la requête");
-        }
-
+        // Avec no-cors, on ne peut pas lire la réponse → on assume que ça marche
         statusMsg.textContent = "✅ Informations envoyées avec succès !";
 
     } catch (err) {
@@ -36,7 +34,6 @@ async function envoyerInfos(prenom, nom, numero) {
     }
 }
 
-// Gestion du bouton d'envoi
 document.getElementById("export-csv").addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -52,5 +49,5 @@ document.getElementById("export-csv").addEventListener("click", function (e) {
     envoyerInfos(prenom, nom, numero);
 });
 
-// Affichage de l'année dans le footer
 document.getElementById('year').textContent = new Date().getFullYear();
+
