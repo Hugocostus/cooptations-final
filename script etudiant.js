@@ -1,9 +1,8 @@
 // === Variables globales ===
-const API_URL = "https://sheetdb.io/api/v1/wjhlemnaekk57"; // API étudiants
-const SHEETDB_URL = "https://sheetdb.io/api/v1/j7e0np995ec15"; // URL POST SheetDB pour sauvegarder
+const API_URL = "https://script.google.com/macros/s/AKfycbxCQMgPVc0XZy9qxTh5CB2thjFNVU3SLmbEUNJWSYzBsvTtnkTZFX08X8a3v9y06E1m4Q/exec";
 let etudiants = [];
 
-// ✅ on garde les étudiants sélectionnés ici
+// Sélections
 let etudiantSelectionne = { 1: null, 2: null };
 
 const associations = [
@@ -12,35 +11,31 @@ const associations = [
     "Radio", "Raid", "Ski club", "Soli", "SDC", "Transac", "Verbat'em", "JE"
 ];
 
-// === Chargement des étudiants depuis l'API ===
+// === Charger les étudiants depuis l'API ===
 async function chargerEtudiants() {
     try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error("Erreur réseau");
+        const response = await fetch(API_URL + "?action=getStudents");
         etudiants = await response.json();
-        console.log("Étudiants chargés :", etudiants.length);
         initialiserListesVoeux();
     } catch (err) {
-        console.error("Erreur API :", err);
+        console.error("Erreur chargement étudiants :", err);
         alert("Impossible de charger les étudiants.");
     }
 }
 
-// === Recherche progressive ===
+// === Recherche dynamique ===
 function chercherEtudiants(num) {
     const recherche = document.getElementById(`search${num}`).value.toLowerCase();
     const resultDiv = document.getElementById(`resultats${num}`);
     resultDiv.innerHTML = "";
-    if (recherche.trim() === "") return;
+    if (!recherche) return;
 
     etudiants.forEach(etudiant => {
-        const texte = `${etudiant.Prenom} ${etudiant.Nom}`; // ✅ affichage sans numéro
-        const texteComplet = `${etudiant.Prenom} ${etudiant.Nom} ${etudiant.Numero}`.toLowerCase();
-
-        if (texteComplet.includes(recherche)) {
+        const txt = `${etudiant.Prenom} ${etudiant.Nom} ${etudiant.Numero}`.toLowerCase();
+        if (txt.includes(recherche)) {
             const div = document.createElement("div");
             div.classList.add("resultat");
-            div.textContent = texte;
+            div.textContent = `${etudiant.Prenom} ${etudiant.Nom}`;
             div.onclick = () => selectionnerEtudiant(num, etudiant);
             resultDiv.appendChild(div);
         }
@@ -49,103 +44,83 @@ function chercherEtudiants(num) {
 
 // === Sélection d'un étudiant ===
 function selectionnerEtudiant(num, etudiant) {
-    etudiantSelectionne[num] = etudiant; // ✅ on garde le vrai objet en mémoire
-
+    etudiantSelectionne[num] = etudiant;
     document.getElementById(`etudiant-selectionne${num}`).textContent =
-        `${etudiant.Prenom} ${etudiant.Nom}`; // ✅ affichage sans numéro
-
+        `${etudiant.Prenom} ${etudiant.Nom}`;
     document.getElementById(`resultats${num}`).innerHTML = "";
     document.getElementById(`search${num}`).value = "";
 }
 
-// === Initialisation des vœux ===
+// === Initialisation des listes de vœux ===
 function initialiserListesVoeux() {
     for (let i = 1; i <= 5; i++) {
         const select = document.getElementById(`voeu${i}`);
-        select.innerHTML = '<option value="">-- Sélectionnez une association (facultatif) --</option>';
+        select.innerHTML = '<option value="">-- Sélectionnez une association --</option>';
         associations.forEach(asso => {
-            const option = document.createElement("option");
-            option.value = asso;
-            option.textContent = asso;
-            select.appendChild(option);
+            const opt = document.createElement("option");
+            opt.value = asso;
+            opt.textContent = asso;
+            select.appendChild(opt);
         });
     }
 }
 
-// === Sauvegarde sur SheetDB ===
+// === Sauvegarde via Apps Script ===
 async function sauvegarderVoeux(etudiant1, etudiant2, voeux) {
     const now = new Date();
-    const data = {
-        data: {
-            "Etudiant 1": etudiant1,
-            "Etudiant 2": etudiant2,
-            "Voeu 1": voeux[0] || "",
-            "Voeu 2": voeux[1] || "",
-            "Voeu 3": voeux[2] || "",
-            "Voeu 4": voeux[3] || "",
-            "Voeu 5": voeux[4] || "",
-            "Date": now.toLocaleDateString('fr-FR'),
-            "Heure": now.toLocaleTimeString('fr-FR')
-        }
+
+    const payload = {
+        action: "addVoeuxEtudiant",
+        Etudiant1: etudiant1,
+        Etudiant2: etudiant2,
+        Voeu1: voeux[0] || "",
+        Voeu2: voeux[1] || "",
+        Voeu3: voeux[2] || "",
+        Voeu4: voeux[3] || "",
+        Voeu5: voeux[4] || "",
+        Date: now.toLocaleDateString('fr-FR'),
+        Heure: now.toLocaleTimeString('fr-FR')
     };
 
     const statusMsg = document.getElementById("status-msg");
     statusMsg.textContent = "⏳ Sauvegarde en cours...";
+
     try {
-        const response = await fetch(SHEETDB_URL, {
+        await fetch(API_URL, {
             method: "POST",
+            mode: "no-cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: JSON.stringify(payload)
         });
-        if (!response.ok) throw new Error(`Erreur API : ${response.status}`);
-        statusMsg.textContent = "✅ Vœux sauvegardés en ligne !";
+
+        statusMsg.textContent = "✅ Vœux sauvegardés !";
+
     } catch (err) {
-        console.error("Erreur :", err);
-        statusMsg.textContent = "⚠️ Impossible de sauvegarder en ligne.";
+        console.error(err);
+        statusMsg.textContent = "❌ Erreur lors de la sauvegarde.";
     }
 }
 
 // === Export CSV + sauvegarde ===
 document.getElementById("export-csv").addEventListener("click", () => {
-
     const e1 = etudiantSelectionne[1];
     const e2 = etudiantSelectionne[2];
 
     if (!e1 || !e2) {
-        alert("⚠️ Veuillez sélectionner les deux étudiants avant d'exporter.");
+        alert("Veuillez sélectionner deux étudiants.");
         return;
     }
 
-    // ✅ ici on remet prénom + nom + numéro pour l’export
     const etudiant1 = `${e1.Prenom} ${e1.Nom} (${e1.Numero})`;
     const etudiant2 = `${e2.Prenom} ${e2.Nom} (${e2.Numero})`;
 
     const voeux = [];
-    for (let i = 1; i <= 5; i++) {
-        voeux.push(document.getElementById(`voeu${i}`).value);
-    }
+    for (let i = 1; i <= 5; i++) voeux.push(document.getElementById(`voeu${i}`).value);
 
-    const now = new Date();
-    const lignes = [
-        ["Étudiant 1", "Étudiant 2", "Vœu 1", "Vœu 2", "Vœu 3", "Vœu 4", "Vœu 5", "Date", "Heure"],
-        [etudiant1, etudiant2, ...voeux, now.toLocaleDateString('fr-FR'), now.toLocaleTimeString('fr-FR')]
-    ];
-
-    const csvContent = lignes.map(e => e.map(v => `"${v}"`).join(",")).join("\n");
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "voeux_etudiants.csv";
-    a.click();
-    URL.revokeObjectURL(url);
-
-    // ✅ sauvegarde en ligne
     sauvegarderVoeux(etudiant1, etudiant2, voeux);
 });
 
-// === Charger les étudiants au démarrage ===
+// === Chargement ===
 window.onload = () => {
     chargerEtudiants();
     document.getElementById("search1").addEventListener("keyup", () => chercherEtudiants(1));
