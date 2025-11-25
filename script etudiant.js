@@ -28,10 +28,12 @@ function chercherEtudiants(num) {
     const recherche = document.getElementById(`search${num}`).value.toLowerCase();
     const resultDiv = document.getElementById(`resultats${num}`);
     resultDiv.innerHTML = "";
+
     if (!recherche) return;
 
     etudiants.forEach(etudiant => {
         const txt = `${etudiant.Prenom} ${etudiant.Nom} ${etudiant.Numero}`.toLowerCase();
+
         if (txt.includes(recherche)) {
             const div = document.createElement("div");
             div.classList.add("resultat");
@@ -58,6 +60,7 @@ function initialiserListesVoeux() {
     for (let i = 1; i <= 5; i++) {
         const select = document.getElementById(`voeu${i}`);
         select.innerHTML = '<option value="">-- Sélectionnez une association --</option>';
+
         associations.forEach(asso => {
             const opt = document.createElement("option");
             opt.value = asso;
@@ -82,9 +85,7 @@ async function sauvegarderVoeux(etudiant1, etudiant2, voeux) {
         Voeu5: voeux[4] || "",
         Date: now.toLocaleDateString('fr-FR'),
         Heure: now.toLocaleTimeString('fr-FR'),
-
-        // 🆕 l’adresse email stockée au login
-        Email: localStorage.getItem("userEmail")
+        Email: localStorage.getItem("userEmail") // email du login
     };
 
     const statusMsg = document.getElementById("status-msg");
@@ -120,7 +121,6 @@ document.getElementById("export-csv").addEventListener("click", () => {
     const etudiant1 = `${e1.Prenom} ${e1.Nom} (${e1.Numero})`;
     const etudiant2 = `${e2.Prenom} ${e2.Nom} (${e2.Numero})`;
 
-    // Vérification : les deux doivent être identiques
     if (etudiant1 !== etudiant2) {
         alert("Les deux sélections doivent correspondre.");
         return;
@@ -134,7 +134,7 @@ document.getElementById("export-csv").addEventListener("click", () => {
     sauvegarderVoeux(etudiant1, etudiant2, voeux);
 });
 
-// === Lance le chargement ===
+// === Chargement ===
 window.onload = () => {
     chargerEtudiants();
     document.getElementById("search1").addEventListener("keyup", () => chercherEtudiants(1));
