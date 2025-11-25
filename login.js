@@ -12,7 +12,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
 
     try {
         const res = await fetch(
-            `${AUTH_API}?action=checkLogin&Adresse=${encodeURIComponent(Adresse)}&Numero=${encodeURIComponent(Numero)}`
+            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
         );
 
         const text = await res.text();
@@ -29,8 +29,4 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         status.textContent = "Erreur serveur.";
     }
 });
-
-
-  return ContentService.createTextOutput("INVALID");
-}
 
