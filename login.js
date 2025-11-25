@@ -1,21 +1,20 @@
-const AUTH_API = "https://script.google.com/macros/s/AKfycbzyjCOYz95BM_0xxU5u7bJDzc4SdpedLu6IfDE4BrINrvLr-x_FK89kQn6BYqBbxeH2Kg/exec";
+const AUTH_API = "https://script.google.com/macros/s/AKfycbx-BjQwlAJMZhRdBZKPtzFJBfLbB5GiCV9fKNDQnG94YhvVHH8DcCr5t0kQwz0PcIq7tw/exec";
 
 document.getElementById("login-btn").addEventListener("click", async () => {
-    const Adresse = document.getElementById("email").value.trim();
-    const Numero = document.getElementById("numero").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const numero = document.getElementById("numero").value.trim();
     const status = document.getElementById("login-status");
 
-    if (!Adresse || !Numero) {
+    if (!email || !numero) {
         status.textContent = "Veuillez remplir les deux champs.";
         return;
     }
 
     try {
         const res = await fetch(
-            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
+            `${AUTH_API}?action=checkLogin&Adresse=${encodeURIComponent(email)}&Numero=${encodeURIComponent(numero)}`
         );
 
-        // 🔥 IMPORTANT : On lit en TEXTE, pas en JSON
         const text = await res.text();
 
         if (text === "OK") {
@@ -30,3 +29,8 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         status.textContent = "Erreur serveur.";
     }
 });
+
+
+  return ContentService.createTextOutput("INVALID");
+}
+
