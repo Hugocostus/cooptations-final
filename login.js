@@ -12,14 +12,15 @@ document.getElementById("login-btn").addEventListener("click", async () => {
 
     try {
         const res = await fetch(
-            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
+            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(email)}&numero=${encodeURIComponent(numero)}`
         );
 
+        // 🔥 IMPORTANT : On lit en TEXTE, pas en JSON
         const text = await res.text();
 
         if (text === "OK") {
             localStorage.setItem("logged", "yes");
-            window.location.href = "etudiant.html"; // 🔥 accès autorisé
+            window.location.href = "etudiant.html";
         } else {
             status.textContent = "Identifiants incorrects.";
         }
