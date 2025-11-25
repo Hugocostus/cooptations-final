@@ -1,11 +1,11 @@
-const AUTH_API = "https://script.google.com/macros/s/AKfycbzyjCOYz95BM_0xxU5u7bJDzc4SdpedLu6IfDE4BrINrvLr-x_FK89kQn6BYqBbxeH2Kg/exec";
+sconst AUTH_API = "https://script.google.com/macros/s/AKfycbzyjCOYz95BM_0xxU5u7bJDzc4SdpedLu6IfDE4BrINrvLr-x_FK89kQn6BYqBbxeH2Kg/exec";
 
 document.getElementById("login-btn").addEventListener("click", async () => {
-    const email = document.getElementById("email").value.trim();
-    const numero = document.getElementById("numero").value.trim();
+    const Adresse = document.getElementById("email").value.trim();
+    const Numero = document.getElementById("numero").value.trim();
     const status = document.getElementById("login-status");
 
-    if (!email || !numero) {
+    if (!Adresse || !Numero) {
         status.textContent = "Veuillez remplir les deux champs.";
         return;
     }
