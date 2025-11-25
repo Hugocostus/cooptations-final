@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    <script>
+    if (localStorage.getItem("logged") !== "yes") {
+        window.location.href = "login.html";
+        }
+    </script>
     <header>
         <h1>Portail des Vœux - Associations</h1>
     </header>
@@ -68,5 +73,6 @@
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
+
 
 </html>
