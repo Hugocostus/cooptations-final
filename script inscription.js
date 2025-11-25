@@ -9,17 +9,18 @@ async function envoyerInfos(prenom, nom, numero, email) {
     const statusMsg = document.getElementById("status-msg");
     statusMsg.textContent = "⏳ Envoi en cours...";
 
-    // 1️⃣ Envoi vers cooptations_etudiant
+    // 1️⃣ Payload pour cooptations_etudiant (inscription)
     const payloadCoopt = {
         action: "addStudent",
         Prenom: prenom,
         Nom: nom,
         Numero: numero,
+        Adresse: email,  // 🔥 important
         Date: now.toLocaleDateString("fr-FR"),
         Heure: now.toLocaleTimeString("fr-FR")
     };
 
-    // 2️⃣ Envoi vers authentification
+    // 2️⃣ Payload pour authentification (adresse + numéro)
     const payloadAuth = {
         action: "addAuthentification",
         Adresse: email,
@@ -27,7 +28,7 @@ async function envoyerInfos(prenom, nom, numero, email) {
     };
 
     try {
-        // --- POST 1 : cooptation ---
+        // --- POST 1 : inscription ---
         await fetch(API_COOPT_URL, {
             method: "POST",
             mode: "no-cors",
@@ -43,7 +44,7 @@ async function envoyerInfos(prenom, nom, numero, email) {
             body: JSON.stringify(payloadAuth)
         });
 
-        statusMsg.textContent = "✅ Inscription enregistrée avec succès !";
+        statusMsg.textContent = "✅ Inscription enregistrée & mail envoyé !";
 
     } catch (err) {
         console.error(err);
@@ -52,14 +53,14 @@ async function envoyerInfos(prenom, nom, numero, email) {
 }
 
 
-// === Gestion du bouton d'envoi ===
+// === Bouton d’envoi ===
 document.getElementById("export-csv").addEventListener("click", (e) => {
     e.preventDefault();
 
     const prenom = document.getElementById("prenom").value.trim();
     const nom = document.getElementById("nom").value.trim();
     const numero = document.getElementById("numero").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const email = document.getElementById("email").value.trim();   // 🔥 ajouté
 
     if (!prenom || !nom || !numero || !email) {
         alert("Veuillez remplir tous les champs.");
@@ -69,5 +70,7 @@ document.getElementById("export-csv").addEventListener("click", (e) => {
     envoyerInfos(prenom, nom, numero, email);
 });
 
+
 // === Footer année ===
 document.getElementById('year').textContent = new Date().getFullYear();
+
