@@ -1,6 +1,6 @@
-// === Version Supabase — Migration SheetDB → Supabase ===
+// === Version Google Apps Script — Migration SheetDB → GAS API ===
 
-// Le script HTML aura déjà créé window.supabase
+const API_URL = "https://script.google.com/macros/s/AKfycbxMZlkQLW2UKR-a5sdlv68nyBt2kzBJRORL9Lxc9yDMdBw5p31vrJmIoCeFSa0_C4hDkw/exec";
 
 async function envoyerInfos(prenom, nom, numero) {
     const now = new Date();
@@ -8,24 +8,31 @@ async function envoyerInfos(prenom, nom, numero) {
 
     statusMsg.textContent = "⏳ Envoi en cours...";
 
-    // 🟢 Insertion dans la table Supabase
-    const { error } = await window.supabase
-        .from("cooptations_etudiant")
-        .insert([
-            {
-                Prenom: prenom,
-                Nom: nom,
-                Numero: numero,
-                Date: now.toLocaleDateString('fr-FR'),
-                Heure: now.toLocaleTimeString('fr-FR')
-            }
-        ]);
+    // Préparation des données pour l’API Google
+    const payload = {
+        action: "addStudent",
+        Prenom: prenom,
+        Nom: nom,
+        Numero: numero,
+        Date: now.toLocaleDateString("fr-FR"),
+        Heure: now.toLocaleTimeString("fr-FR")
+    };
 
-    if (error) {
-        console.error("Erreur Supabase :", error);
-        statusMsg.textContent = "❌ Erreur lors de l'envoi.";
-    } else {
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error("Erreur lors de la requête");
+        }
+
         statusMsg.textContent = "✅ Informations envoyées avec succès !";
+
+    } catch (err) {
+        console.error(err);
+        statusMsg.textContent = "❌ Erreur lors de l'envoi.";
     }
 }
 
@@ -47,4 +54,3 @@ document.getElementById("export-csv").addEventListener("click", function (e) {
 
 // Affichage de l'année dans le footer
 document.getElementById('year').textContent = new Date().getFullYear();
-
