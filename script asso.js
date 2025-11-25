@@ -2,6 +2,9 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec";
 let etudiants = [];
 
+// 🔥 On garde les étudiants sélectionnés ici
+let etudiantsSelectionnes = {};  // ex : { "1": {Prenom, Nom, Numero}, ... }
+
 // Charger les étudiants (pour recherche dynamique)
 async function chargerEtudiants() {
     try {
@@ -41,7 +44,12 @@ function rechercher(num) {
         div.style.cursor = "pointer";
 
         div.onclick = () => {
+            // Affichage simplifié
             document.getElementById(`nom-${num}`).textContent = `${e.Prenom} ${e.Nom}`;
+
+            // 🔥 Stockage complet pour l’envoi
+            etudiantsSelectionnes[num] = e;
+
             input.value = "";
             results.innerHTML = "";
         };
@@ -58,8 +66,12 @@ document.getElementById("envoyer").addEventListener("click", async () => {
     // Collecte des étudiants sélectionnés
     const noms = [];
     document.querySelectorAll('td[id^="nom-"]').forEach(td => {
-        if (td.textContent && td.textContent !== "—") {
-            noms.push(td.textContent);
+        const num = td.id.split("-")[1];
+        const e = etudiantsSelectionnes[num];
+
+        if (e) {
+            // 🔥 Forme finale : "Prénom Nom (Numéro)"
+            noms.push(`${e.Prenom} ${e.Nom} (${e.Numero})`);
         }
     });
 
@@ -91,4 +103,5 @@ document.getElementById("envoyer").addEventListener("click", async () => {
 });
 
 window.onload = chargerEtudiants;
+
 
