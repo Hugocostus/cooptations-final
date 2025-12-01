@@ -6,6 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail des Associations</title>
 </head>
+<script>
+(async () => {
+    if (sessionStorage.getItem("accesAsso") === "oui") {
+        return; // déjà validé dans cette session
+    }
+
+    const saisie = prompt("Code d'accès à la page :");
+
+    // On interroge Apps Script
+    const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbxCQMgPVc0XZy9qxTh5CB2thjFNVU3SLmbEUNJWSYzBsvTtnkTZFX08X8a3v9y06E1m4Q/exec" 
+        + "?action=checkCode&code=" + encodeURIComponent(saisie)
+    );
+
+    const txt = await res.text();
+
+    if (txt === "OK") {
+        sessionStorage.setItem("accesAsso", "oui");
+    } else {
+        alert("Code incorrect ❌");
+        window.location.href = "index.html"; // ou page login
+    }
+})();
+</script>
 
 <body>
 
@@ -71,5 +95,6 @@
 
 
 </html>
+
 
 
