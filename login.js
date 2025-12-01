@@ -18,7 +18,12 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         const text = await res.text();
 
         if (text === "OK") {
+            // 🔥 Stockage des données nécessaires pour la page des vœux
+            localStorage.setItem("userNumero", Numero);
+            localStorage.setItem("userEmail", Adresse);
             localStorage.setItem("logged", "yes");
+
+            // Redirection
             window.location.href = "etudiant.html";
         } else {
             status.textContent = "Identifiants incorrects.";
