@@ -10,50 +10,49 @@
 
 <body>
     <script>
-    if (localStorage.getItem("logged") !== "yes") {
-        window.location.href = "login.html";
+        // Redirection si pas connecté
+        if (localStorage.getItem("logged") !== "yes") {
+            window.location.href = "login.html";
         }
     </script>
+
     <header>
         <h1>Portail des Vœux - Associations</h1>
     </header>
 
     <main>
-        <!-- Sélection Étudiant 1 -->
+
+        <!-- IDENTITÉ AUTO-DÉTECTÉE -->
         <section class="selection-etudiant">
-            <h2>Étudiant 1</h2>
-            <input type="text" id="search1" placeholder="Tapez le nom ou numéro...">
-            <div id="resultats1"></div>
-            <p id="etudiant-selectionne1">Aucun étudiant sélectionné</p>
+            <h2>Étudiant</h2>
+            <p id="etudiant-selectionne1">Chargement...</p>
+            <p id="etudiant-selectionne2" style="display:none;"></p>
         </section>
 
-        <!-- Sélection Étudiant 2 -->
-        <section class="selection-etudiant">
-            <h2>Étudiant 2</h2>
-            <input type="text" id="search2" placeholder="Tapez le nom ou numéro...">
-            <div id="resultats2"></div>
-            <p id="etudiant-selectionne2">Aucun étudiant sélectionné</p>
-        </section>
-
-        <!-- Sélection des vœux -->
+        <!-- SÉLECTION DES VŒUX -->
         <section class="voeux-section">
             <h2>Choisissez vos 5 vœux d’associations (facultatif)</h2>
+
             <div class="voeu">
                 <label for="voeu1">Vœu 1 :</label>
                 <select id="voeu1"></select>
             </div>
+
             <div class="voeu">
                 <label for="voeu2">Vœu 2 :</label>
                 <select id="voeu2"></select>
             </div>
+
             <div class="voeu">
                 <label for="voeu3">Vœu 3 :</label>
                 <select id="voeu3"></select>
             </div>
+
             <div class="voeu">
                 <label for="voeu4">Vœu 4 :</label>
                 <select id="voeu4"></select>
             </div>
+
             <div class="voeu">
                 <label for="voeu5">Vœu 5 :</label>
                 <select id="voeu5"></select>
@@ -73,6 +72,5 @@
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
-
 
 </html>
