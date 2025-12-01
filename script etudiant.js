@@ -31,7 +31,8 @@ async function chargerEtudiantConnecte() {
         const data = await response.json();
 
         // Chercher l'étudiant connecté
-        etudiantConnecte = data.find(e => e.Numero === numero);
+        etudiantConnecte = data.find(e => String(e.Numero) === String(numero));
+
 
         if (!etudiantConnecte) {
             alert("Erreur : étudiant introuvable dans la base.");
@@ -146,3 +147,4 @@ window.onload = () => {
     chargerEtudiantConnecte();  // Récupère automatiquement l'utilisateur
     initialiserListesVoeux();   // Remplit les <select>
 };
+
