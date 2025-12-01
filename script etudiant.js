@@ -21,6 +21,8 @@ const associations = [
 async function chargerEtudiantConnecte() {
     const numero = localStorage.getItem("userNumero");
 
+    console.log("🔍 NUMÉRO LOCALSTORAGE =", numero);
+
     if (!numero) {
         alert("Erreur : aucun numéro étudiant détecté.");
         return;
@@ -33,6 +35,7 @@ async function chargerEtudiantConnecte() {
         // Chercher l'étudiant connecté
         etudiantConnecte = data.find(e => String(e.Numero) === String(numero));
 
+        console.log("👤 ÉTUDIANT TROUVÉ :", etudiantConnecte);
 
         if (!etudiantConnecte) {
             alert("Erreur : étudiant introuvable dans la base.");
@@ -85,6 +88,9 @@ async function sauvegarderVoeux(voeux) {
 
     const now = new Date();
 
+    const email = localStorage.getItem("userEmail");
+    console.log("📧 EMAIL ENVOYÉ :", email);
+
     const payload = {
         action: "addVoeuxEtudiant",
         Etudiant1: identite,
@@ -96,8 +102,10 @@ async function sauvegarderVoeux(voeux) {
         Voeu5: voeux[4] || "",
         Date: now.toLocaleDateString("fr-FR"),
         Heure: now.toLocaleTimeString("fr-FR"),
-        Email: localStorage.getItem("userEmail")
+        Email: email
     };
+
+    console.log("📦 PAYLOAD ENVOYÉ AU SERVEUR :", payload);
 
     const statusMsg = document.getElementById("status-msg");
     statusMsg.textContent = "⏳ Sauvegarde en cours...";
@@ -147,4 +155,6 @@ window.onload = () => {
     chargerEtudiantConnecte();  // Récupère automatiquement l'utilisateur
     initialiserListesVoeux();   // Remplit les <select>
 };
+
+
 
