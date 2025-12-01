@@ -44,7 +44,7 @@ function rechercher(num) {
         div.style.cursor = "pointer";
 
         div.onclick = () => {
-            // Affichage simplifié
+            // Affichage
             document.getElementById(`nom-${num}`).textContent = `${e.Prenom} ${e.Nom}`;
 
             // 🔥 Stockage complet pour l’envoi
@@ -61,7 +61,14 @@ function rechercher(num) {
 // Envoi des vœux asso
 document.getElementById("envoyer").addEventListener("click", async () => {
     const asso = document.getElementById("select-asso").value;
-    const numero = document.getElementById("num-libre").value;
+    const numero = document.getElementById("num-libre").value.trim();
+    const email = document.getElementById("email-libre").value.trim(); // 🔥 NOUVEAU
+
+    // Vérification
+    if (!asso || !numero || !email) {
+        alert("Veuillez remplir association, numéro et email.");
+        return;
+    }
 
     // Collecte des étudiants sélectionnés
     const noms = [];
@@ -70,7 +77,6 @@ document.getElementById("envoyer").addEventListener("click", async () => {
         const e = etudiantsSelectionnes[num];
 
         if (e) {
-            // 🔥 Forme finale : "Prénom Nom (Numéro)"
             noms.push(`${e.Prenom} ${e.Nom} (${e.Numero})`);
         }
     });
@@ -82,6 +88,7 @@ document.getElementById("envoyer").addEventListener("click", async () => {
         action: "addVoeuxAsso",
         Association: asso,
         Numero: numero,
+        Email: email, // 🔥 ENVOYÉ AU SERVEUR
         Etudiants: etudiantsCSV,
         Date: now.toLocaleDateString("fr-FR"),
         Heure: now.toLocaleTimeString("fr-FR")
@@ -95,7 +102,7 @@ document.getElementById("envoyer").addEventListener("click", async () => {
             body: JSON.stringify(payload)
         });
 
-        alert("✅ Vœux association envoyés !");
+        alert("✅ Enregistré avec succès !");
     } catch (err) {
         console.error(err);
         alert("⚠️ Impossible d'envoyer les données.");
@@ -103,5 +110,4 @@ document.getElementById("envoyer").addEventListener("click", async () => {
 });
 
 window.onload = chargerEtudiants;
-
 
