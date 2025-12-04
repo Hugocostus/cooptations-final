@@ -7,26 +7,37 @@
     <title>Portail des Associations</title>
 </head>
 <script>
+// Vérification du code AVANT d'afficher la page
 (async () => {
+
+    // Si déjà validé dans cette session, on affiche directement
     if (sessionStorage.getItem("accesAsso") === "oui") {
-        return; // déjà validé dans cette session
+        document.getElementById("page").style.display = "block";
+        return;
     }
 
     const saisie = prompt("Code d'accès à la page :");
 
-    // On interroge Apps Script
+    // Si l'utilisateur clique sur Annuler → bloque immédiatement
+    if (!saisie) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    // Appel Apps Script
     const res = await fetch(
-        "https://script.google.com/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
+        "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
         + "?action=checkCode&code=" + encodeURIComponent(saisie)
     );
 
     const txt = await res.text();
 
-    if (txt === "OK") {
+    if (txt.trim() === "OK") {
         sessionStorage.setItem("accesAsso", "oui");
+        document.getElementById("page").style.display = "block"; // ✔ affiche la page
     } else {
         alert("Code incorrect ❌");
-        window.location.href = "index.html"; // ou page login
+        window.location.href = "index.html"; // ou autre page d'accueil
     }
 })();
 </script>
@@ -95,6 +106,7 @@
 
 
 </html>
+
 
 
 
