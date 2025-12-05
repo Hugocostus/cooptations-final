@@ -1,55 +1,44 @@
-// ==============================
-// 🌐 URL de ton API Apps Script
-// ==============================
+// === API URL ===
 const API_COOPT_URL = "https://script.google.com/macros/s/AKfycbwOzUN89SrhsRlOBoDrc7UKjJFgEh9ojMFZmc89G4EM0tcpR_aZ-VxIzaYzO7R8hpvv/exec";
 
 
-// ==============================
-// ✉️ Fonction principale : envoi
-// ==============================
+// === Fonction principale ===
 async function envoyerInfos(prenom, nom, numero, email) {
     const now = new Date();
     const statusMsg = document.getElementById("status-msg");
 
     statusMsg.textContent = "⏳ Envoi en cours...";
 
-    // Données envoyées à Apps Script
-    const payload = {
+    // Payload unique pour cooptations_etudiant
+    const payloadCoopt = {
         action: "addStudent",
         Prenom: prenom,
         Nom: nom,
         Numero: numero,
-        Adresse: email,
+        Adresse: email,  // 👈 envoyé dans la feuille principale
         Date: now.toLocaleDateString("fr-FR"),
         Heure: now.toLocaleTimeString("fr-FR")
     };
 
     try {
-        // Envoi POST + CORS
-        const response = await fetch(API_COOPT_URL, {
+        // --- POST : inscription ---
+        await fetch(API_COOPT_URL, {
             method: "POST",
+            mode: "no-cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payloadCoopt)
         });
 
-        const text = await response.text();
-
-        if (text.includes("OK")) {
-            statusMsg.textContent = "✅ Inscription enregistrée !";
-        } else {
-            statusMsg.textContent = "❌ Erreur côté serveur : " + text;
-        }
+        statusMsg.textContent = "✅ Inscription enregistrée !";
 
     } catch (err) {
-        console.error("Erreur fetch :", err);
+        console.error(err);
         statusMsg.textContent = "❌ Erreur lors de l'envoi.";
     }
 }
 
 
-// ==============================
-// 🖱️ Gestion du bouton d’envoi
-// ==============================
+// === Bouton d’envoi ===
 document.getElementById("export-csv").addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -58,7 +47,6 @@ document.getElementById("export-csv").addEventListener("click", (e) => {
     const numero = document.getElementById("numero").value.trim();
     const email = document.getElementById("email").value.trim();
 
-    // Vérification des champs
     if (!prenom || !nom || !numero || !email) {
         alert("Veuillez remplir tous les champs.");
         return;
@@ -68,8 +56,5 @@ document.getElementById("export-csv").addEventListener("click", (e) => {
 });
 
 
-// ==============================
-// 🗓️ Mise à jour de l'année
-// ==============================
-document.getElementById("year").textContent = new Date().getFullYear();
-
+// === Footer année ===
+document.getElementById('year').textContent = new Date().getFullYear();
