@@ -6,104 +6,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail des Associations</title>
 </head>
+
 <script>
-// Vérification du code AVANT d'afficher la page
-(async () => {
+    // Vérification du code AVANT d'afficher la page
+    (async () => {
 
-    // Si déjà validé dans cette session, on affiche directement
-    if (sessionStorage.getItem("accesAsso") === "oui") {
-        document.getElementById("page").style.display = "block";
-        return;
-    }
+        // Si déjà validé dans cette session, on affiche directement
+        if (sessionStorage.getItem("accesAsso") === "oui") {
+            document.getElementById("page").style.display = "block";
+            return;
+        }
 
-    const saisie = prompt("Code d'accès à la page :");
+        const saisie = prompt("Code d'accès à la page :");
 
-    // Si l'utilisateur clique sur Annuler → bloque immédiatement
-    if (!saisie) {
-        window.location.href = "index.html";
-        return;
-    }
+        // Si l'utilisateur clique sur Annuler → bloque immédiatement
+        if (!saisie) {
+            window.location.href = "index.html";
+            return;
+        }
 
-    // Appel Apps Script
-    const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
-        + "?action=checkCode&code=" + encodeURIComponent(saisie)
-    );
+        // Appel Apps Script
+        const res = await fetch(
+            "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
+            + "?action=checkCode&code=" + encodeURIComponent(saisie)
+        );
 
-    const txt = await res.text();
+        const txt = await res.text();
 
-    if (txt.trim() === "OK") {
-        sessionStorage.setItem("accesAsso", "oui");
-        document.getElementById("page").style.display = "block"; // ✔ affiche la page
-    } else {
-        alert("Code incorrect ❌");
-        window.location.href = "index.html"; // ou autre page d'accueil
-    }
-})();
+        if (txt.trim() === "OK") {
+            sessionStorage.setItem("accesAsso", "oui");
+            document.getElementById("page").style.display = "block"; // ✔ affiche la page
+        } else {
+            alert("Code incorrect ❌");
+            window.location.href = "index.html"; // ou autre page d'accueil
+        }
+    })();
 </script>
 
 <body>
 
-    <h1>Portail des Associations</h1>
+    <div id="page" style="display:none">
 
-    <div>
-        <label>Association :
-    <select id="select-asso">
-      <option value="">-- Sélectionnez une association --</option>
-      <option>Astuce</option>
-      <option>BDA</option>
-      <option>BDE</option>
-      <option>BDI</option>
-      <option>BDS</option>
-      <option>Cheer'up</option>
-      <option>Forum</option>
-      <option>Noise</option>
-      <option>Raid</option>
-      <option>Transac</option>
-    </select>
-  </label>
-        <label>Nombre de cooptants pour cette session :
-    <input type="number" id="num-libre" placeholder="Ex : 42">
-  </label>
-    <label>Email :
-        <input type="email" id="email-libre" placeholder="exemple@domain.com">
-    </label>
-        <button id="envoyer">Envoyer</button>
+        <h1>Portail des Associations</h1>
+
+        <div>
+            <label>Association :
+                <select id="select-asso">
+                    <!-- Rempli automatiquement par JS -->
+                </select>
+            </label>
+            <label>Nombre de cooptants pour cette session :
+                <input type="number" id="num-libre" placeholder="Ex : 42">
+            </label>
+            <label>Email :
+                <input type="email" id="email-libre" placeholder="exemple@domain.com">
+            </label>
+            <button id="envoyer">Envoyer</button>
+        </div>
+
+        <h2>Tableau des Étudiants</h2>
+        <table id="table-etudiants">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom Étudiant</th>
+                    <th>Recherche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 150 lignes pré-remplies -->
+                <script>
+                    for (let i = 1; i <= 150; i++) {
+                        document.write(`
+                        <tr>
+                            <td>${i}</td>
+                            <td id="nom-${i}">—</td>
+                            <td>
+                                <input type="text" id="search-${i}" placeholder="Rechercher étudiant...">
+                                <div id="resultats-${i}"></div>
+                            </td>
+                        </tr>
+                        `);
+                    }
+                </script>
+            </tbody>
+        </table>
+
+        <!-- Auto-remplissage association + email -->
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const asso = localStorage.getItem("userAsso");
+                const email = localStorage.getItem("userEmail");
+
+                const selectAsso = document.getElementById("select-asso");
+                const inputEmail = document.getElementById("email-libre");
+
+                if (asso) {
+                    selectAsso.innerHTML = `<option value="${asso}" selected>${asso}</option>`;
+                    selectAsso.disabled = true; // Bloque la modification si nécessaire
+                }
+
+                if (email) {
+                    inputEmail.value = email;
+                    inputEmail.readOnly = true; // Bloque la modification si nécessaire
+                }
+            });
+        </script>
+
+        <script src="script asso.js"></script>
+
     </div>
 
-    <h2>Tableau des Étudiants</h2>
-    <table id="table-etudiants">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nom Étudiant</th>
-                <th>Recherche</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- 150 lignes pré-remplies -->
-            <!-- Chaque ligne a : td pour numéro, td pour nom, input + div pour résultats -->
-            <!-- Généré automatiquement ici pour simplifier -->
-            <script>
-                for (let i = 1; i <= 150; i++) {
-                    document.write(`
-          <tr>
-            <td>${i}</td>
-            <td id="nom-${i}">—</td>
-            <td>
-              <input type="text" id="search-${i}" placeholder="Rechercher étudiant...">
-              <div id="resultats-${i}"></div>
-            </td>
-          </tr>
-        `);
-                }
-            </script>
-        </tbody>
-    </table>
-
-    <script src="script asso.js"></script>
 </body>
-
 
 </html>
 
