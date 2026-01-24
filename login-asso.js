@@ -1,33 +1,34 @@
 const AUTH_API = "https://script.google.com/macros/s/AKfycbwBigVj9kLbiWOeuN9W6e8SrE_Hfdg2OqgAsGqVhPUL3wr_qCdAltu8KtoeZplPMEZVig/exec"; 
 
 document.getElementById("login-btn").addEventListener("click", async () => {
-    const Adresse = document.getElementById("email").value.trim();
-    const Numero = document.getElementById("numero").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const numero = document.getElementById("numero").value.trim();
+    const asso = document.getElementById("asso").value.trim();
     const status = document.getElementById("login-status");
 
-    if (!Adresse || !Numero) {
-        status.textContent = "Veuillez remplir les deux champs.";
+    if (!email || !numero || !asso) {
+        status.textContent = "Veuillez remplir tous les champs.";
         return;
     }
 
     try {
         const res = await fetch(
-            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
+            `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(email)}&numero=${encodeURIComponent(numero)}&asso=${encodeURIComponent(asso)}`
         );
 
-        // Lire la réponse en texte (car ton Apps Script renvoie "OK" ou "DENIED")
-        const text = await res.text();
+        const data = await res.json();
 
-        if (text.trim() === "OK") {
-            // Stockage local (email et numéro uniquement, pas l'asso)
-            localStorage.setItem("userEmail", Adresse);
-            localStorage.setItem("userNumero", Numero);
+        if (data.status === "OK") {
+            // ✅ Stockage local
+            localStorage.setItem("userEmail", data.email);
+            localStorage.setItem("userNumero", data.numero);
+            localStorage.setItem("userAsso", data.asso);
             localStorage.setItem("logged", "yes");
 
             // Redirection vers la page association
             window.location.href = "asso.html";
         } else {
-            status.textContent = "Identifiants incorrects.";
+            status.textContent = "Identifiants ou association incorrects.";
         }
 
     } catch (err) {
@@ -35,3 +36,4 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         status.textContent = "Erreur serveur.";
     }
 });
+
