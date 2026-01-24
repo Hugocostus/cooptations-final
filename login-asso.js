@@ -15,21 +15,23 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
         );
 
-        // ✅ Lire la réponse comme JSON
-const data = await res.json(); // JSON valide maintenant
-if (data.status === "OK") {
-    localStorage.setItem("userEmail", data.email);
-    localStorage.setItem("userNumero", Numero);
-    localStorage.setItem("userAsso", data.asso);
-    localStorage.setItem("logged", "yes");
-    window.location.href = "asso.html";
-} else {
-    status.textContent = "Identifiants incorrects.";
-}
-        
+        // Lire la réponse en texte (car ton Apps Script renvoie "OK" ou "DENIED")
+        const text = await res.text();
+
+        if (text.trim() === "OK") {
+            // Stockage local (email et numéro uniquement, pas l'asso)
+            localStorage.setItem("userEmail", Adresse);
+            localStorage.setItem("userNumero", Numero);
+            localStorage.setItem("logged", "yes");
+
+            // Redirection vers la page association
+            window.location.href = "asso.html";
+        } else {
+            status.textContent = "Identifiants incorrects.";
+        }
+
     } catch (err) {
         console.error(err);
         status.textContent = "Erreur serveur.";
     }
 });
-
