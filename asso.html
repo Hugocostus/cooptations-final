@@ -11,7 +11,6 @@
     // Vérification du code AVANT d'afficher la page
     (async () => {
 
-        // Si déjà validé dans cette session, on affiche directement
         if (sessionStorage.getItem("accesAsso") === "oui") {
             document.getElementById("page").style.display = "block";
             return;
@@ -19,13 +18,11 @@
 
         const saisie = prompt("Code d'accès à la page :");
 
-        // Si l'utilisateur clique sur Annuler → bloque immédiatement
         if (!saisie) {
             window.location.href = "index.html";
             return;
         }
 
-        // Appel Apps Script
         const res = await fetch(
             "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
             + "?action=checkCode&code=" + encodeURIComponent(saisie)
@@ -35,10 +32,10 @@
 
         if (txt.trim() === "OK") {
             sessionStorage.setItem("accesAsso", "oui");
-            document.getElementById("page").style.display = "block"; // ✔ affiche la page
+            document.getElementById("page").style.display = "block";
         } else {
             alert("Code incorrect ❌");
-            window.location.href = "index.html"; // ou autre page d'accueil
+            window.location.href = "index.html";
         }
     })();
 </script>
@@ -50,16 +47,16 @@
         <h1>Portail des Associations</h1>
 
         <div>
+            <!-- Association et email visibles mais non modifiables -->
             <label>Association :
-                <select id="select-asso">
-                    <!-- Rempli automatiquement par JS -->
-                </select>
-            </label>
-            <label>Nombre de cooptants pour cette session :
-                <input type="number" id="num-libre" placeholder="Ex : 42">
+                <input type="text" id="select-asso" readonly>
             </label>
             <label>Email :
-                <input type="email" id="email-libre" placeholder="exemple@domain.com">
+                <input type="email" id="email-libre" readonly>
+            </label>
+
+            <label>Nombre de cooptants pour cette session :
+                <input type="number" id="num-libre" placeholder="Ex : 42">
             </label>
             <button id="envoyer">Envoyer</button>
         </div>
@@ -74,7 +71,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 150 lignes pré-remplies -->
                 <script>
                     for (let i = 1; i <= 150; i++) {
                         document.write(`
@@ -98,18 +94,11 @@
                 const asso = localStorage.getItem("userAsso");
                 const email = localStorage.getItem("userEmail");
 
-                const selectAsso = document.getElementById("select-asso");
+                const inputAsso = document.getElementById("select-asso");
                 const inputEmail = document.getElementById("email-libre");
 
-                if (asso) {
-                    selectAsso.innerHTML = `<option value="${asso}" selected>${asso}</option>`;
-                    selectAsso.disabled = true; // Bloque la modification si nécessaire
-                }
-
-                if (email) {
-                    inputEmail.value = email;
-                    inputEmail.readOnly = true; // Bloque la modification si nécessaire
-                }
+                if (asso) inputAsso.value = asso;  // visible, readonly
+                if (email) inputEmail.value = email; // visible, readonly
             });
         </script>
 
@@ -120,6 +109,7 @@
 </body>
 
 </html>
+
 
 
 
