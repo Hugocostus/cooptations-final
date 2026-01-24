@@ -21,6 +21,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             // Stockage local
             localStorage.setItem("userEmail", Adresse);
             localStorage.setItem("userNumero", Numero);
+            localStorage.setItem("userAsso", data.asso);
             localStorage.setItem("logged", "yes");
 
             // Redirection vers la page association
