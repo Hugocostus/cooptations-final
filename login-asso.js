@@ -1,4 +1,4 @@
-const AUTH_API = "https://script.google.com/macros/s/AKfycbwBigVj9kLbiWOeuN9W6e8SrE_Hfdg2OqgAsGqVhPUL3wr_qCdAltu8KtoeZplPMEZVig/exec"; 
+const AUTH_API = "https://script.google.com/macros/s/AKfycbwBigVj9kLbiWOeuN9W6e8SrE_Hfdg2OqgAsGqVhPUL3wr_qCdAltu8KtoeZplPMEZVig/exec";
 
 document.getElementById("login-btn").addEventListener("click", async () => {
     const email = document.getElementById("email").value.trim();
@@ -16,7 +16,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(email)}&numero=${encodeURIComponent(numero)}&asso=${encodeURIComponent(asso)}`
         );
 
-        const data = await res.json();
+        const data = await res.json(); // ✅ JSON correct
 
         if (data.status === "OK") {
             // ✅ Stockage local
@@ -36,4 +36,3 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         status.textContent = "Erreur serveur.";
     }
 });
-
