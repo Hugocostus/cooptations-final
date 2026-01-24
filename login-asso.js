@@ -17,6 +17,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         );
 
         const data = await res.json(); // ✅ JSON correct
+        console.log("JSON reçu:", data);
 
         if (data.status === "OK") {
             // ✅ Stockage local
