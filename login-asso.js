@@ -16,21 +16,17 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         );
 
         // ✅ Lire la réponse comme JSON
-        const data = await res.json();
-
-        if (data.status === "OK") {
-            // Stockage local
-            localStorage.setItem("userEmail", data.email);
-            localStorage.setItem("userNumero", Numero);
-            localStorage.setItem("userAsso", data.asso);
-            localStorage.setItem("logged", "yes");
-
-            // Redirection vers la page association
-            window.location.href = "asso.html";
-        } else {
-            status.textContent = "Identifiants incorrects.";
-        }
-
+const data = await res.json(); // JSON valide maintenant
+if (data.status === "OK") {
+    localStorage.setItem("userEmail", data.email);
+    localStorage.setItem("userNumero", Numero);
+    localStorage.setItem("userAsso", data.asso);
+    localStorage.setItem("logged", "yes");
+    window.location.href = "asso.html";
+} else {
+    status.textContent = "Identifiants incorrects.";
+}
+        
     } catch (err) {
         console.error(err);
         status.textContent = "Erreur serveur.";
