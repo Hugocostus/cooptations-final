@@ -1,4 +1,4 @@
-const AUTH_API = "https://script.google.com/macros/s/AKfycbwBigVj9kLbiWOeuN9W6e8SrE_Hfdg2OqgAsGqVhPUL3wr_qCdAltu8KtoeZplPMEZVig/exec"; // Remplace par ton URL déployée
+const AUTH_API = "https://script.google.com/macros/s/AKfycbwBigVj9kLbiWOeuN9W6e8SrE_Hfdg2OqgAsGqVhPUL3wr_qCdAltu8KtoeZplPMEZVig/exec"; 
 
 document.getElementById("login-btn").addEventListener("click", async () => {
     const Adresse = document.getElementById("email").value.trim();
@@ -15,11 +15,12 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(Adresse)}&numero=${encodeURIComponent(Numero)}`
         );
 
-        const text = await res.text();
+        // ✅ Lire la réponse comme JSON
+        const data = await res.json();
 
-        if (text === "OK") {
+        if (data.status === "OK") {
             // Stockage local
-            localStorage.setItem("userEmail", Adresse);
+            localStorage.setItem("userEmail", data.email);
             localStorage.setItem("userNumero", Numero);
             localStorage.setItem("userAsso", data.asso);
             localStorage.setItem("logged", "yes");
@@ -35,3 +36,4 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         status.textContent = "Erreur serveur.";
     }
 });
+
