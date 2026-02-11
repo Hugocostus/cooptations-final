@@ -4,35 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail Principal</title>
+    <style>
+        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        :root {
+            --bg-deep: #0d1117;       /* Fond principal */
+            --bg-card: #161b22;       /* Fond des cartes */
+            --blue-electric: #2f81f7; /* Bleu primaire */
+            --blue-soft: #58a6ff;     /* Bleu accent */
+            --text-main: #c9d1d9;     /* Texte gris clair */
+            --text-bright: #ffffff;   /* Texte blanc */
+            --border: #30363d;        /* Bordures */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #161b22, #0d1117);
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            color: var(--blue-electric);
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- GRILLE DE NAVIGATION --- */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            width: 90%;
+            margin: 50px auto;
+        }
+
+        section {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        section:hover {
+            transform: translateY(-10px);
+            border-color: var(--blue-electric);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        section h2 {
+            color: var(--blue-soft);
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        section p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: var(--text-main);
+            flex-grow: 1;
+        }
+
+        /* --- BOUTONS --- */
+        button {
+            background-color: var(--blue-electric);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #1f6feb;
+            box-shadow: 0 0 15px rgba(47, 129, 247, 0.4);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            main { margin: 20px auto; }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Portail Principal des Étudiants et Associations</h1>
-        <p>Bienvenue sur le portail. Choisissez une section pour continuer :</p>
+        <h1>Portail Central</h1>
+        <p>Bienvenue. Sélectionnez votre espace de gestion pour continuer.</p>
     </header>
 
     <main>
         <section>
-            <h2>Gestion des inscriptions</h2>
-            <p>Accédez à la page pour inscrire de nouveaux étudiants.</p>
-            <button onclick="location.href='inscription.html'">Inscriptions</button>
+            <div>
+                <h2>Gestion des inscriptions</h2>
+                <p>Accédez à l'interface sécurisée pour enregistrer de nouveaux étudiants dans la base de données.</p>
+            </div>
+            <button onclick="location.href='inscription.html'">Ouvrir Inscriptions</button>
         </section>
 
         <section>
-            <h2>Vœux des étudiants</h2>
-            <p>Visualisez et gérez les vœux des étudiants pour les différentes associations.</p>
+            <div>
+                <h2>Espace Étudiants</h2>
+                <p>Zone dédiée aux étudiants pour la soumission et la modification de leurs vœux d'associations.</p>
+            </div>
             <button onclick="location.href='login.html'">Vœux Étudiants</button>
         </section>
 
         <section>
-            <h2>Vœux des associations</h2>
-            <p>Accédez aux vœux soumis par les associations et suivez leur statut.</p>
+            <div>
+                <h2>Espace Associations</h2>
+                <p>Interface réservée aux responsables d'associations pour la consultation des listes et le suivi des vœux.</p>
+            </div>
             <button onclick="location.href='login-asso.html'">Vœux Associations</button>
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Portail des associations et étudiants</p>
+        <p>© <span id="year"></span> — Portail des associations et étudiants</p>
         <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
     </footer>
 </body>
