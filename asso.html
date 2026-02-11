@@ -5,31 +5,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail des Associations</title>
+    <style>
+        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        :root {
+            --bg-deep: #0d1117;       /* Noir de fond */
+            --bg-card: #161b22;       /* Fond des sections */
+            --blue-electric: #2f81f7; /* Bleu primaire */
+            --blue-soft: #58a6ff;     /* Bleu accent */
+            --text-main: #c9d1d9;     /* Texte gris clair */
+            --text-bright: #ffffff;   /* Texte blanc */
+            --border: #30363d;        /* Bordures */
+            --locked: #21262d;        /* Fond pour champs readonly */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--blue-electric);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        /* --- PANNEAU DE CONTRÔLE --- */
+        .control-panel {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .control-panel label {
+            display: flex;
+            flex-direction: column;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--blue-soft);
+            gap: 8px;
+        }
+
+        input {
+            background-color: var(--bg-deep);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input:focus:not([readonly]) {
+            border-color: var(--blue-electric);
+            box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
+        }
+
+        /* Style spécifique pour les champs non modifiables */
+        input[readonly] {
+            background-color: var(--locked);
+            color: #8b949e;
+            cursor: not-allowed;
+            border-style: dashed;
+        }
+
+        button#envoyer {
+            background-color: var(--blue-electric);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+            margin-left: auto;
+        }
+
+        button#envoyer:hover {
+            background-color: #1f6feb;
+            transform: translateY(-1px);
+        }
+
+        /* --- TABLEAU DES ÉTUDIANTS --- */
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--blue-electric);
+            padding-left: 15px;
+        }
+
+        .table-container {
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #21262d;
+            color: var(--blue-soft);
+            text-align: left;
+            padding: 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background-color: rgba(47, 129, 247, 0.03);
+        }
+
+        /* --- RECHERCHE DYNAMIQUE --- */
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        [id^="resultats-"] {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #161b22;
+            border: 1px solid var(--blue-electric);
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+
+        [id^="resultats-"] div {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        [id^="resultats-"] div:hover {
+            background-color: var(--blue-electric);
+            color: white;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--blue-soft); }
+    </style>
 </head>
 
 <script>
-    // Vérification du code AVANT d'afficher la page
     (async () => {
-
         if (sessionStorage.getItem("accesAsso") === "oui") {
             document.getElementById("page").style.display = "block";
             return;
         }
-
         const saisie = prompt("Code d'accès à la page :");
-
         if (!saisie) {
             window.location.href = "index.html";
             return;
         }
-
         const res = await fetch(
             "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
             + "?action=checkCode&code=" + encodeURIComponent(saisie)
         );
-
         const txt = await res.text();
-
         if (txt.trim() === "OK") {
             sessionStorage.setItem("accesAsso", "oui");
             document.getElementById("page").style.display = "block";
@@ -46,59 +216,54 @@
 
         <h1>Portail des Associations</h1>
 
-        <div>
-            <!-- Association et email visibles mais non modifiables -->
-            <label>Association :
+        <div class="control-panel">
+            <label>Association
                 <input type="text" id="select-asso" readonly>
             </label>
-            <label>Email :
+            <label>Email de l'association
                 <input type="email" id="email-libre" readonly>
             </label>
-
-            <label>Nombre de cooptants pour cette session :
+            <label>Nombre de cooptants (session)
                 <input type="number" id="num-libre" placeholder="Ex : 42">
             </label>
-            <button id="envoyer">Envoyer</button>
+            <button id="envoyer">VALIDER LA LISTE</button>
         </div>
 
         <h2>Tableau des Étudiants</h2>
-        <table id="table-etudiants">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nom Étudiant</th>
-                    <th>Recherche</th>
-                </tr>
-            </thead>
-            <tbody>
-                <script>
-                    for (let i = 1; i <= 150; i++) {
-                        document.write(`
-                        <tr>
-                            <td>${i}</td>
-                            <td id="nom-${i}">—</td>
-                            <td>
-                                <input type="text" id="search-${i}" placeholder="Rechercher étudiant...">
-                                <div id="resultats-${i}"></div>
-                            </td>
-                        </tr>
-                        `);
-                    }
-                </script>
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table id="table-etudiants">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">ID</th>
+                        <th>Nom de l'étudiant</th>
+                        <th>Recherche & Sélection</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <script>
+                        for (let i = 1; i <= 150; i++) {
+                            document.write(`
+                            <tr>
+                                <td style="color: var(--blue-soft); font-weight: bold;">#${i}</td>
+                                <td id="nom-${i}" style="color: var(--text-bright); font-weight: 500;">—</td>
+                                <td class="search-box">
+                                    <input type="text" id="search-${i}" placeholder="Taper le nom pour rechercher...">
+                                    <div id="resultats-${i}"></div>
+                                </td>
+                            </tr>
+                            `);
+                        }
+                    </script>
+                </tbody>
+            </table>
+        </div>
 
-        <!-- Auto-remplissage association + email -->
         <script>
             window.addEventListener("DOMContentLoaded", () => {
                 const asso = localStorage.getItem("userAsso");
                 const email = localStorage.getItem("userEmail");
-
-                const inputAsso = document.getElementById("select-asso");
-                const inputEmail = document.getElementById("email-libre");
-
-                if (asso) inputAsso.value = asso;  // visible, readonly
-                if (email) inputEmail.value = email; // visible, readonly
+                if (asso) document.getElementById("select-asso").value = asso;
+                if (email) document.getElementById("email-libre").value = email;
             });
         </script>
 
@@ -107,11 +272,4 @@
     </div>
 
 </body>
-
 </html>
-
-
-
-
-
-
