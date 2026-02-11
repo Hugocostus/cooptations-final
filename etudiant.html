@@ -5,7 +5,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail des Vœux - Associations</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        :root {
+            --bg-deep: #0d1117;       /* Fond principal */
+            --bg-card: #161b22;       /* Fond des sections */
+            --blue-electric: #2f81f7; /* Bleu primaire */
+            --blue-soft: #58a6ff;     /* Bleu accent */
+            --text-main: #c9d1d9;     /* Texte gris clair */
+            --text-bright: #ffffff;   /* Texte blanc */
+            --border: #30363d;        /* Bordures */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to bottom, #161b22, #0d1117);
+        }
+
+        header h1 {
+            color: var(--blue-electric);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            margin: 40px auto;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* --- SECTIONS (Cartes) --- */
+        section {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            color: var(--blue-soft);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid var(--blue-electric);
+            padding-left: 15px;
+        }
+
+        /* --- IDENTITÉ ÉTUDIANT --- */
+        .selection-etudiant p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            background: rgba(47, 129, 247, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--blue-electric);
+            margin: 0;
+        }
+
+        /* --- FORMULAIRE VŒUX --- */
+        .voeu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+
+        .voeu label {
+            font-weight: bold;
+            flex: 0 0 80px;
+        }
+
+        select {
+            flex: 1;
+            background-color: var(--bg-deep);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        select:focus {
+            border-color: var(--blue-electric);
+            box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
+        }
+
+        /* --- BOUTON & MESSAGES --- */
+        #export-csv {
+            width: 100%;
+            background-color: var(--blue-electric);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        #export-csv:hover {
+            background-color: #1f6feb;
+            transform: translateY(-2px);
+        }
+
+        #export-csv:active {
+            transform: translateY(0);
+        }
+
+        #status-msg {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #8b949e;
+            border-top: 1px solid var(--border);
+        }
+
+    </style>
 </head>
 
 <body>
@@ -17,49 +166,46 @@
     </script>
 
     <header>
-        <h1>Portail des Vœux - Associations</h1>
+        <h1>Portail des Vœux</h1>
     </header>
 
     <main>
 
-        <!-- IDENTITÉ AUTO-DÉTECTÉE -->
         <section class="selection-etudiant">
-            <h2>Étudiant</h2>
-            <p id="etudiant-selectionne1">Chargement...</p>
-            <!-- Étudiant 2 masqué mais gardé pour compatibilité -->
+            <h2>Session de l'étudiant</h2>
+            <p id="etudiant-selectionne1">Chargement des données...</p>
             <p id="etudiant-selectionne2" style="display:none;"></p>
         </section>
 
-        <!-- SÉLECTION DES VŒUX -->
         <section class="voeux-section">
-            <h2>Choisissez vos 5 vœux d’associations (facultatif)</h2>
+            <h2>Vos 5 choix d'associations</h2>
 
             <div class="voeu">
-                <label for="voeu1">Vœu 1 :</label>
+                <label for="voeu1">Vœu 1</label>
                 <select id="voeu1"></select>
             </div>
 
             <div class="voeu">
-                <label for="voeu2">Vœu 2 :</label>
+                <label for="voeu2">Vœu 2</label>
                 <select id="voeu2"></select>
             </div>
 
             <div class="voeu">
-                <label for="voeu3">Vœu 3 :</label>
+                <label for="voeu3">Vœu 3</label>
                 <select id="voeu3"></select>
             </div>
 
             <div class="voeu">
-                <label for="voeu4">Vœu 4 :</label>
+                <label for="voeu4">Vœu 4</label>
                 <select id="voeu4"></select>
             </div>
 
             <div class="voeu">
-                <label for="voeu5">Vœu 5 :</label>
+                <label for="voeu5">Vœu 5</label>
                 <select id="voeu5"></select>
             </div>
 
-            <button id="export-csv">Envoyer</button>
+            <button id="export-csv">ENREGISTRER MES VŒUX</button>
             <p id="status-msg"></p>
         </section>
     </main>
@@ -75,4 +221,3 @@
 </body>
 
 </html>
-
