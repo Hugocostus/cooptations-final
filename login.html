@@ -3,19 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Étudiant</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Connexion Étudiant - Portail</title>
+    <style>
+        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        :root {
+            --bg-deep: #0d1117;       /* Fond principal */
+            --bg-card: #161b22;       /* Fond de la carte */
+            --blue-electric: #2f81f7; /* Bleu primaire */
+            --blue-soft: #58a6ff;     /* Bleu accent */
+            --text-main: #c9d1d9;     /* Texte gris clair */
+            --text-bright: #ffffff;   /* Texte blanc */
+            --border: #30363d;        /* Bordures */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- CARTE DE CONNEXION --- */
+        .login-box {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 380px;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--blue-electric);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- ENTRÉES SAISIE --- */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: var(--blue-soft);
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: var(--bg-deep);
+            border: 1px solid var(--border);
+            color: var(--text-bright);
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            border-color: var(--blue-electric);
+            box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
+        }
+
+        /* --- BOUTON ACTION --- */
+        #login-btn {
+            width: 100%;
+            background-color: var(--blue-electric);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        #login-btn:hover {
+            background-color: #1f6feb;
+            transform: translateY(-2px);
+        }
+
+        #login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* --- STATUT & RETOUR --- */
+        #login-status {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            min-height: 1.2em;
+            color: #f85149; /* Rouge erreur GitHub pour les alertes */
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .back-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--blue-soft);
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Connexion</h2>
+    <div class="login-box">
+        <h2>Connexion</h2>
 
-    <input type="email" id="email" placeholder="Adresse e-mail" required>
-    <input type="text" id="numero" placeholder="Numéro étudiant" required>
+        <div class="input-group">
+            <label for="email">E-mail Étudiant</label>
+            <input type="email" id="email" placeholder="nom.prenom@ecole.com" required>
+        </div>
 
-    <button id="login-btn">Se connecter</button>
+        <div class="input-group">
+            <label for="numero">Numéro Étudiant</label>
+            <input type="text" id="numero" placeholder="Ex: 22104567" required>
+        </div>
 
-    <p id="login-status"></p>
+        <button id="login-btn">Se connecter</button>
+
+        <p id="login-status"></p>
+
+        <div class="footer-links">
+            <a href="index.html" class="back-link">← Retour au portail</a>
+        </div>
+    </div>
 
     <script src="login.js"></script>
 </body>
