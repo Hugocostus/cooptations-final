@@ -4,49 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail des Vœux - Associations</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Inscription - Portail des Associations</title>
+    <style>
+        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        :root {
+            --bg-deep: #0d1117;       /* Fond principal */
+            --bg-card: #161b22;       /* Fond du formulaire */
+            --blue-electric: #2f81f7; /* Bleu primaire */
+            --blue-soft: #58a6ff;     /* Bleu accent */
+            --text-main: #c9d1d9;     /* Texte gris clair */
+            --text-bright: #ffffff;   /* Texte blanc */
+            --border: #30363d;        /* Bordures */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #161b22, #0d1117);
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            color: var(--blue-electric);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+        }
+
+        main {
+            flex: 1;
+            max-width: 500px;
+            margin: 40px auto;
+            width: 90%;
+        }
+
+        /* --- CARTE DU FORMULAIRE --- */
+        section.formulaire-etudiant {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--blue-soft);
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        input {
+            background-color: var(--bg-deep);
+            border: 1px solid var(--border);
+            color: var(--text-bright);
+            padding: 12px 15px;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            border-color: var(--blue-electric);
+            box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
+        }
+
+        /* --- BOUTON D'ENVOI --- */
+        #export-csv {
+            width: 100%;
+            background-color: var(--blue-electric);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #export-csv:hover {
+            background-color: #1f6feb;
+            transform: translateY(-2px);
+        }
+
+        #export-csv:active {
+            transform: translateY(0);
+        }
+
+        #status-msg {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+            min-height: 1.2em;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85rem;
+            color: #8b949e;
+            border-top: 1px solid var(--border);
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <h1>Portail des Vœux - Associations</h1>
+        <h1>Portail des Associations</h1>
     </header>
 
     <main>
-        <!-- Formulaire simplifié -->
         <section class="formulaire-etudiant">
-            <h2>Informations Étudiant</h2>
+            <h2>Nouvelle Inscription</h2>
             <form id="form-etudiant">
-                <div>
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" id="prenom" name="prenom" required>
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required placeholder="Ex: Jean">
                 </div>
-                <div>
-                    <label for="nom">Nom :</label>
-                    <input type="text" id="nom" name="nom" required>
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required placeholder="Ex: Dupont">
                 </div>
-                <div>
-                    <label for="numero">Numéro étudiant :</label>
-                    <input type="text" id="numero" name="numero" required>
+                <div class="form-group">
+                    <label for="numero">Numéro étudiant</label>
+                    <input type="text" id="numero" name="numero" required placeholder="Ex: 22104567">
                 </div>
-                <div>
-                    <label for="email">Adresse mail :</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="form-group">
+                    <label for="email">Adresse mail</label>
+                    <input type="email" id="email" name="email" required placeholder="exemple@domain.com">
                 </div>
+                <button type="button" id="export-csv">Inscrire l'étudiant</button>
             </form>
-        </section>
-        <button id="export-csv">Envoyer</button>
-        <p id="status-msg"></p>
+            <p id="status-msg"></p>
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Portail des associations</p>
+        <p>© <span id="year"></span> — Portail des Associations</p>
     </footer>
 
     <script src="script inscription.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 
+</html>
 
 </html>
+
