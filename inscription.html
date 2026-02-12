@@ -141,9 +141,16 @@
         }
     </style>
 </head>
-<footer>
-    <p>© <span id="year"></span> Portail des associations et étudiants | <a href="rgpd.html">Mentions RGPD</a></p>
+<footer style="margin-top: 50px; padding: 20px; border-top: 2px solid #1a1a1a; text-align: center; font-family: sans-serif;">
+    <p style="color: #4a4a4a; font-size: 0.9em;">
+        © <span id="year"></span> Conseil de corporation des étudiants Em-lyon | 
+        <a href="faq.html" style="color: #003366; font-weight: bold; text-decoration: none;">Besoin d'aide ? (FAQ)</a> | 
+        <a href="rgpd.html" style="color: #003366; text-decoration: none;">Mentions RGPD</a>
+    </p>
 </footer>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 <body>
     <header>
         <h1>Portail des Associations</h1>
@@ -188,5 +195,6 @@
 </html>
 
 </html>
+
 
 
