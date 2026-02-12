@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGPD - Portail des Associations</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; }
+        h1 { color: #333; border-bottom: 2px solid #eee; }
+        h2 { color: #555; margin-top: 25px; }
+        section { margin-bottom: 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #007bff; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Retour à l'accueil</a>
+    
+    <h1>Protection des Données Personnelles (RGPD)</h1>
+
+    <section>
+        <p>Conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong>, cette page explique comment vos données sont collectées et traitées dans le cadre du projet "Projet Coo".</p>
+    </section>
+
+    <section>
+        <h2>1. Responsable du traitement</h2>
+        <p>Le traitement des données est assuré par l'équipe d'administration du <strong>Projet Coo</strong>.</p>
+    </section>
+
+    <section>
+        <h2>2. Données collectées</h2>
+        <ul>
+            <li><strong>Identité :</strong> Prénom et Nom.</li>
+            <li><strong>Identifiants :</strong> Numéro étudiant.</li>
+            <li><strong>Contact :</strong> Adresse e-mail personnelle ou associative.</li>
+            <li><strong>Choix de vœux :</strong> Associations sélectionnées par les étudiants.</li>
+            <li><strong>Sélections associatives :</strong> Liste des étudiants cooptés par les associations.</li>
+            <li><strong>Horodatage :</strong> Date et heure de chaque soumission.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Finalités du traitement</h2>
+        <p>Les données sont utilisées pour :</p>
+        <ul>
+            <li>L'inscription des étudiants dans la base de données.</li>
+            <li>L'authentification sécurisée sur l'espace de vœux.</li>
+            <li>La mise en relation entre les vœux des étudiants et les choix des associations.</li>
+            <li>L'envoi automatique de confirmations par e-mail.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Destinataires et Sécurité</h2>
+        <p>Les données sont stockées via <strong>Google Apps Script</strong>. Elles sont uniquement accessibles aux administrateurs du portail et, de manière partielle, aux bureaux des associations concernées par les cooptations.</p>
+    </section>
+
+    <section>
+        <h2>5. Vos droits</h2>
+        <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande, veuillez contacter l'administrateur du système.</p>
+    </section>
+
+    <footer>
+        <p>© <span id="year"></span> Portail des associations</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
