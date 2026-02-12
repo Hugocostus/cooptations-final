@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Portail des Associations</title>
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --deep-black: #1a1a1a;
+            --soft-blue: #e6f0fa;
+            --text-gray: #4a4a4a;
+            --white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            padding: 40px 20px; 
+            max-width: 900px; 
+            margin: auto; 
+            color: var(--deep-black);
+            background-color: #fcfcfc;
+        }
+
+        h1 { 
+            color: var(--primary-blue); 
+            border-bottom: 3px solid var(--primary-blue); 
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 { 
+            color: var(--white); 
+            margin-top: 40px; 
+            background: var(--deep-black); 
+            padding: 12px 20px; 
+            border-radius: 4px;
+            font-size: 1.3em;
+        }
+
+        .faq-section {
+            margin-bottom: 30px;
+        }
+
+        .faq-item { 
+            margin-bottom: 0;
+            padding: 20px; 
+            border-left: 4px solid var(--primary-blue);
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: var(--soft-blue);
+        }
+
+        .question { 
+            font-weight: 700; 
+            color: var(--primary-blue); 
+            display: block; 
+            margin-bottom: 8px; 
+            font-size: 1.1em; 
+        }
+
+        .answer { 
+            color: var(--text-gray); 
+            margin: 0;
+        }
+
+        .back-link { 
+            display: inline-block; 
+            margin-bottom: 30px; 
+            text-decoration: none; 
+            color: var(--primary-blue); 
+            font-weight: bold;
+            border: 2px solid var(--primary-blue);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover { 
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        footer { 
+            margin-top: 60px; 
+            padding: 25px 0; 
+            border-top: 2px solid var(--deep-black); 
+            font-size: 0.9em; 
+            color: var(--text-gray);
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← RETOUR AU PORTAIL</a>
+    
+    <h1>Foire Aux Questions</h1>
+
+    <div class="faq-section">
+        <h2>Pour les Étudiants</h2>
+        
+        <div class="faq-item">
+            <span class="question">Je n'arrive pas à me connecter, que faire ?</span>
+            <p class="answer">Vérifiez que vous utilisez l'adresse e-mail et le numéro étudiant fournis lors de votre inscription. Si le problème persiste, contactez l'administration car votre profil n'est peut-être pas encore validé dans la base.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Puis-je modifier mes vœux après avoir cliqué sur "Envoyer" ?</span>
+            <p class="answer">Le système enregistre chaque soumission avec un horodatage. En cas de plusieurs envois, c'est généralement le dernier formulaire soumis qui est pris en compte par les administrateurs.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Pourquoi certaines associations ne sont-elles pas dans la liste ?</span>
+            <p class="answer">La liste des associations disponibles est prédéfinie. Si une association manque, il est possible qu'elle ne participe pas au processus de cooptation via ce portail cette année.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Vais-je recevoir une confirmation ?</span>
+            <p class="answer">Oui, un message de succès s'affiche après l'envoi et un mail récapitulatif est envoyé à l'adresse utilisée pour la connexion.</p>
+        </div>
+    </div>
+
+    <div class="faq-section">
+        <h2>Pour les Associations</h2>
+
+        <div class="faq-item">
+            <span class="question">Comment obtenir le code d'accès à la page Association ?</span>
+            <p class="answer">Le code est transmis uniquement au représentant de l’association par le Conseil de Corporation. Sans ce code, l'accès à la page <code>asso.html</code> est bloqué et vous serez redirigé vers l'accueil.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Je ne trouve pas un étudiant dans la barre de recherche, pourquoi ?</span>
+            <p class="answer">La recherche dynamique ne fonctionne que pour les étudiants déjà inscrits via la page <code>inscription.html</code>. Si un étudiant est introuvable, demandez-lui de finaliser son inscription au préalable.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Combien de noms puis-je soumettre ?</span>
+            <p class="answer">Le tableau est conçu pour accueillir jusqu'à 150 noms par session de cooptation. N'oubliez pas d'indiquer le nombre exact de cooptants que votre association peut avoir sur ce créneau dans le champ dédié avant d'envoyer.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Est-ce que l'étudiant voit si je l'ai sélectionné ?</span>
+            <p class="answer">Non. Le portail étudiant permet uniquement de saisir des vœux. Les résultats finaux sont traités par les administrateurs et communiqués ultérieurement.</p>
+        </div>
+    </div>
+
+    <div class="faq-section">
+        <h2>Sécurité et Données</h2>
+
+        <div class="faq-item">
+            <span class="question">Qui peut voir mes choix ?</span>
+            <p class="answer">Vos vœux, qu'ils soient associatifs ou étudiants, sont confidentiels. Ils ne sont visibles que par les administrateurs du système.</p>
+        </div>
+
+        <div class="faq-item">
+            <span class="question">Comment supprimer mon compte ou mes données ?</span>
+            <p class="answer">Conformément au RGPD, vous pouvez exercer votre droit à l'effacement en écrivant à <a href="mailto:cooptations@corpo-emlyon.com">cooptations@corpo-emlyon.com</a>.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© <span id="year"></span> Conseil de corporation des étudiants Em-lyon | <a href="rgpd.html">Mentions RGPD</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
