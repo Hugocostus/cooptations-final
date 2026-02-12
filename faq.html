@@ -80,6 +80,8 @@
             padding: 8px 15px;
             border-radius: 5px;
             transition: all 0.3s ease;
+            cursor: pointer;
+            background: none;
         }
 
         .back-link:hover { 
@@ -111,9 +113,9 @@
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-link">← RETOUR AU PORTAIL</a>
+    <button id="back-button" class="back-link">← RETOUR</button>
     
-    <h1>Foire Aux Questions</h1>
+    <h1>Foire Aux Questions (FAQ)</h1>
 
     <div class="faq-section">
         <h2>Pour les Étudiants</h2>
@@ -182,7 +184,17 @@
     </footer>
 
     <script>
+        // Mise à jour de l'année
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Redirection intelligente : retourne à la page précédente si elle appartient au site
+        document.getElementById('back-button').addEventListener('click', function() {
+            if (document.referrer && document.referrer.includes(window.location.hostname)) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
     </script>
 </body>
 </html>
