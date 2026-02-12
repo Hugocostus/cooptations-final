@@ -4,64 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RGPD - Portail des Associations</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; }
-        h1 { color: #333; border-bottom: 2px solid #eee; }
-        h2 { color: #555; margin-top: 25px; }
-        section { margin-bottom: 20px; }
-        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #007bff; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 40px 20px; max-width: 900px; margin: auto; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { color: #2c3e50; margin-top: 30px; border-left: 4px solid #2c3e50; padding-left: 15px; }
+        section { margin-bottom: 25px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #3498db; font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+        footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
+        .contact-box { background: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-link">← Retour à l'accueil</a>
+    <a href="index.html" class="back-link">← Retour au portail</a>
     
     <h1>Protection des Données Personnelles (RGPD)</h1>
 
     <section>
-        <p>Conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong>, cette page explique comment vos données sont collectées et traitées dans le cadre du projet "Projet Coo".</p>
+        <p>Conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong> et à la Loi Informatique et Libertés, la présente information détaille la manière dont sont traitées les données collectées sur ce portail.</p>
     </section>
 
     <section>
         <h2>1. Responsable du traitement</h2>
-        <p>Le traitement des données est assuré par l'équipe d'administration du <strong>Projet Coo</strong>.</p>
+        <p>Le traitement des données est effectué par le <strong>Conseil de corporation des étudiants de l’Em-Lyon</strong>, agissant pour la gestion des processus de cooptation et de vœux associatifs.</p>
     </section>
 
     <section>
         <h2>2. Données collectées</h2>
+        <p>Nous collectons et traitons les catégories de données suivantes :</p>
         <ul>
-            <li><strong>Identité :</strong> Prénom et Nom.</li>
+            <li><strong>Identité :</strong> Prénom, Nom.</li>
             <li><strong>Identifiants :</strong> Numéro étudiant.</li>
-            <li><strong>Contact :</strong> Adresse e-mail personnelle ou associative.</li>
-            <li><strong>Choix de vœux :</strong> Associations sélectionnées par les étudiants.</li>
-            <li><strong>Sélections associatives :</strong> Liste des étudiants cooptés par les associations.</li>
-            <li><strong>Horodatage :</strong> Date et heure de chaque soumission.</li>
+            <li><strong>Contact :</strong> Adresse e-mail (étudiante ou associative).</li>
+            <li><strong>Choix :</strong> Vœux d'associations (pour les étudiants) et listes de cooptations (pour les associations).</li>
+            <li><strong>Horodatage :</strong> Date et heure de soumission des formulaires.</li>
         </ul>
     </section>
 
     <section>
         <h2>3. Finalités du traitement</h2>
-        <p>Les données sont utilisées pour :</p>
+        <p>Les données sont collectées pour les objectifs suivants :</p>
         <ul>
-            <li>L'inscription des étudiants dans la base de données.</li>
-            <li>L'authentification sécurisée sur l'espace de vœux.</li>
-            <li>La mise en relation entre les vœux des étudiants et les choix des associations.</li>
-            <li>L'envoi automatique de confirmations par e-mail.</li>
+            <li><strong>Gestion des inscriptions :</strong> Enregistrer les étudiants dans la base de données du système.</li>
+            <li><strong>Authentification :</strong> Permettre aux étudiants de se connecter de manière sécurisée à leur espace de vœux.</li>
+            <li><strong>Recueil des vœux :</strong> Collecter les préférences des étudiants pour les associations et les choix des associations pour les futurs membres.</li>
+            <li><strong>Communication :</strong> Envoi de mails récapitulatifs suite à la saisie des vœux.</li>
+            <li><strong>Entrainement :</strong> Entrainement des modèles et des administrateurs.</li>
         </ul>
     </section>
 
     <section>
-        <h2>4. Destinataires et Sécurité</h2>
-        <p>Les données sont stockées via <strong>Google Apps Script</strong>. Elles sont uniquement accessibles aux administrateurs du portail et, de manière partielle, aux bureaux des associations concernées par les cooptations.</p>
+        <h2>4. Destinataires des données</h2>
+        <p>Les données collectées sont destinées exclusivement :</p>
+        <ul>
+            <li>Aux administrateurs du système de cooptation.</li>
+            <li>Aux bureaux des associations concernées (uniquement pour les noms des étudiants sélectionnés).</li>
+        </ul>
     </section>
 
     <section>
-        <h2>5. Vos droits</h2>
-        <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande, veuillez contacter l'administrateur du système.</p>
+        <h2>5. Durée de conservation</h2>
+        <p>Les données sont conservées uniquement pour la durée nécessaire aux opérations de cooptation de l'année universitaire en cours. Elles seront archivées ensuite pour les <strong>2 années</strong> suivant cette durée opérationnelle.</p>
+    </section>
+
+    <section>
+        <h2>6. Sécurité des données</h2>
+        <p>Vos données sont transmises via des scripts sécurisés et stockées sur des bases de données privées à l’accès restreint. L'accès à la partie "Association" est protégé par un code d'accès.</p>
+    </section>
+
+    <section>
+        <h2>7. Vos droits</h2>
+        <p>Conformément à la réglementation, vous disposez des droits suivants :</p>
+        <ul>
+            <li><strong>Droit d'accès et de rectification :</strong> Vous pouvez demander la modification de vos informations si elles sont erronées.</li>
+            <li><strong>Droit à l'effacement :</strong> Vous pouvez demander la suppression de vos vœux ou de votre compte.</li>
+            <li><strong>Droit d'opposition :</strong> Vous pouvez vous opposer au traitement de vos données pour des motifs légitimes.</li>
+        </ul>
+        <div class="contact-box">
+            <p>Pour exercer ces droits, vous pouvez contacter l'administrateur du portail, le délégué à la sécurité des données du Conseil de corporation des étudiants Em-lyon ou à défaut son représentant légal.</p>
+            <p><strong>Contact privilégié :</strong> <a href="mailto:cooptations@corpo-emlyon.com">cooptations@corpo-emlyon.com</a></p>
+        </div>
     </section>
 
     <footer>
-        <p>© <span id="year"></span> Portail des associations</p>
+        <p>© <span id="year"></span> Conseil de corporation des étudiants Em-lyon</p>
     </footer>
 
     <script>
