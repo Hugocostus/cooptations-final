@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Portail des Associations</title>
+    <title>Registration - Associations Portal</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Fond principal */
-            --bg-card: #161b22;       /* Fond du formulaire */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
+            --bg-deep: #0d1117;       /* Main background */
+            --bg-card: #161b22;       /* Form background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
         }
 
         body {
@@ -50,7 +50,7 @@
             width: 90%;
         }
 
-        /* --- CARTE DU FORMULAIRE --- */
+        /* --- FORM CARD --- */
         section.formulaire-etudiant {
             background: var(--bg-card);
             padding: 35px;
@@ -98,7 +98,7 @@
             box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
         }
 
-        /* --- BOUTON D'ENVOI --- */
+        /* --- SUBMIT BUTTON --- */
         #export-csv {
             width: 100%;
             background-color: var(--blue-electric);
@@ -175,43 +175,43 @@
 
 <body>
     <header>
-        <h1>Portail des Associations</h1>
+        <h1>Associations Portal</h1>
     </header>
 
     <main>
         <section class="formulaire-etudiant">
-            <h2>Nouvelle Inscription</h2>
+            <h2>New Registration</h2>
             <form id="form-etudiant">
                 <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom" required placeholder="Ex: Jean">
+                    <label for="prenom">First Name</label>
+                    <input type="text" id="prenom" name="prenom" required placeholder="e.g.: John">
                 </div>
                 <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom" required placeholder="Ex: Dupont">
+                    <label for="nom">Last Name</label>
+                    <input type="text" id="nom" name="nom" required placeholder="e.g.: Doe">
                 </div>
                 <div class="form-group">
-                    <label for="numero">Numéro étudiant</label>
-                    <input type="text" id="numero" name="numero" required placeholder="Ex: 22104567">
+                    <label for="numero">Student ID</label>
+                    <input type="text" id="numero" name="numero" required placeholder="e.g.: 22104567">
                 </div>
                 <div class="form-group">
-                    <label for="email">Adresse mail</label>
-                    <input type="email" id="email" name="email" required placeholder="exemple@ecole.com">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="example@school.com">
                 </div>
-                <button type="button" id="export-csv">S'inscrire</button>
+                <button type="button" id="export-csv">Sign Up</button>
             </form>
             <p id="status-msg"></p>
             <div class="back-link-container">
-                <a href="index.html" class="back-link">← Retour au portail</a>
+                <a href="index.html" class="back-link">← Back to Portal</a>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
         <p>
-            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
-            <a href="rgpd.html">Mentions RGPD</a>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data Policy</a>
         </p>
     </footer>
 
