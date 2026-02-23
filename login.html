@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Étudiant - Portail</title>
+    <title>Student Login - Portal</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Fond principal */
-            --bg-card: #161b22;       /* Fond de la carte */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
+            --bg-deep: #0d1117;       /* Main background */
+            --bg-card: #161b22;       /* Card background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Light gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
         }
 
         body {
@@ -26,7 +26,7 @@
             min-height: 100vh;
         }
 
-        /* --- CONTENU PRINCIPAL --- */
+        /* --- MAIN CONTENT --- */
         main {
             flex: 1;
             display: flex;
@@ -35,7 +35,7 @@
             padding: 20px;
         }
 
-        /* --- CARTE DE CONNEXION --- */
+        /* --- LOGIN CARD --- */
         .login-box {
             background: var(--bg-card);
             width: 100%;
@@ -55,7 +55,7 @@
             letter-spacing: 2px;
         }
 
-        /* --- ENTRÉES SAISIE --- */
+        /* --- INPUT GROUPS --- */
         .input-group {
             margin-bottom: 15px;
             text-align: left;
@@ -87,7 +87,7 @@
             box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
         }
 
-        /* --- BOUTON ACTION --- */
+        /* --- ACTION BUTTON --- */
         #login-btn {
             width: 100%;
             background-color: var(--blue-electric);
@@ -108,7 +108,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- STATUT & RETOUR --- */
+        /* --- STATUS & NAVIGATION --- */
         #login-status {
             margin-top: 20px;
             font-size: 0.9rem;
@@ -133,7 +133,7 @@
             color: var(--blue-soft);
         }
 
-        /* --- FOOTER BAS DE PAGE --- */
+        /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -163,33 +163,33 @@
 
     <main>
         <div class="login-box">
-            <h2>Connexion</h2>
+            <h2>Login</h2>
 
             <div class="input-group">
-                <label for="email">E-mail Étudiant</label>
-                <input type="email" id="email" placeholder="nom.prenom@ecole.com" required>
+                <label for="email">Student Email</label>
+                <input type="email" id="email" placeholder="first.last@school.com" required>
             </div>
 
             <div class="input-group">
-                <label for="numero">Numéro Étudiant</label>
-                <input type="text" id="numero" placeholder="Ex: 22104567" required>
+                <label for="numero">Student ID</label>
+                <input type="text" id="numero" placeholder="e.g.: 22104567" required>
             </div>
 
-            <button id="login-btn">Se connecter</button>
+            <button id="login-btn">Log In</button>
 
             <p id="login-status"></p>
 
             <div class="footer-links">
-                <a href="index.html" class="back-link">← Retour au portail</a>
+                <a href="index.html" class="back-link">← Back to Portal</a>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
         <p>
-            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
-            <a href="rgpd.html">Mentions RGPD</a>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data Policy</a>
         </p>
     </footer>
 
