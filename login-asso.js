@@ -7,39 +7,39 @@ document.getElementById("login-btn").addEventListener("click", async () => {
     const status = document.getElementById("login-status");
 
     if (!email || !numero || !asso) {
-        status.textContent = "Veuillez remplir tous les champs.";
+        status.textContent = "Please fill in all fields.";
         return;
     }
 
     try {
-        console.log("Envoi du login :", { email, numero, asso });
+        console.log("Sending login data:", { email, numero, asso });
 
         const res = await fetch(
             `${AUTH_API}?action=checkLogin&email=${encodeURIComponent(email)}&numero=${encodeURIComponent(numero)}&asso=${encodeURIComponent(asso)}`
         );
 
-        // Lire la réponse brute
+        // Read raw response
         const text = await res.text();
-        console.log("Réponse brute :", text);
+        console.log("Raw response:", text);
 
         let data;
         try {
             data = JSON.parse(text);
-            console.log("JSON parsé :", data);
+            console.log("Parsed JSON:", data);
         } catch (err) {
-            console.error("Erreur parsing JSON :", err);
-            status.textContent = "Erreur serveur (JSON invalide).";
+            console.error("JSON parsing error:", err);
+            status.textContent = "Server error (Invalid JSON).";
             return;
         }
 
         if (data.status === "OK") {
-            // Stockage local
+            // Local storage
             localStorage.setItem("userEmail", data.email);
             localStorage.setItem("userNumero", data.numero);
             localStorage.setItem("userAsso", data.asso);
             localStorage.setItem("logged", "yes");
 
-            console.log("LocalStorage mis à jour :", {
+            console.log("LocalStorage updated:", {
                 userEmail: data.email,
                 userNumero: data.numero,
                 userAsso: data.asso
@@ -48,12 +48,11 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             // Redirection
             window.location.href = "asso.html";
         } else {
-            status.textContent = "Identifiants ou association incorrects.";
+            status.textContent = "Incorrect credentials or association name.";
         }
 
     } catch (err) {
-        console.error("Erreur fetch :", err);
-        status.textContent = "Erreur serveur (fetch).";
+        console.error("Fetch error:", err);
+        status.textContent = "Server error (fetch failed).";
     }
 });
-
