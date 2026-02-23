@@ -1,19 +1,19 @@
-// === Variables globales ===
+// === Global Variables ===
 const API_URL = "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec";
 let etudiants = [];
 
-// 🔥 On garde les étudiants sélectionnés ici
-let etudiantsSelectionnes = {};  // ex : { "1": {Prenom, Nom, Numero}, ... }
+// 🔥 Keep selected students here
+let etudiantsSelectionnes = {};  // e.g.: { "1": {Prenom, Nom, Numero}, ... }
 
-// Charger les étudiants (pour recherche dynamique)
+// Load students (for dynamic search)
 async function chargerEtudiants() {
     try {
         const res = await fetch(API_URL + "?action=getStudents");
-        if (!res.ok) throw new Error("Erreur API");
+        if (!res.ok) throw new Error("API Error");
 
         etudiants = await res.json();
 
-        // Attacher la recherche dynamique à chaque champ
+        // Attach dynamic search to each input field
         document.querySelectorAll('input[id^="search-"]').forEach(input => {
             const num = input.id.split("-")[1];
             input.addEventListener("input", () => rechercher(num));
@@ -21,11 +21,11 @@ async function chargerEtudiants() {
 
     } catch (err) {
         console.error(err);
-        alert("Erreur lors du chargement des étudiants.");
+        alert("Error while loading student list.");
     }
 }
 
-// Recherche dynamique
+// Dynamic Search
 function rechercher(num) {
     const input = document.getElementById(`search-${num}`);
     const results = document.getElementById(`resultats-${num}`);
@@ -44,10 +44,10 @@ function rechercher(num) {
         div.style.cursor = "pointer";
 
         div.onclick = () => {
-            // Affichage
+            // Display
             document.getElementById(`nom-${num}`).textContent = `${e.Prenom} ${e.Nom}`;
 
-            // 🔥 Stockage complet pour l’envoi
+            // 🔥 Full storage for submission
             etudiantsSelectionnes[num] = e;
 
             input.value = "";
@@ -58,19 +58,19 @@ function rechercher(num) {
     });
 }
 
-// Envoi des vœux asso
+// Submit association wishes
 document.getElementById("envoyer").addEventListener("click", async () => {
     const asso = document.getElementById("select-asso").value;
     const numero = document.getElementById("num-libre").value.trim();
-    const email = document.getElementById("email-libre").value.trim(); // 🔥 NOUVEAU
+    const email = document.getElementById("email-libre").value.trim(); 
 
-    // Vérification
+    // Validation
     if (!asso || !numero || !email) {
-        alert("Veuillez remplir association, numéro et email.");
+        alert("Please fill in the association name, number and email.");
         return;
     }
 
-    // Collecte des étudiants sélectionnés
+    // Collect selected students
     const noms = [];
     document.querySelectorAll('td[id^="nom-"]').forEach(td => {
         const num = td.id.split("-")[1];
@@ -88,10 +88,10 @@ document.getElementById("envoyer").addEventListener("click", async () => {
         action: "addVoeuxAsso",
         Association: asso,
         Numero: numero,
-        Email: email, // 🔥 ENVOYÉ AU SERVEUR
+        Email: email, 
         Etudiants: etudiantsCSV,
-        Date: now.toLocaleDateString("fr-FR"),
-        Heure: now.toLocaleTimeString("fr-FR")
+        Date: now.toLocaleDateString("en-GB"),
+        Heure: now.toLocaleTimeString("en-GB")
     };
 
     try {
@@ -102,12 +102,11 @@ document.getElementById("envoyer").addEventListener("click", async () => {
             body: JSON.stringify(payload)
         });
 
-        alert("✅ Enregistré avec succès !");
+        alert("✅ Registered successfully!");
     } catch (err) {
         console.error(err);
-        alert("⚠️ Impossible d'envoyer les données.");
+        alert("⚠️ Unable to submit data.");
     }
 });
 
 window.onload = chargerEtudiants;
-
