@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Portail des Associations</title>
+    <title>FAQ - Associations Portal</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Fond principal */
-            --bg-card: #161b22;       /* Fond des sections */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
+            --bg-deep: #0d1117;       /* Main background */
+            --bg-card: #161b22;       /* Section background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Light gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
         }
 
         body {
@@ -54,7 +54,7 @@
             border-left: 4px solid var(--blue-electric);
         }
 
-        /* --- ACCORDIONS / FAQ ITEMS --- */
+        /* --- FAQ ITEMS --- */
         .faq-section {
             margin-bottom: 30px;
         }
@@ -88,7 +88,7 @@
             font-size: 0.95rem;
         }
 
-        /* --- BOUTONS & LIENS --- */
+        /* --- BUTTONS & LINKS --- */
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -155,56 +155,73 @@
 <body>
 
     <main>
-        <a href="index.html" class="back-link">← Retour au portail</a>
+        <a href="index.html" class="back-link">← Back to Portal</a>
         
-        <h1>Foire Aux Questions</h1>
+        <h1>Frequently Asked Questions</h1>
 
         <div class="faq-section">
-            <h2>Pour les Étudiants</h2>
+            <h2>For Students</h2>
             
             <div class="faq-item">
-                <span class="question">Je n'arrive pas à me connecter, que faire ?</span>
-                <p class="answer">Vérifiez que vous utilisez l'adresse e-mail et le numéro étudiant fournis lors de votre inscription. Si le problème persiste, contactez l'administration car votre profil n'est peut-être pas encore validé dans la base.</p>
+                <span class="question">I can't log in, what should I do?</span>
+                <p class="answer">Ensure you are using the email address and student ID provided during registration. If the issue persists, contact the administration as your profile may not be validated in the database yet.</p>
             </div>
 
             <div class="faq-item">
-                <span class="question">Puis-je modifier mes vœux après avoir cliqué sur "Envoyer" ?</span>
-                <p class="answer">Le système enregistre chaque soumission avec un horodatage. En cas de plusieurs envois, c'est généralement le dernier formulaire soumis qui est pris en compte par les administrateurs.</p>
+                <span class="question">Can I modify my choices after clicking "Submit"?</span>
+                <p class="answer">The system records every submission with a timestamp. In case of multiple submissions, the latest form submitted is generally the one taken into account by administrators.</p>
             </div>
 
             <div class="faq-item">
-                <span class="question">Pourquoi certaines associations ne sont-elles pas dans la liste ?</span>
-                <p class="answer">La liste des associations disponibles est prédéfinie. Si une association manque, il est possible qu'elle ne participe pas au processus de cooptation via ce portail cette année.</p>
-            </div>
-        </div>
-
-        <div class="faq-section">
-            <h2>Pour les Associations</h2>
-
-            <div class="faq-item">
-                <span class="question">Comment obtenir le code d'accès à la page Association ?</span>
-                <p class="answer">Le code est transmis uniquement au représentant de l’association par le Conseil de Corporation. Sans ce code, l'accès est bloqué et vous serez redirigé vers l'accueil.</p>
-            </div>
-
-            <div class="faq-item">
-                <span class="question">Je ne trouve pas un étudiant dans la barre de recherche, pourquoi ?</span>
-                <p class="answer">La recherche dynamique ne fonctionne que pour les étudiants déjà inscrits via la page <code>inscription.html</code>. Si un étudiant est introuvable, demandez-lui de finaliser son inscription au préalable.</p>
-            </div>
-
-            <div class="faq-item">
-                <span class="question">Combien de noms puis-je soumettre ?</span>
-                <p class="answer">Le tableau est conçu pour accueillir jusqu'à 150 noms par session. N'oubliez pas d'indiquer le nombre exact de cooptants autorisés dans le champ dédié avant de valider la liste.</p>
+                <span class="question">Why are some associations missing from the list?</span>
+                <p class="answer">The list of available associations is predefined. If an association is missing, it may not be participating in the cooptation process through this portal this year.</p>
             </div>
         </div>
 
         <div class="faq-section">
-            <h2>Sécurité et Données</h2>
+            <h2>For Associations</h2>
 
             <div class="faq-item">
-                <span class="question">Qui peut voir mes choix ?</span>
-                <p class="answer">Vos vœux sont confidentiels. Ils ne sont visibles que par les administrateurs du système pour garantir l'équité du processus.</p>
+                <span class="question">How do I get the access code for the Association page?</span>
+                <p class="answer">The code is sent exclusively to the association representative by the Students Corporation Council. Without this code, access is blocked and you will be redirected to the homepage.</p>
             </div>
 
             <div class="faq-item">
-                <span class="question">Droit à l'oubli (RGPD)</span>
-                <p class="answer">Vous pouvez exercer votre droit à l'effacement de vos données en écrivant à <a href="mailto:cooptations@corpo-emlyon.com" style="color: var(--blue-soft);">cooptations@corpo-emlyon.com
+                <span class="question">I can't find a student in the search bar, why?</span>
+                <p class="answer">The dynamic search only works for students already registered via the <code>registration.html</code> page. If a student cannot be found, please ask them to complete their registration first.</p>
+            </div>
+
+            <div class="faq-item">
+                <span class="question">How many names can I submit?</span>
+                <p class="answer">The table is designed to hold up to 150 names per session. Remember to specify the exact number of authorized coopted members in the dedicated field before validating the list.</p>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Security and Data</h2>
+
+            <div class="faq-item">
+                <span class="question">Who can see my choices?</span>
+                <p class="answer">Your choices are confidential. They are only visible to system administrators to ensure the fairness of the process.</p>
+            </div>
+
+            <div class="faq-item">
+                <span class="question">Right to be forgotten (GDPR)</span>
+                <p class="answer">You can exercise your right to have your data deleted by writing to <a href="mailto:cooptations@corpo-emlyon.com" style="color: var(--blue-soft);">cooptations@corpo-emlyon.com</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
+        <p>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data Policy</a>
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
