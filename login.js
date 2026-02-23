@@ -6,7 +6,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
     const status = document.getElementById("login-status");
 
     if (!Adresse || !Numero) {
-        status.textContent = "Veuillez remplir les deux champs.";
+        status.textContent = "Please fill in both fields.";
         return;
     }
 
@@ -18,7 +18,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
         const text = await res.text();
 
         if (text === "OK") {
-            // 🔥 Stockage des données nécessaires pour la page des vœux
+            // 🔥 Storage of necessary data for the wishes page
             localStorage.setItem("userNumero", Numero);
             localStorage.setItem("userEmail", Adresse);
             localStorage.setItem("logged", "yes");
@@ -26,12 +26,11 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             // Redirection
             window.location.href = "etudiant.html";
         } else {
-            status.textContent = "Identifiants incorrects.";
+            status.textContent = "Incorrect credentials.";
         }
 
     } catch (err) {
         console.error(err);
-        status.textContent = "Erreur serveur.";
+        status.textContent = "Server error.";
     }
 });
-
