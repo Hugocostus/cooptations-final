@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail des Associations</title>
+    <title>Associations Portal - emlyon</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Noir de fond */
-            --bg-card: #161b22;       /* Fond des sections */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
-            --locked: #21262d;        /* Fond pour champs readonly */
+            --bg-deep: #0d1117;       /* Background */
+            --bg-card: #161b22;       /* Section background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
+            --locked: #21262d;        /* Readonly background */
         }
 
         body {
@@ -45,7 +45,7 @@
             font-size: 2rem;
         }
 
-        /* --- PANNEAU DE CONTRÔLE --- */
+        /* --- CONTROL PANEL --- */
         .control-panel {
             background: var(--bg-card);
             padding: 25px;
@@ -100,6 +100,7 @@
             cursor: pointer;
             transition: transform 0.1s, background 0.2s;
             margin-left: auto;
+            text-transform: uppercase;
         }
 
         button#envoyer:hover {
@@ -107,7 +108,7 @@
             transform: translateY(-1px);
         }
 
-        /* --- TABLEAU --- */
+        /* --- TABLE --- */
         h2 {
             font-size: 1.2rem;
             margin-bottom: 15px;
@@ -162,6 +163,7 @@
             padding: 30px 20px;
             background-color: #161b22;
             border-top: 1px solid var(--border);
+            margin-top: 50px;
         }
 
         footer p {
@@ -194,7 +196,7 @@
                 document.getElementById("main-footer").style.display = "block";
                 return;
             }
-            const saisie = prompt("Code d'accès à la page :");
+            const saisie = prompt("Access code for this page:");
             if (!saisie) {
                 window.location.href = "index.html";
                 return;
@@ -209,36 +211,36 @@
                 document.getElementById("page").style.display = "block";
                 document.getElementById("main-footer").style.display = "block";
             } else {
-                alert("Code incorrect ❌");
+                alert("Incorrect code ❌");
                 window.location.href = "index.html";
             }
         })();
     </script>
 
     <div id="page" style="display:none">
-        <h1>Portail des Associations</h1>
+        <h1>Associations Portal</h1>
 
         <div class="control-panel">
-            <label>Association
+            <label>Association Name
                 <input type="text" id="select-asso" readonly>
             </label>
-            <label>Email de l'association
+            <label>Association Email
                 <input type="email" id="email-libre" readonly>
             </label>
-            <label>Nombre de cooptants (session)
-                <input type="number" id="num-libre" placeholder="Ex : 42">
+            <label>Number of coopted students
+                <input type="number" id="num-libre" placeholder="e.g.: 42">
             </label>
-            <button id="envoyer">VALIDER LA LISTE</button>
+            <button id="envoyer">Submit List</button>
         </div>
 
-        <h2>Tableau des Étudiants</h2>
+        <h2>Students Table</h2>
         <div class="table-container">
             <table id="table-etudiants">
                 <thead>
                     <tr>
                         <th style="width: 60px;">ID</th>
-                        <th>Nom de l'étudiant</th>
-                        <th>Recherche & Sélection</th>
+                        <th>Student Name</th>
+                        <th>Search & Selection</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -249,7 +251,7 @@
                                 <td style="color: var(--blue-soft); font-weight: bold;">#${i}</td>
                                 <td id="nom-${i}" style="color: var(--text-bright); font-weight: 500;">—</td>
                                 <td class="search-box">
-                                    <input type="text" id="search-${i}" placeholder="Taper le nom pour rechercher...">
+                                    <input type="text" id="search-${i}" placeholder="Type name to search...">
                                     <div id="resultats-${i}"></div>
                                 </td>
                             </tr>
@@ -262,10 +264,10 @@
     </div>
 
     <footer id="main-footer" style="display:none">
-        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
         <p>
-            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
-            <a href="rgpd.html">Mentions RGPD</a>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data Policy</a>
         </p>
     </footer>
 
