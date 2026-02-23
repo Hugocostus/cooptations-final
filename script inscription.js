@@ -2,26 +2,26 @@
 const API_COOPT_URL = "https://script.google.com/macros/s/AKfycbwOzUN89SrhsRlOBoDrc7UKjJFgEh9ojMFZmc89G4EM0tcpR_aZ-VxIzaYzO7R8hpvv/exec";
 
 
-// === Fonction principale ===
+// === Main function ===
 async function envoyerInfos(prenom, nom, numero, email) {
     const now = new Date();
     const statusMsg = document.getElementById("status-msg");
 
-    statusMsg.textContent = "⏳ Envoi en cours...";
+    statusMsg.textContent = "⏳ Sending...";
 
-    // Payload unique pour cooptations_etudiant
+    // Unique payload for cooptations_etudiant
     const payloadCoopt = {
         action: "addStudent",
         Prenom: prenom,
         Nom: nom,
         Numero: numero,
-        Adresse: email,  // 👈 envoyé dans la feuille principale
-        Date: now.toLocaleDateString("fr-FR"),
-        Heure: now.toLocaleTimeString("fr-FR")
+        Adresse: email,  // 👈 sent to the main sheet
+        Date: now.toLocaleDateString("en-GB"),
+        Heure: now.toLocaleTimeString("en-GB")
     };
 
     try {
-        // --- POST : inscription ---
+        // --- POST : registration ---
         await fetch(API_COOPT_URL, {
             method: "POST",
             mode: "no-cors",
@@ -29,16 +29,16 @@ async function envoyerInfos(prenom, nom, numero, email) {
             body: JSON.stringify(payloadCoopt)
         });
 
-        statusMsg.textContent = "✅ Inscription enregistrée !";
+        statusMsg.textContent = "✅ Registration recorded!";
 
     } catch (err) {
         console.error(err);
-        statusMsg.textContent = "❌ Erreur lors de l'envoi.";
+        statusMsg.textContent = "❌ Error during submission.";
     }
 }
 
 
-// === Bouton d’envoi ===
+// === Submit button ===
 document.getElementById("export-csv").addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -48,7 +48,7 @@ document.getElementById("export-csv").addEventListener("click", (e) => {
     const email = document.getElementById("email").value.trim();
 
     if (!prenom || !nom || !numero || !email) {
-        alert("Veuillez remplir tous les champs.");
+        alert("Please fill in all fields.");
         return;
     }
 
@@ -56,5 +56,6 @@ document.getElementById("export-csv").addEventListener("click", (e) => {
 });
 
 
-// === Footer année ===
+// === Footer year ===
 document.getElementById('year').textContent = new Date().getFullYear();
+
