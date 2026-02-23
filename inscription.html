@@ -134,23 +134,31 @@
         /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 25px;
-            font-size: 0.85rem;
-            color: #8b949e;
+            padding: 30px 20px;
+            background-color: #161b22;
             border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-<footer style="margin-top: 50px; padding: 20px; border-top: 2px solid #1a1a1a; text-align: center; font-family: sans-serif;">
-    <p style="color: #4a4a4a; font-size: 0.9em;">
-        © <span id="year"></span> Conseil de corporation des étudiants Em-lyon | 
-        <a href="faq.html" style="color: #003366; font-weight: bold; text-decoration: none;">Besoin d'aide ? (FAQ)</a> | 
-        <a href="rgpd.html" style="color: #003366; text-decoration: none;">Mentions RGPD</a>
-    </p>
-</footer>
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+
 <body>
     <header>
         <h1>Portail des Associations</h1>
@@ -183,7 +191,11 @@
     </main>
 
     <footer>
-        <p>© <span id="year"></span> — Portail des Associations</p>
+        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>
+            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
+            <a href="rgpd.html">Mentions RGPD</a>
+        </p>
     </footer>
 
     <script src="script inscription.js"></script>
@@ -191,9 +203,6 @@
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
-
-</html>
-
 </html>
 
 
