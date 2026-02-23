@@ -5,91 +5,205 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RGPD - Portail des Associations</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 40px 20px; max-width: 900px; margin: auto; color: #333; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h2 { color: #2c3e50; margin-top: 30px; border-left: 4px solid #2c3e50; padding-left: 15px; }
-        section { margin-bottom: 25px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #3498db; font-weight: bold; }
-        .back-link:hover { text-decoration: underline; }
-        footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
-        .contact-box { background: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #ddd; }
+        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        :root {
+            --bg-deep: #0d1117;       /* Fond principal */
+            --bg-card: #161b22;       /* Fond des sections */
+            --blue-electric: #2f81f7; /* Bleu primaire */
+            --blue-soft: #58a6ff;     /* Bleu accent */
+            --text-main: #c9d1d9;     /* Texte gris clair */
+            --text-bright: #ffffff;   /* Texte blanc */
+            --border: #30363d;        /* Bordures */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            width: 90%;
+        }
+
+        h1 {
+            color: var(--blue-electric);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--blue-soft);
+            font-size: 1.4rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid var(--blue-electric);
+        }
+
+        section {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        li::before {
+            content: "→";
+            color: var(--blue-electric);
+            position: absolute;
+            left: -20px;
+        }
+
+        strong {
+            color: var(--text-bright);
+        }
+
+        /* --- BOUTONS & LIENS --- */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: transparent;
+            color: var(--blue-soft);
+            border: 1px solid var(--blue-soft);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .back-link:hover {
+            background-color: var(--blue-electric);
+            border-color: var(--blue-electric);
+            color: white;
+            box-shadow: 0 0 15px rgba(47, 129, 247, 0.3);
+        }
+
+        .contact-box {
+            background: var(--bg-deep);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--blue-electric);
+            margin-top: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #161b22;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-link">← Retour au portail</a>
-    
-    <h1>Protection des Données Personnelles (RGPD)</h1>
 
-    <section>
-        <p>Conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong> et à la Loi Informatique et Libertés, la présente information détaille la manière dont sont traitées les données collectées sur ce portail.</p>
-    </section>
+    <main>
+        <a href="index.html" class="back-link">← Retour au portail</a>
+        
+        <h1>Protection des Données (RGPD)</h1>
 
-    <section>
-        <h2>1. Responsable du traitement</h2>
-        <p>Le traitement des données est effectué par le <strong>Conseil de corporation des étudiants de l’Em-Lyon</strong>, agissant pour la gestion des processus de cooptation et de vœux associatifs.</p>
-    </section>
+        <section>
+            <p>Conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong>, cette page détaille la manière dont sont traitées les données collectées sur ce portail par le Conseil de Corporation.</p>
+        </section>
 
-    <section>
-        <h2>2. Données collectées</h2>
-        <p>Nous collectons et traitons les catégories de données suivantes :</p>
-        <ul>
-            <li><strong>Identité :</strong> Prénom, Nom.</li>
-            <li><strong>Identifiants :</strong> Numéro étudiant.</li>
-            <li><strong>Contact :</strong> Adresse e-mail (étudiante ou associative).</li>
-            <li><strong>Choix :</strong> Vœux d'associations (pour les étudiants) et listes de cooptations (pour les associations).</li>
-            <li><strong>Horodatage :</strong> Date et heure de soumission des formulaires.</li>
-        </ul>
-    </section>
+        <section>
+            <h2>1. Responsable du traitement</h2>
+            <p>Le traitement des données est effectué par le <strong>Conseil de corporation des étudiants de l’Em-Lyon</strong>, responsable de la gestion des processus de cooptation.</p>
+        </section>
 
-    <section>
-        <h2>3. Finalités du traitement</h2>
-        <p>Les données sont collectées pour les objectifs suivants :</p>
-        <ul>
-            <li><strong>Gestion des inscriptions :</strong> Enregistrer les étudiants dans la base de données du système.</li>
-            <li><strong>Authentification :</strong> Permettre aux étudiants de se connecter de manière sécurisée à leur espace de vœux.</li>
-            <li><strong>Recueil des vœux :</strong> Collecter les préférences des étudiants pour les associations et les choix des associations pour les futurs membres.</li>
-            <li><strong>Communication :</strong> Envoi de mails récapitulatifs suite à la saisie des vœux.</li>
-            <li><strong>Entrainement :</strong> Entrainement des modèles et des administrateurs.</li>
-        </ul>
-    </section>
+        <section>
+            <h2>2. Données collectées</h2>
+            <ul>
+                <li><strong>Identité :</strong> Prénom, Nom.</li>
+                <li><strong>Identifiants :</strong> Numéro étudiant.</li>
+                <li><strong>Contact :</strong> Adresse e-mail (étudiante ou associative).</li>
+                <li><strong>Choix :</strong> Vœux d'associations et listes de cooptations.</li>
+                <li><strong>Horodatage :</strong> Date et heure de soumission des formulaires.</li>
+            </ul>
+        </section>
 
-    <section>
-        <h2>4. Destinataires des données</h2>
-        <p>Les données collectées sont destinées exclusivement :</p>
-        <ul>
-            <li>Aux administrateurs du système de cooptation.</li>
-            <li>Aux bureaux des associations concernées (uniquement pour les noms des étudiants sélectionnés).</li>
-        </ul>
-    </section>
+        <section>
+            <h2>3. Finalités du traitement</h2>
+            <ul>
+                <li><strong>Gestion des inscriptions :</strong> Enregistrement des utilisateurs dans le système.</li>
+                <li><strong>Authentification :</strong> Sécurisation de l'accès aux espaces personnels.</li>
+                <li><strong>Recueil des vœux :</strong> Centralisation des préférences pour le processus de cooptation.</li>
+                <li><strong>Communication :</strong> Envoi de confirmations et récapitulatifs par mail.</li>
+            </ul>
+        </section>
 
-    <section>
-        <h2>5. Durée de conservation</h2>
-        <p>Les données sont conservées uniquement pour la durée nécessaire aux opérations de cooptation de l'année universitaire en cours. Elles seront archivées ensuite pour les <strong>2 années</strong> suivant cette durée opérationnelle.</p>
-    </section>
+        <section>
+            <h2>4. Conservation et Sécurité</h2>
+            <p>Les données sont conservées pour la durée du processus de cooptation de l'année en cours et archivées pour une durée de <strong>2 ans</strong>. Elles sont transmises via des protocoles sécurisés et stockées sur des bases de données à accès restreint.</p>
+        </section>
 
-    <section>
-        <h2>6. Sécurité des données</h2>
-        <p>Vos données sont transmises via des scripts sécurisés et stockées sur des bases de données privées à l’accès restreint. L'accès à la partie "Association" est protégé par un code d'accès.</p>
-    </section>
-
-    <section>
-        <h2>7. Vos droits</h2>
-        <p>Conformément à la réglementation, vous disposez des droits suivants :</p>
-        <ul>
-            <li><strong>Droit d'accès et de rectification :</strong> Vous pouvez demander la modification de vos informations si elles sont erronées.</li>
-            <li><strong>Droit à l'effacement :</strong> Vous pouvez demander la suppression de vos vœux ou de votre compte.</li>
-            <li><strong>Droit d'opposition :</strong> Vous pouvez vous opposer au traitement de vos données pour des motifs légitimes.</li>
-        </ul>
-        <div class="contact-box">
-            <p>Pour exercer ces droits, vous pouvez contacter l'administrateur du portail, le délégué à la sécurité des données du Conseil de corporation des étudiants Em-lyon ou à défaut son représentant légal.</p>
-            <p><strong>Contact privilégié :</strong> <a href="mailto:cooptations@corpo-emlyon.com">cooptations@corpo-emlyon.com</a></p>
-        </div>
-    </section>
+        <section>
+            <h2>5. Vos droits</h2>
+            <p>Vous disposez d'un droit d'accès, de rectification et d'effacement de vos données personnelles.</p>
+            <div class="contact-box">
+                <p>Pour exercer ces droits, contactez le délégué à la protection des données :</p>
+                <p><strong>E-mail :</strong> <a href="mailto:cooptations@corpo-emlyon.com" style="color: var(--blue-soft); text-decoration: none;">cooptations@corpo-emlyon.com</a></p>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>© <span id="year"></span> Conseil de corporation des étudiants Em-lyon</p>
+        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>
+            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
+            <a href="rgpd.html">Mentions RGPD</a>
+        </p>
     </footer>
 
     <script>
