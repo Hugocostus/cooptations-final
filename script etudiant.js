@@ -24,7 +24,7 @@ async function chargerEtudiantConnecte() {
     console.log("🔍 NUMÉRO LOCALSTORAGE =", numero);
 
     if (!numero) {
-        alert("Erreur : aucun numéro étudiant détecté.");
+        alert("Error: no student number found.");
         return;
     }
 
@@ -35,7 +35,7 @@ async function chargerEtudiantConnecte() {
         // Chercher l'étudiant connecté
         etudiantConnecte = data.find(e => String(e.Numero) === String(numero));
 
-        console.log("👤 ÉTUDIANT TROUVÉ :", etudiantConnecte);
+        console.log("👤 Student found :", etudiantConnecte);
 
         if (!etudiantConnecte) {
             alert("Erreur : étudiant introuvable dans la base.");
@@ -63,7 +63,7 @@ async function chargerEtudiantConnecte() {
 function initialiserListesVoeux() {
     for (let i = 1; i <= 5; i++) {
         const select = document.getElementById(`voeu${i}`);
-        select.innerHTML = '<option value="">-- Sélectionnez une association --</option>';
+        select.innerHTML = '<option value="">-- Select an association --</option>';
 
         associations.forEach(asso => {
             const opt = document.createElement("option");
@@ -80,7 +80,7 @@ function initialiserListesVoeux() {
 
 async function sauvegarderVoeux(voeux) {
     if (!etudiantConnecte) {
-        alert("Erreur : étudiant non chargé.");
+        alert("Error: student unload.");
         return;
     }
 
@@ -89,7 +89,7 @@ async function sauvegarderVoeux(voeux) {
     const now = new Date();
 
     const email = localStorage.getItem("userEmail");
-    console.log("📧 EMAIL ENVOYÉ :", email);
+    console.log("📧 mail sent :", email);
 
     const payload = {
         action: "addVoeuxEtudiant",
@@ -108,7 +108,7 @@ async function sauvegarderVoeux(voeux) {
     console.log("📦 PAYLOAD ENVOYÉ AU SERVEUR :", payload);
 
     const statusMsg = document.getElementById("status-msg");
-    statusMsg.textContent = "⏳ Sauvegarde en cours...";
+    statusMsg.textContent = "⏳ Saving...";
 
     try {
         await fetch(API_URL, {
@@ -118,11 +118,11 @@ async function sauvegarderVoeux(voeux) {
             body: JSON.stringify(payload)
         });
 
-        statusMsg.textContent = "✅ Vœux sauvegardés ! Un mail récapitulatif vous a été envoyé.";
+        statusMsg.textContent = "✅ Choices saved, an E-mail has been sent.";
 
     } catch (err) {
         console.error(err);
-        statusMsg.textContent = "❌ Erreur lors de la sauvegarde.";
+        statusMsg.textContent = "❌ Issue regarding saving.";
     }
 }
 
@@ -155,6 +155,7 @@ window.onload = () => {
     chargerEtudiantConnecte();  // Récupère automatiquement l'utilisateur
     initialiserListesVoeux();   // Remplit les <select>
 };
+
 
 
 
