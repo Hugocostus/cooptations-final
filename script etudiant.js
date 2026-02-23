@@ -1,12 +1,12 @@
 /* ================================
-         ⚙️ VARIABLES GLOBALES
+          ⚙️ GLOBAL VARIABLES
    ================================ */
 
 const API_URL = "https://script.google.com/macros/s/AKfycbxCQMgPVc0XZy9qxTh5CB2thjFNVU3SLmbEUNJWSYzBsvTtnkTZFX08X8a3v9y06E1m4Q/exec";
 
-let etudiantConnecte = null; // Contiendra l'objet {Prenom, Nom, Numero}
+let etudiantConnecte = null; // Will contain the object {Prenom, Nom, Numero}
 
-/* Liste des associations */
+/* List of associations */
 const associations = [
     "Astuce", "BDA", "BDE", "BDI", "BDS", "BDX", "Cheer'up", "Club voile", "Declic", "Diplo",
     "Focus", "Forum", "Gourmets", "Libr'air", "Frontrow", "PnP", "PP", "Noise", "Racing",
@@ -15,13 +15,13 @@ const associations = [
 
 
 /* ================================
-       🧩 CHARGER L'ÉTUDIANT
+        🧩 LOAD LOGGED STUDENT
    ================================ */
 
 async function chargerEtudiantConnecte() {
     const numero = localStorage.getItem("userNumero");
 
-    console.log("🔍 NUMÉRO LOCALSTORAGE =", numero);
+    console.log("🔍 LOCALSTORAGE ID =", numero);
 
     if (!numero) {
         alert("Error: no student number found.");
@@ -32,32 +32,32 @@ async function chargerEtudiantConnecte() {
         const response = await fetch(API_URL + "?action=getStudents");
         const data = await response.json();
 
-        // Chercher l'étudiant connecté
+        // Find the connected student
         etudiantConnecte = data.find(e => String(e.Numero) === String(numero));
 
-        console.log("👤 Student found :", etudiantConnecte);
+        console.log("👤 Student found:", etudiantConnecte);
 
         if (!etudiantConnecte) {
-            alert("Erreur : étudiant introuvable dans la base.");
+            alert("Error: student not found in the database.");
             return;
         }
 
-        // Générer l'identité complète
+        // Generate full identity string
         const identite = `${etudiantConnecte.Prenom} ${etudiantConnecte.Nom} (${etudiantConnecte.Numero})`;
 
-        // Afficher automatiquement dans l’UI
+        // Automatically display in UI
         document.getElementById("etudiant-selectionne1").textContent = identite;
         document.getElementById("etudiant-selectionne2").textContent = identite;
 
     } catch (err) {
-        console.error("Erreur lors du chargement :", err);
-        alert("Impossible de charger les informations de l'étudiant.");
+        console.error("Loading error:", err);
+        alert("Unable to load student information.");
     }
 }
 
 
 /* ================================
-        📋 LISTES DES VŒUX
+         📋 WISH LISTS SETUP
    ================================ */
 
 function initialiserListesVoeux() {
@@ -75,12 +75,12 @@ function initialiserListesVoeux() {
 
 
 /* ================================
-       💾 SAUVEGARDE DES VŒUX
+        💾 SAVE WISHES
    ================================ */
 
 async function sauvegarderVoeux(voeux) {
     if (!etudiantConnecte) {
-        alert("Error: student unload.");
+        alert("Error: student data not loaded.");
         return;
     }
 
@@ -89,7 +89,7 @@ async function sauvegarderVoeux(voeux) {
     const now = new Date();
 
     const email = localStorage.getItem("userEmail");
-    console.log("📧 mail sent :", email);
+    console.log("📧 Email sent to:", email);
 
     const payload = {
         action: "addVoeuxEtudiant",
@@ -100,12 +100,12 @@ async function sauvegarderVoeux(voeux) {
         Voeu3: voeux[2] || "",
         Voeu4: voeux[3] || "",
         Voeu5: voeux[4] || "",
-        Date: now.toLocaleDateString("fr-FR"),
-        Heure: now.toLocaleTimeString("fr-FR"),
+        Date: now.toLocaleDateString("en-GB"),
+        Heure: now.toLocaleTimeString("en-GB"),
         Email: email
     };
 
-    console.log("📦 PAYLOAD ENVOYÉ AU SERVEUR :", payload);
+    console.log("📦 PAYLOAD SENT TO SERVER:", payload);
 
     const statusMsg = document.getElementById("status-msg");
     statusMsg.textContent = "⏳ Saving...";
@@ -118,23 +118,23 @@ async function sauvegarderVoeux(voeux) {
             body: JSON.stringify(payload)
         });
 
-        statusMsg.textContent = "✅ Choices saved, an E-mail has been sent.";
+        statusMsg.textContent = "✅ Choices saved, a confirmation email has been sent.";
 
     } catch (err) {
         console.error(err);
-        statusMsg.textContent = "❌ Issue regarding saving.";
+        statusMsg.textContent = "❌ Error while saving.";
     }
 }
 
 
 /* ================================
-          📤 BOUTON VALIDER
+          📤 SUBMIT BUTTON
    ================================ */
 
 document.getElementById("export-csv").addEventListener("click", () => {
 
     if (!etudiantConnecte) {
-        alert("Erreur : étudiant non identifié.");
+        alert("Error: student not identified.");
         return;
     }
 
@@ -148,14 +148,10 @@ document.getElementById("export-csv").addEventListener("click", () => {
 
 
 /* ================================
-          🚀 AU CHARGEMENT
+          🚀 ON LOAD
    ================================ */
 
 window.onload = () => {
-    chargerEtudiantConnecte();  // Récupère automatiquement l'utilisateur
-    initialiserListesVoeux();   // Remplit les <select>
+    chargerEtudiantConnecte();  // Automatically fetch user info
+    initialiserListesVoeux();   // Populate dropdown menus
 };
-
-
-
-
