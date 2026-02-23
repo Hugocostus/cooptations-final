@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Association - Portail</title>
+    <title>Association Login - Portal</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Fond principal */
-            --bg-card: #161b22;       /* Fond de la carte de connexion */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
+            --bg-deep: #0d1117;       /* Main background */
+            --bg-card: #161b22;       /* Login card background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Light gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
         }
 
         body {
@@ -26,7 +26,7 @@
             min-height: 100vh;
         }
 
-        /* --- CONTENU PRINCIPAL --- */
+        /* --- MAIN CONTENT --- */
         main {
             flex: 1;
             display: flex;
@@ -35,7 +35,7 @@
             padding: 20px;
         }
 
-        /* --- CARTE DE CONNEXION --- */
+        /* --- LOGIN CARD --- */
         .login-container {
             background: var(--bg-card);
             width: 100%;
@@ -84,7 +84,7 @@
             color: #484f58;
         }
 
-        /* --- BOUTON --- */
+        /* --- BUTTON --- */
         #login-btn {
             width: 100%;
             background-color: var(--blue-electric);
@@ -106,7 +106,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- LIEN RETOUR --- */
+        /* --- BACK LINK --- */
         .back-link {
             display: block;
             margin-top: 25px;
@@ -150,33 +150,33 @@
 
     <main>
         <div class="login-container">
-            <h2>Connexion Association</h2>
+            <h2>Association Login</h2>
 
             <div class="input-group">
-                <input type="email" id="email" placeholder="Adresse e-mail" required>
+                <input type="email" id="email" placeholder="Email address" required>
             </div>
             
             <div class="input-group">
-                <input type="password" id="numero" placeholder="Mot de passe" required>
+                <input type="password" id="numero" placeholder="Password" required>
             </div>
 
             <div class="input-group">
-                <input type="text" id="asso" placeholder="Nom de l'association" required>
+                <input type="text" id="asso" placeholder="Association name" required>
             </div>
 
-            <button id="login-btn">Se connecter</button>
+            <button id="login-btn">Log In</button>
 
             <p id="login-status" style="margin-top: 20px; font-size: 0.9rem; min-height: 1.2em; color: var(--blue-soft);"></p>
 
-            <a href="index.html" class="back-link">← Retour au portail principal</a>
+            <a href="index.html" class="back-link">← Back to main portal</a>
         </div>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
         <p>
-            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
-            <a href="rgpd.html">Mentions RGPD</a>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data policy</a>
         </p>
     </footer>
 
