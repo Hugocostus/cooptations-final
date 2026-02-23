@@ -167,3 +167,118 @@
         footer p {
             font-size: 0.9rem;
             color: #8b949e;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        (async () => {
+            if (sessionStorage.getItem("accesAsso") === "oui") {
+                document.getElementById("page").style.display = "block";
+                document.getElementById("main-footer").style.display = "block";
+                return;
+            }
+            const saisie = prompt("Code d'accès à la page :");
+            if (!saisie) {
+                window.location.href = "index.html";
+                return;
+            }
+            const res = await fetch(
+                "https://script.google.com/macros/s/AKfycbw17YxKO-2sZnEy5vDrgNvFeqRNqVozi1pz5lH3WLh_bsICjWNXREhRHvI7LyxZ7BZp/exec" 
+                + "?action=checkCode&code=" + encodeURIComponent(saisie)
+            );
+            const txt = await res.text();
+            if (txt.trim() === "OK") {
+                sessionStorage.setItem("accesAsso", "oui");
+                document.getElementById("page").style.display = "block";
+                document.getElementById("main-footer").style.display = "block";
+            } else {
+                alert("Code incorrect ❌");
+                window.location.href = "index.html";
+            }
+        })();
+    </script>
+
+    <div id="page" style="display:none">
+        <h1>Portail des Associations</h1>
+
+        <div class="control-panel">
+            <label>Association
+                <input type="text" id="select-asso" readonly>
+            </label>
+            <label>Email de l'association
+                <input type="email" id="email-libre" readonly>
+            </label>
+            <label>Nombre de cooptants (session)
+                <input type="number" id="num-libre" placeholder="Ex : 42">
+            </label>
+            <button id="envoyer">VALIDER LA LISTE</button>
+        </div>
+
+        <h2>Tableau des Étudiants</h2>
+        <div class="table-container">
+            <table id="table-etudiants">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">ID</th>
+                        <th>Nom de l'étudiant</th>
+                        <th>Recherche & Sélection</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <script>
+                        for (let i = 1; i <= 150; i++) {
+                            document.write(`
+                            <tr>
+                                <td style="color: var(--blue-soft); font-weight: bold;">#${i}</td>
+                                <td id="nom-${i}" style="color: var(--text-bright); font-weight: 500;">—</td>
+                                <td class="search-box">
+                                    <input type="text" id="search-${i}" placeholder="Taper le nom pour rechercher...">
+                                    <div id="resultats-${i}"></div>
+                                </td>
+                            </tr>
+                            `);
+                        }
+                    </script>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer id="main-footer" style="display:none">
+        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>
+            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
+            <a href="rgpd.html">Mentions RGPD</a>
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        window.addEventListener("DOMContentLoaded", () => {
+            const asso = localStorage.getItem("userAsso");
+            const email = localStorage.getItem("userEmail");
+            if (asso) document.getElementById("select-asso").value = asso;
+            if (email) document.getElementById("email-libre").value = email;
+        });
+    </script>
+    <script src="script asso.js"></script>
+
+</body>
+</html>
