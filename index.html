@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail Principal</title>
+    <title>Cooptation Portal - Home</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Fond principal */
-            --bg-card: #161b22;       /* Fond des cartes */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
+            --bg-deep: #0d1117;       /* Main background */
+            --bg-card: #161b22;       /* Card background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Light gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
         }
 
         body {
@@ -50,7 +50,7 @@
             margin: 0 auto;
         }
 
-        /* --- GRILLE DE NAVIGATION --- */
+        /* --- NAVIGATION GRID --- */
         main {
             flex: 1;
             display: grid;
@@ -94,7 +94,7 @@
             flex-grow: 1;
         }
 
-        /* --- BOUTONS --- */
+        /* --- BUTTONS --- */
         button {
             background-color: var(--blue-electric);
             color: white;
@@ -154,41 +154,41 @@
 </head>
 <body>
     <header>
-        <h1>Cooptations center</h1>
-        <p>Welcome, choose a section</p>
+        <h1>Cooptations Center</h1>
+        <p>Welcome, please choose a section</p>
     </header>
 
     <main>
         <section>
             <div>
-                <h2>Student sign up</h2>
-                <p>Come here to sign up to this cooptation session</p>
+                <h2>Student Sign Up</h2>
+                <p>Register here to participate in this cooptation session</p>
             </div>
-            <button onclick="location.href='inscription.html'">Sign up</button>
+            <button onclick="location.href='inscription.html'">Sign Up</button>
         </section>
 
         <section>
             <div>
-                <h2>Student wishes</h2>
-                <p>Section to submit your wishes as a student</p>
+                <h2>Student Wishes</h2>
+                <p>Submit your wishes and preferences as a student</p>
             </div>
-            <button onclick="location.href='login.html'">Student wishes</button>
+            <button onclick="location.href='login.html'">Student Wishes</button>
         </section>
 
         <section>
             <div>
-                <h2>Association wishes</h2>
-                <p>Section to submit your wishes as an association</p>
+                <h2>Association Wishes</h2>
+                <p>Section to submit your recruitment choices as an association</p>
             </div>
-            <button onclick="location.href='login-asso.html'">Association wishes</button>
+            <button onclick="location.href='login-asso.html'">Association Wishes</button>
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
         <p>
-            <a href="faq.html">Need help ? (FAQ)</a> | 
-            <a href="rgpd.html">Data policy</a>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data Policy</a>
         </p>
     </footer>
 
