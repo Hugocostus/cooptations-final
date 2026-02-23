@@ -120,15 +120,29 @@
             transform: translateY(-2px);
         }
 
-        #export-csv:active {
-            transform: translateY(0);
-        }
-
         #status-msg {
             margin-top: 20px;
             text-align: center;
             font-weight: 500;
             min-height: 1.2em;
+        }
+
+        .back-link-container {
+            margin-top: 25px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .back-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--blue-soft);
         }
 
         /* --- FOOTER --- */
@@ -182,16 +196,15 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Adresse mail</label>
-                    <input type="email" id="email" name="email" required placeholder="exemple@domain.com">
+                    <input type="email" id="email" name="email" required placeholder="exemple@ecole.com">
                 </div>
                 <button type="button" id="export-csv">S'inscrire</button>
             </form>
             <p id="status-msg"></p>
-            <div class="footer-links">
+            <div class="back-link-container">
                 <a href="index.html" class="back-link">← Retour au portail</a>
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -207,9 +220,5 @@
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
+
 </html>
-
-
-
-
-
