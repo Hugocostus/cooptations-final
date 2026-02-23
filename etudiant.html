@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail des Vœux - Associations</title>
+    <title>Wishes Portal - Associations</title>
     <style>
-        /* --- SYSTÈME DE DESIGN DARK & BLUE --- */
+        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Fond principal */
-            --bg-card: #161b22;       /* Fond des sections */
-            --blue-electric: #2f81f7; /* Bleu primaire */
-            --blue-soft: #58a6ff;     /* Bleu accent */
-            --text-main: #c9d1d9;     /* Texte gris clair */
-            --text-bright: #ffffff;   /* Texte blanc */
-            --border: #30363d;        /* Bordures */
+            --bg-deep: #0d1117;       /* Main background */
+            --bg-card: #161b22;       /* Section background */
+            --blue-electric: #2f81f7; /* Primary blue */
+            --blue-soft: #58a6ff;     /* Accent blue */
+            --text-main: #c9d1d9;     /* Light gray text */
+            --text-bright: #ffffff;   /* White text */
+            --border: #30363d;        /* Borders */
         }
 
         body {
@@ -53,7 +53,7 @@
             gap: 30px;
         }
 
-        /* --- SECTIONS (Cartes) --- */
+        /* --- SECTIONS (Cards) --- */
         section {
             background: var(--bg-card);
             padding: 30px;
@@ -73,7 +73,7 @@
             padding-left: 15px;
         }
 
-        /* --- IDENTITÉ ÉTUDIANT --- */
+        /* --- STUDENT IDENTITY --- */
         .selection-etudiant p {
             font-size: 1.2rem;
             font-weight: 600;
@@ -85,7 +85,7 @@
             margin: 0;
         }
 
-        /* --- FORMULAIRE VŒUX --- */
+        /* --- WISHES FORM --- */
         .voeu {
             display: flex;
             align-items: center;
@@ -96,7 +96,7 @@
 
         .voeu label {
             font-weight: bold;
-            flex: 0 0 80px;
+            flex: 0 0 100px;
         }
 
         select {
@@ -115,7 +115,7 @@
             box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
         }
 
-        /* --- BOUTON & MESSAGES --- */
+        /* --- BUTTON & MESSAGES --- */
         #export-csv {
             width: 100%;
             background-color: var(--blue-electric);
@@ -128,6 +128,7 @@
             cursor: pointer;
             transition: background 0.2s, transform 0.1s;
             margin-top: 10px;
+            text-transform: uppercase;
         }
 
         #export-csv:hover {
@@ -148,46 +149,53 @@
         /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 20px;
-            font-size: 0.85rem;
-            color: #8b949e;
+            padding: 30px 20px;
+            background-color: #161b22;
             border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
 
     </style>
 </head>
-<footer style="margin-top: 50px; padding: 20px; border-top: 2px solid #1a1a1a; text-align: center; font-family: sans-serif;">
-    <p style="color: #4a4a4a; font-size: 0.9em;">
-        © <span id="year"></span> Conseil de corporation des étudiants Em-lyon | 
-        <a href="faq.html" style="color: #003366; font-weight: bold; text-decoration: none;">Need help ? (FAQ)</a> | 
-        <a href="rgpd.html" style="color: #003366; text-decoration: none;">Data policy</a>
-    </p>
-</footer>
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+
 <body>
     <script>
-        // Redirection si pas connecté
+        // Redirect if not logged in
         if (localStorage.getItem("logged") !== "yes") {
             window.location.href = "login.html";
         }
     </script>
 
     <header>
-        <h1>Wishes center</h1>
+        <h1>Wishes Center</h1>
     </header>
 
     <main>
-
         <section class="selection-etudiant">
-            <h2>Student sessions</h2>
-            <p id="etudiant-selectionne1">Data load...</p>
+            <h2>Student Session</h2>
+            <p id="etudiant-selectionne1">Loading data...</p>
             <p id="etudiant-selectionne2" style="display:none;"></p>
         </section>
 
         <section class="voeux-section">
-            <h2>Your 5 choices of association</h2>
+            <h2>Your 5 Choices of Association</h2>
 
             <div class="voeu">
                 <label for="voeu1">Choice 1</label>
@@ -214,13 +222,17 @@
                 <select id="voeu5"></select>
             </div>
 
-            <button id="export-csv">Registering my choices</button>
+            <button id="export-csv">Register my choices</button>
             <p id="status-msg"></p>
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Portail des associations</p>
+        <p>© <span id="year"></span> — Em-lyon Students Corporation Council</p>
+        <p>
+            <a href="faq.html">Need help? (FAQ)</a> | 
+            <a href="rgpd.html">Data policy</a>
+        </p>
     </footer>
 
     <script src="script etudiant.js"></script>
