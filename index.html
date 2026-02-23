@@ -121,10 +121,28 @@
         /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
             border-top: 1px solid var(--border);
-            font-size: 0.85rem;
+            background-color: #161b22;
+        }
+
+        footer p {
+            font-size: 0.9rem;
             color: #8b949e;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--blue-electric);
+            text-decoration: underline;
         }
 
         /* --- RESPONSIVE --- */
@@ -134,16 +152,6 @@
         }
     </style>
 </head>
-<footer style="margin-top: 50px; padding: 20px; border-top: 2px solid #1a1a1a; text-align: center; font-family: sans-serif;">
-    <p style="color: #4a4a4a; font-size: 0.9em;">
-        © <span id="year"></span> Conseil de corporation des étudiants Em-lyon | 
-        <a href="faq.html" style="color: #003366; font-weight: bold; text-decoration: none;">Besoin d'aide ? (FAQ)</a> | 
-        <a href="rgpd.html" style="color: #003366; text-decoration: none;">Mentions RGPD</a>
-    </p>
-</footer>
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <body>
     <header>
         <h1>Portail des Cooptations</h1>
@@ -162,7 +170,7 @@
         <section>
             <div>
                 <h2>Voeux Étudiants</h2>
-                <p>Zone dédiée à la soumission des voeux étudiants .</p>
+                <p>Zone dédiée à la soumission des voeux étudiants.</p>
             </div>
             <button onclick="location.href='login.html'">Vœux Étudiants</button>
         </section>
@@ -177,8 +185,15 @@
     </main>
 
     <footer>
-        <p>© <span id="year"></span> — Portail des associations et étudiants</p>
-        <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>
+            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
+            <a href="rgpd.html">Mentions RGPD</a>
+        </p>
     </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
