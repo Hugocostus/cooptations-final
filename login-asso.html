@@ -22,9 +22,17 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             margin: 0;
             display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- CONTENU PRINCIPAL --- */
+        main {
+            flex: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 20px;
         }
 
         /* --- CARTE DE CONNEXION --- */
@@ -98,18 +106,6 @@
             transform: translateY(-2px);
         }
 
-        #login-btn:active {
-            transform: translateY(0);
-        }
-
-        /* --- STATUT --- */
-        #login-status {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            min-height: 1.2em;
-            color: var(--blue-soft);
-        }
-
         /* --- LIEN RETOUR --- */
         .back-link {
             display: block;
@@ -123,42 +119,70 @@
         .back-link:hover {
             color: var(--blue-soft);
         }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #161b22;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: var(--blue-soft);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
-<footer style="margin-top: 50px; padding: 20px; border-top: 2px solid #1a1a1a; text-align: center; font-family: sans-serif;">
-    <p style="color: #4a4a4a; font-size: 0.9em;">
-        © <span id="year"></span> Conseil de corporation des étudiants Em-lyon | 
-        <a href="faq.html" style="color: #003366; font-weight: bold; text-decoration: none;">Besoin d'aide ? (FAQ)</a> | 
-        <a href="rgpd.html" style="color: #003366; text-decoration: none;">Mentions RGPD</a>
-    </p>
-</footer>
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <body>
 
-    <div class="login-container">
-        <h2>Connexion Association</h2>
+    <main>
+        <div class="login-container">
+            <h2>Connexion Association</h2>
 
-        <div class="input-group">
-            <input type="email" id="email" placeholder="Adresse e-mail" required>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Adresse e-mail" required>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="numero" placeholder="Mot de passe" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="asso" placeholder="Nom de l'association" required>
+            </div>
+
+            <button id="login-btn">Se connecter</button>
+
+            <p id="login-status" style="margin-top: 20px; font-size: 0.9rem; min-height: 1.2em; color: var(--blue-soft);"></p>
+
+            <a href="index.html" class="back-link">← Retour au portail principal</a>
         </div>
-        
-        <div class="input-group">
-            <input type="password" id="numero" placeholder="Mot de passe" required>
-        </div>
+    </main>
 
-        <div class="input-group">
-            <input type="text" id="asso" placeholder="Nom de l'association" required>
-        </div>
-
-        <button id="login-btn">Se connecter</button>
-
-        <p id="login-status"></p>
-
-        <a href="index.html" class="back-link">← Retour au portail principal</a>
-    </div>
+    <footer>
+        <p>© <span id="year"></span> — Conseil de corporation des étudiants Em-lyon</p>
+        <p>
+            <a href="faq.html">Besoin d'aide ? (FAQ)</a> | 
+            <a href="rgpd.html">Mentions RGPD</a>
+        </p>
+    </footer>
 
     <script src="login-asso.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
