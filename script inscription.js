@@ -9,27 +9,37 @@ async function envoyerInfos(prenom, nom, numero, email) {
 
     statusMsg.textContent = "⏳ Sending...";
 
-    // Unique payload for cooptations_etudiant
     const payloadCoopt = {
         action: "addStudent",
         Prenom: prenom,
         Nom: nom,
         Numero: numero,
-        Adresse: email,  // 👈 sent to the main sheet
+        Adresse: email,
         Date: now.toLocaleDateString("en-GB"),
         Heure: now.toLocaleTimeString("en-GB")
     };
 
     try {
-        // --- POST : registration ---
-        await fetch(API_COOPT_URL, {
+
+        const response = await fetch(API_COOPT_URL, {
             method: "POST",
-            mode: "no-cors",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payloadCoopt)
         });
 
-        statusMsg.textContent = "✅ Registration recorded!";
+        const text = await response.text();
+
+        if (text === "NUMERO_DEJA_PRIS") {
+            statusMsg.textContent = "❌ Student number already used.";
+            return;
+        }
+
+        if (text === "OK") {
+            statusMsg.textContent = "✅ Registration recorded!";
+            return;
+        }
+
+        statusMsg.textContent = "❌ Unexpected server response.";
 
     } catch (err) {
         console.error(err);
