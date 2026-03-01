@@ -9,37 +9,27 @@ async function envoyerInfos(prenom, nom, numero, email) {
 
     statusMsg.textContent = "⏳ Sending...";
 
+    // Unique payload for cooptations_etudiant
     const payloadCoopt = {
         action: "addStudent",
         Prenom: prenom,
         Nom: nom,
         Numero: numero,
-        Adresse: email,
+        Adresse: email, // 👈 sent to the main sheet
         Date: now.toLocaleDateString("en-GB"),
         Heure: now.toLocaleTimeString("en-GB")
     };
 
     try {
-
-        const response = await fetch(API_COOPT_URL, {
+        // --- POST : registration ---
+        await fetch(API_COOPT_URL, {
             method: "POST",
+            mode: "no-cors",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payloadCoopt)
         });
 
-        const text = await response.text();
-
-        if (text === "NUMERO_DEJA_PRIS") {
-            statusMsg.textContent = "❌ Student number already used.";
-            return;
-        }
-
-        if (text === "OK") {
-            statusMsg.textContent = "✅ Registration recorded!";
-            return;
-        }
-
-        statusMsg.textContent = "❌ Unexpected server response.";
+        statusMsg.textContent = "✅ Registration recorded!";
 
     } catch (err) {
         console.error(err);
@@ -68,4 +58,3 @@ document.getElementById("export-csv").addEventListener("click", (e) => {
 
 // === Footer year ===
 document.getElementById('year').textContent = new Date().getFullYear();
-
