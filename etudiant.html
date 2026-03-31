@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishes Portal - Associations</title>
     <style>
-        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Main background */
-            --bg-card: #161b22;       /* Section background */
-            --blue-electric: #2f81f7; /* Primary blue */
-            --blue-soft: #58a6ff;     /* Accent blue */
-            --text-main: #c9d1d9;     /* Light gray text */
-            --text-bright: #ffffff;   /* White text */
-            --border: #30363d;        /* Borders */
+            --bg-deep: #0d1117;
+            --bg-card: #161b22;
+            --blue-electric: #2f81f7;
+            --blue-soft: #58a6ff;
+            --text-main: #c9d1d9;
+            --text-bright: #ffffff;
+            --border: #30363d;
         }
 
         body {
@@ -43,17 +41,8 @@
             font-size: 1.8rem;
         }
 
-        main {
-            flex: 1;
-            max-width: 800px;
-            margin: 40px auto;
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
+        main { flex: 1; max-width: 800px; margin: 40px auto; width: 90%; display: flex; flex-direction: column; gap: 30px; }
 
-        /* --- SECTIONS (Cards) --- */
         section {
             background: var(--bg-card);
             padding: 30px;
@@ -65,15 +54,13 @@
         h2 {
             font-size: 1.1rem;
             color: var(--blue-soft);
-            margin-top: 0;
-            margin-bottom: 20px;
+            margin: 0 0 20px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
             border-left: 4px solid var(--blue-electric);
             padding-left: 15px;
         }
 
-        /* --- STUDENT IDENTITY --- */
         .selection-etudiant p {
             font-size: 1.2rem;
             font-weight: 600;
@@ -85,19 +72,8 @@
             margin: 0;
         }
 
-        /* --- WISHES FORM --- */
-        .voeu {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            gap: 20px;
-        }
-
-        .voeu label {
-            font-weight: bold;
-            flex: 0 0 100px;
-        }
+        .voeu { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; gap: 20px; }
+        .voeu label { font-weight: bold; flex: 0 0 100px; }
 
         select {
             flex: 1;
@@ -107,15 +83,8 @@
             padding: 10px 15px;
             border-radius: 6px;
             outline: none;
-            transition: all 0.2s ease;
         }
 
-        select:focus {
-            border-color: var(--blue-electric);
-            box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
-        }
-
-        /* --- BUTTON & MESSAGES --- */
         #export-csv {
             width: 100%;
             background-color: var(--blue-electric);
@@ -124,65 +93,33 @@
             padding: 15px;
             border-radius: 6px;
             font-weight: bold;
-            font-size: 1rem;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            margin-top: 10px;
             text-transform: uppercase;
         }
 
-        #export-csv:hover {
-            background-color: #1f6feb;
-            transform: translateY(-2px);
-        }
-
-        #export-csv:active {
-            transform: translateY(0);
-        }
-
-        #status-msg {
-            margin-top: 15px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #161b22;
-            border-top: 1px solid var(--border);
-            margin-top: 50px;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            color: #8b949e;
-            margin: 5px 0;
-        }
-
-        footer a {
-            color: var(--blue-soft);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
+        footer { text-align: center; padding: 30px 20px; background-color: #161b22; border-top: 1px solid var(--border); margin-top: 50px; }
     </style>
-</head>
-
-<body>
     <script>
-        // Redirect if not logged in
-        if (localStorage.getItem("logged") !== "yes") {
-            window.location.href = "login.html";
+        async function securityCheck() {
+            try {
+                const response = await fetch('status.txt');
+                const text = await response.text();
+                if (!text.toLowerCase().includes('voeux : open')) {
+                    alert("🚫 La saisie des vœux est actuellement fermée.");
+                    window.location.href = "index.html";
+                    return;
+                }
+                if (localStorage.getItem("logged") !== "yes") {
+                    window.location.href = "login.html";
+                }
+            } catch (e) {
+                window.location.href = "index.html";
+            }
         }
+        securityCheck();
     </script>
-
+</head>
+<body>
     <header>
         <h1>Wishes Center</h1>
     </header>
@@ -196,32 +133,11 @@
 
         <section class="voeux-section">
             <h2>Your 5 Choices of Association</h2>
-
-            <div class="voeu">
-                <label for="voeu1">Choice 1</label>
-                <select id="voeu1"></select>
-            </div>
-
-            <div class="voeu">
-                <label for="voeu2">Choice 2</label>
-                <select id="voeu2"></select>
-            </div>
-
-            <div class="voeu">
-                <label for="voeu3">Choice 3</label>
-                <select id="voeu3"></select>
-            </div>
-
-            <div class="voeu">
-                <label for="voeu4">Choice 4</label>
-                <select id="voeu4"></select>
-            </div>
-
-            <div class="voeu">
-                <label for="voeu5">Choice 5</label>
-                <select id="voeu5"></select>
-            </div>
-
+            <div class="voeu"><label for="voeu1">Choice 1</label><select id="voeu1"></select></div>
+            <div class="voeu"><label for="voeu2">Choice 2</label><select id="voeu2"></select></div>
+            <div class="voeu"><label for="voeu3">Choice 3</label><select id="voeu3"></select></div>
+            <div class="voeu"><label for="voeu4">Choice 4</label><select id="voeu4"></select></div>
+            <div class="voeu"><label for="voeu5">Choice 5</label><select id="voeu5"></select></div>
             <button id="export-csv">Register my choices</button>
             <p id="status-msg"></p>
         </section>
@@ -229,17 +145,12 @@
 
     <footer>
         <p>© <span id="year"></span> — Em-lyon Students Corporation Council</p>
-        <p>
-            <a href="faq.html">Need help? (FAQ)</a> | 
-            <a href="rgpd.html">Data policy</a>
-        </p>
     </footer>
 
     <script src="script etudiant.js"></script>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
+</html>
 
 </html>
 
