@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cooptation Portal - Home</title>
     <style>
+        /* --- RED, BLACK & WHITE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;
-            --bg-card: #161b22;
-            --blue-electric: #2f81f7;
-            --blue-soft: #58a6ff;
-            --text-main: #c9d1d9;
-            --text-bright: #ffffff;
-            --border: #30363d;
+            --bg-deep: #b91c1c;       /* Rouge intense */
+            --bg-card: #000000;       /* Noir pur */
+            --accent-white: #ffffff;  /* Blanc */
+            --text-main: #ffffff;     /* Texte blanc */
+            --text-bright: #ffffff;   /* Texte blanc brillant */
+            --border: #ffffff;        /* Bordures blanches */
         }
 
         body {
@@ -24,45 +24,110 @@
 
         header {
             padding: 60px 20px; text-align: center;
-            background: linear-gradient(to bottom, #161b22, #0d1117);
-            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--bg-deep));
+            border-bottom: 2px solid var(--border);
         }
 
-        header h1 { color: var(--blue-electric); font-size: 2.2rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        header h1 { 
+            color: var(--accent-white); 
+            font-size: 2.5rem; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: 4px;
+            font-weight: 900;
+        }
+
+        header p {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
 
         main {
             flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; max-width: 1100px; width: 90%; margin: 50px auto;
+            gap: 30px; max-width: 1100px; width: 90%; margin: 50px auto;
         }
 
         section {
-            background: var(--bg-card); padding: 40px 30px; border-radius: 16px;
-            border: 1px solid var(--border); text-align: center;
-            transition: transform 0.3s ease; display: flex; flex-direction: column;
+            background: var(--bg-card); 
+            padding: 40px 30px; 
+            border-radius: 0px; /* Style plus brutaliste sans arrondis */
+            border: 3px solid var(--border); 
+            text-align: center;
+            transition: all 0.3s ease; 
+            display: flex; 
+            flex-direction: column;
         }
 
-        section:hover { transform: translateY(-10px); border-color: var(--blue-electric); }
+        section:hover { 
+            transform: translateY(-10px); 
+            background: #111111;
+            box-shadow: 10px 10px 0px rgba(0,0,0,1); /* Ombre portée style pop-art */
+        }
 
         /* Style pour la date limite */
         .deadline {
-            font-size: 0.8rem;
-            color: var(--blue-soft);
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--accent-white);
+            font-weight: 800;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            min-height: 1.2em;
+            letter-spacing: 2px;
+            background: var(--bg-deep);
+            padding: 5px;
+            display: inline-block;
         }
 
-        h2 { color: var(--text-bright); font-size: 1.4rem; margin: 0 0 15px 0; }
+        h2 { 
+            color: var(--accent-white); 
+            font-size: 1.6rem; 
+            margin: 0 0 15px 0; 
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        p {
+            line-height: 1.6;
+        }
 
         button {
-            background-color: var(--blue-electric); color: white; border: none;
-            padding: 14px 20px; border-radius: 8px; font-weight: bold;
-            cursor: pointer; width: 100%; margin-top: 20px;
+            background-color: var(--accent-white); 
+            color: var(--bg-card); 
+            border: none;
+            padding: 16px 20px; 
+            font-weight: 900;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: auto; /* Aligne le bouton en bas */
+            transition: all 0.2s ease;
         }
 
-        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); background-color: #161b22; }
+        button:hover {
+            background-color: #dddddd;
+            transform: scale(1.02);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 40px 20px; 
+            border-top: 2px solid var(--border); 
+            background-color: var(--bg-card);
+            color: var(--accent-white);
+            font-weight: bold;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -74,7 +139,7 @@
     <main>
         <section>
             <div>
-                <p id="date-inscription" class="deadline"></p>
+                <p id="date-inscription" class="deadline">Loading...</p>
                 <h2>Student Sign Up</h2>
                 <p>Register here to participate in this cooptation session</p>
             </div>
@@ -83,7 +148,7 @@
 
         <section>
             <div>
-                <p id="date-voeux" class="deadline"></p>
+                <p id="date-voeux" class="deadline">Loading...</p>
                 <h2>Student Wishes</h2>
                 <p>Submit your wishes and preferences as a student</p>
             </div>
@@ -92,7 +157,7 @@
 
         <section>
             <div>
-                <p class="deadline">Admin section</p>
+                <p class="deadline"></p>
                 <h2>Association Wishes</h2>
                 <p>Section to submit your recruitment choices as an association</p>
             </div>
@@ -116,10 +181,12 @@
                     if (line.toLowerCase().includes('inscription')) {
                         const parts = line.split('|');
                         if (parts[1]) document.getElementById('date-inscription').textContent = parts[1].trim();
+                        else document.getElementById('date-inscription').textContent = "No deadline set";
                     }
                     if (line.toLowerCase().includes('voeux')) {
                         const parts = line.split('|');
                         if (parts[1]) document.getElementById('date-voeux').textContent = parts[1].trim();
+                        else document.getElementById('date-voeux').textContent = "No deadline set";
                     }
                 });
             } catch (err) {
@@ -136,7 +203,6 @@
                 let isOpened = false;
 
                 lines.forEach(line => {
-                    // On vérifie si la ligne contient la clé et le mot OPEN avant le séparateur |
                     const mainPart = line.split('|')[0];
                     if (mainPart.toLowerCase().includes(key.toLowerCase()) && mainPart.toUpperCase().includes('OPEN')) {
                         isOpened = true;
@@ -146,10 +212,10 @@
                 if (isOpened) {
                     window.location.href = targetUrl;
                 } else {
-                    alert("🚫 Accès fermé : Cette section n'est pas ouverte actuellement.");
+                    alert("🚫 ACCESS DENIED: This section is currently closed.");
                 }
             } catch (err) {
-                alert("Erreur de connexion au serveur.");
+                alert("Server connection error.");
             }
         }
 
