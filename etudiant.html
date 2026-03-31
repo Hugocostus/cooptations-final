@@ -33,13 +33,7 @@
             background: linear-gradient(to bottom, #161b22, #0d1117);
         }
 
-        header h1 {
-            color: var(--blue-electric);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.8rem;
-        }
+        header h1 { color: var(--blue-electric); margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1.8rem; }
 
         main { flex: 1; max-width: 800px; margin: 40px auto; width: 90%; display: flex; flex-direction: column; gap: 30px; }
 
@@ -99,16 +93,23 @@
 
         footer { text-align: center; padding: 30px 20px; background-color: #161b22; border-top: 1px solid var(--border); margin-top: 50px; }
     </style>
+    
     <script>
+        // SÉCURITÉ DOUBLE : Statut du portail + Connexion de l'élève
         async function securityCheck() {
             try {
                 const response = await fetch('status.txt');
                 const text = await response.text();
-                if (!text.toLowerCase().includes('voeux : open')) {
+                // On cherche spécifiquement la ligne pour les voeux
+                const ouvert = text.toLowerCase().includes('voeux : open');
+
+                if (!ouvert) {
                     alert("🚫 La saisie des vœux est actuellement fermée.");
                     window.location.href = "index.html";
                     return;
                 }
+
+                // Si c'est ouvert, on vérifie quand même que l'élève s'est loggé
                 if (localStorage.getItem("logged") !== "yes") {
                     window.location.href = "login.html";
                 }
