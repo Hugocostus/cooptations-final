@@ -5,74 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration - Associations Portal</title>
     <style>
+        /* --- RED, BLACK & WHITE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;
-            --bg-card: #161b22;
-            --blue-electric: #2f81f7;
-            --blue-soft: #58a6ff;
-            --text-main: #c9d1d9;
-            --text-bright: #ffffff;
-            --border: #30363d;
+            --bg-body-outer: #f4f4f4; /* Gris clair extérieur */
+            --bg-deep-red: #b91c1c;   /* Rouge intense */
+            --bg-card: #000000;       /* Noir pur */
+            --accent-white: #ffffff;  /* Blanc */
+            --border: #ffffff;        /* Bordures blanches */
+            
+            /* Arrondis */
+            --radius-main: 20px;
+            --radius-card: 15px;
+            --radius-btn: 8px;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-body-outer);
+            color: var(--accent-white);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* --- CONTENEUR PRINCIPAL CENTRÉ --- */
+        .main-wrapper {
+            background-color: var(--bg-deep-red);
+            max-width: 600px; /* Plus étroit pour un formulaire */
+            width: 95%;
+            margin: 40px auto;
+            border-radius: var(--radius-main);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
         header {
             padding: 40px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, #161b22, #0d1117);
-            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+            border-bottom: 2px solid var(--border);
         }
 
-        header h1 { color: var(--blue-electric); margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1.8rem; }
+        header h1 { 
+            color: var(--accent-white); 
+            font-size: 1.8rem; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
 
-        main { flex: 1; max-width: 500px; margin: 40px auto; width: 90%; }
+        main {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
+        /* --- CARTE DE FORMULAIRE --- */
         section.formulaire-etudiant {
             background: var(--bg-card);
+            width: 100%;
+            max-width: 450px;
             padding: 35px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            border: 3px solid var(--border);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
-        h2 { font-size: 1.2rem; color: var(--blue-soft); margin: 0 0 25px 0; text-align: center; text-transform: uppercase; }
+        h2 { 
+            font-size: 1.2rem; 
+            color: var(--accent-white); 
+            margin: 0 0 25px 0; 
+            text-align: center; 
+            text-transform: uppercase;
+            font-weight: 800;
+        }
 
         .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
 
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-white);
+        }
+
         input {
-            background-color: var(--bg-deep);
+            background-color: #1a1a1a;
             border: 1px solid var(--border);
-            color: var(--text-bright);
+            color: var(--accent-white);
             padding: 12px 15px;
             border-radius: 6px;
             outline: none;
+            transition: border 0.2s;
         }
 
+        input:focus {
+            border-color: #cccccc;
+        }
+
+        /* --- BOUTON BLANC --- */
         #export-csv {
             width: 100%;
-            background-color: var(--blue-electric);
-            color: white;
+            background-color: var(--accent-white);
+            color: var(--bg-card);
             border: none;
             padding: 15px;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: var(--radius-btn);
+            font-weight: 900;
+            font-size: 1rem;
             cursor: pointer;
             text-transform: uppercase;
+            transition: transform 0.2s, background 0.2s;
         }
 
-        #status-msg { margin-top: 20px; text-align: center; min-height: 1.2em; }
+        #export-csv:hover {
+            background-color: #dddddd;
+            transform: translateY(-2px);
+        }
 
-        footer { text-align: center; padding: 30px 20px; background-color: #161b22; border-top: 1px solid var(--border); margin-top: 50px; }
+        #status-msg { margin-top: 20px; text-align: center; font-weight: bold; min-height: 1.2em; }
+
+        .back-link {
+            color: var(--accent-white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 30px 20px; 
+            background-color: var(--bg-card);
+            border-top: 2px solid var(--border);
+            color: var(--accent-white);
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper { margin: 10px auto; }
+            section.formulaire-etudiant { padding: 25px; }
+        }
     </style>
     
     <script>
@@ -81,7 +158,6 @@
             try {
                 const response = await fetch('status.txt');
                 const text = await response.text();
-                // On vérifie si la ligne inscription contient bien OPEN
                 const estOuvert = text.toLowerCase().includes('inscription : open');
 
                 if (!estOuvert) {
@@ -97,40 +173,45 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1>Associations Portal</h1>
-    </header>
 
-    <main>
-        <section class="formulaire-etudiant">
-            <h2>New Registration</h2>
-            <form id="form-etudiant">
-                <div class="form-group">
-                    <label for="prenom">First Name</label>
-                    <input type="text" id="prenom" name="prenom" required placeholder="e.g.: John">
-                </div>
-                <div class="form-group">
-                    <label for="nom">Last Name</label>
-                    <input type="text" id="nom" name="nom" required placeholder="e.g.: Doe">
-                </div>
-                <div class="form-group">
-                    <label for="numero">Student ID</label>
-                    <input type="text" id="numero" name="numero" required placeholder="e.g.: 22104567">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="example@school.com">
-                </div>
-                <button type="button" id="export-csv">Sign Up</button>
-            </form>
-            <p id="status-msg"></p>
-            <div style="text-align:center; margin-top:20px;"><a href="index.html" style="color:var(--text-main); text-decoration:none; font-size:0.8rem;">← Back to Portal</a></div>
-        </section>
-    </main>
+    <div class="main-wrapper">
+        <header>
+            <h1>Associations Portal</h1>
+        </header>
 
-    <footer>
-        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
-    </footer>
+        <main>
+            <section class="formulaire-etudiant">
+                <h2>New Registration</h2>
+                <form id="form-etudiant">
+                    <div class="form-group">
+                        <label for="prenom">First Name</label>
+                        <input type="text" id="prenom" name="prenom" required placeholder="e.g.: John">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Last Name</label>
+                        <input type="text" id="nom" name="nom" required placeholder="e.g.: Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="numero">Student ID</label>
+                        <input type="text" id="numero" name="numero" required placeholder="e.g.: 22104567">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="example@school.com">
+                    </div>
+                    <button type="button" id="export-csv">Sign Up</button>
+                </form>
+                <p id="status-msg"></p>
+                <div style="text-align:center; margin-top:20px;">
+                    <a href="index.html" class="back-link">← Back to Portal</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
+        </footer>
+    </div>
 
     <script src="script inscription.js"></script>
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
