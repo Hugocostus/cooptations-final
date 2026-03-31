@@ -173,26 +173,10 @@
     </style>
     
     <script>
-        // SÉCURITÉ DOUBLE : Statut du portail + Connexion de l'élève
-        async function securityCheck() {
-            try {
-                const response = await fetch('status.txt');
-                const text = await response.text();
-                // On cherche spécifiquement la ligne pour les voeux
-                const ouvert = text.toLowerCase().includes('voeux : open');
-
-                if (!ouvert) {
-                    alert("🚫 La saisie des vœux est actuellement fermée.");
-                    window.location.href = "index.html";
-                    return;
-                }
-
-                // Si c'est ouvert, on vérifie quand même que l'élève s'est loggé
-                if (localStorage.getItem("logged") !== "yes") {
-                    window.location.href = "login.html";
-                }
-            } catch (e) {
-                window.location.href = "index.html";
+        // SÉCURITÉ : Vérification de la connexion uniquement
+        function securityCheck() {
+            if (localStorage.getItem("logged") !== "yes") {
+                window.location.href = "login.html";
             }
         }
         securityCheck();
@@ -249,4 +233,3 @@
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
