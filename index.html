@@ -110,10 +110,6 @@
             box-shadow: 0 0 15px rgba(47, 129, 247, 0.4);
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -121,24 +117,8 @@
             background-color: #161b22;
         }
 
-        footer p {
-            font-size: 0.9rem;
-            color: #8b949e;
-            margin: 5px 0;
-        }
-
-        footer a {
-            color: var(--blue-soft);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 10px;
-            transition: color 0.2s;
-        }
-
-        footer a:hover {
-            color: var(--blue-electric);
-            text-decoration: underline;
-        }
+        footer p { font-size: 0.9rem; color: #8b949e; margin: 5px 0; }
+        footer a { color: var(--blue-soft); text-decoration: none; font-weight: 600; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -161,7 +141,7 @@
                 <h2>Student Wishes</h2>
                 <p>Submit your wishes and preferences as a student</p>
             </div>
-            <button onclick="location.href='login.html'">Student Wishes</button>
+            <button id="btn-wishes">Student Wishes</button>
         </section>
 
         <section>
@@ -175,23 +155,40 @@
 
     <footer>
         <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
-        <p>
-            <a href="faq.html">Need help? (FAQ)</a> | 
-            <a href="rgpd.html">Data Policy</a>
-        </p>
+        <p><a href="faq.html">Need help?</a> | <a href="rgpd.html">Data Policy</a></p>
     </footer>
 
     <script>
-        // === GESTION DES INSCRIPTIONS ===
-        // Remplacez "open" par "close" pour fermer l'accès au formulaire
-        const STATUT_INSCRIPTION = "close"; 
+        async function checkStatusAndRedirect(key, targetUrl) {
+            try {
+                const response = await fetch('status.txt');
+                const text = await response.text();
+                const lines = text.split('\n');
+                let isOpened = false;
 
-        document.getElementById("btn-signup").addEventListener("click", function() {
-            if (STATUT_INSCRIPTION === "open") {
-                window.location.href = 'inscription.html';
-            } else {
-                alert("🚫 Inscription fermée : Les inscriptions ne sont pas encore ouvertes ou sont désormais closes.");
+                lines.forEach(line => {
+                    if (line.toLowerCase().includes(key.toLowerCase()) && line.toUpperCase().includes('OPEN')) {
+                        isOpened = true;
+                    }
+                });
+
+                if (isOpened) {
+                    window.location.href = targetUrl;
+                } else {
+                    alert("🚫 Accès fermé : Cette section n'est pas ouverte actuellement.");
+                }
+            } catch (err) {
+                console.error("Erreur status.txt:", err);
+                alert("Erreur de connexion au serveur.");
             }
+        }
+
+        document.getElementById("btn-signup").addEventListener("click", () => {
+            checkStatusAndRedirect('inscription', 'inscription.html');
+        });
+
+        document.getElementById("btn-wishes").addEventListener("click", () => {
+            checkStatusAndRedirect('voeux', 'login.html');
         });
 
         document.getElementById('year').textContent = new Date().getFullYear();
