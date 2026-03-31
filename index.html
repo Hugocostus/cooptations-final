@@ -7,24 +7,46 @@
     <style>
         /* --- RED, BLACK & WHITE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #b91c1c;       /* Rouge intense */
-            --bg-card: #000000;       /* Noir pur */
-            --accent-white: #ffffff;  /* Blanc */
-            --text-main: #ffffff;     /* Texte blanc */
-            --text-bright: #ffffff;   /* Texte blanc brillant */
+            /* Couleurs principales */
+            --bg-body-outer: #f4f4f4; /* Gris très clair pour le hors-cadre */
+            --bg-deep-red: #b91c1c;   /* Rouge intense pour le cadre principal */
+            
+            /* Couleurs des éléments internes */
+            --bg-card: #000000;       /* Noir pur pour les cartes */
+            --accent-white: #ffffff;  /* Blanc pour le texte et accents */
             --border: #ffffff;        /* Bordures blanches */
+            
+            /* Arrondis */
+            --radius-main: 20px;      /* Arrondi du grand cadre rouge */
+            --radius-card: 15px;      /* Arrondi des cartes noires */
+            --radius-btn: 8px;        /* Arrondi des boutons */
         }
 
+        /* Le fond de la page est maintenant gris clair */
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-body-outer);
+            color: var(--accent-white);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
         }
 
+        /* --- CONTENEUR PRINCIPAL CENTRÉ (Cadre Rouge) --- */
+        .main-wrapper {
+            background-color: var(--bg-deep-red);
+            max-width: 1200px;
+            width: 95%; /* Légère marge sur les côtés sur mobile */
+            margin: 40px auto; /* Centré horizontalement, marge haut/bas */
+            border-radius: var(--radius-main);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Ombre douce pour le relief */
+            overflow: hidden; /* Pour que le header/footer respectent l'arrondi */
+            display: flex;
+            flex-direction: column;
+            flex: 1; /* Prend toute la hauteur disponible dans le body */
+        }
+
         header {
             padding: 60px 20px; text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--bg-deep));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
             border-bottom: 2px solid var(--border);
         }
 
@@ -42,17 +64,20 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 10px;
+            color: var(--accent-white);
         }
 
         main {
             flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; max-width: 1100px; width: 90%; margin: 50px auto;
+            gap: 30px; 
+            padding: 50px; /* Espace à l'intérieur du cadre rouge */
         }
 
+        /* --- CARTES NOIRES --- */
         section {
             background: var(--bg-card); 
             padding: 40px 30px; 
-            border-radius: 0px; /* Style plus brutaliste sans arrondis */
+            border-radius: var(--radius-card); /* Bords ronds appliqués */
             border: 3px solid var(--border); 
             text-align: center;
             transition: all 0.3s ease; 
@@ -61,9 +86,9 @@
         }
 
         section:hover { 
-            transform: translateY(-10px); 
+            transform: translateY(-5px); 
             background: #111111;
-            box-shadow: 10px 10px 0px rgba(0,0,0,1); /* Ombre portée style pop-art */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
         /* Style pour la date limite */
@@ -74,9 +99,10 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            background: var(--bg-deep);
-            padding: 5px;
+            background: var(--bg-deep-red);
+            padding: 5px 10px;
             display: inline-block;
+            border-radius: 4px; /* Petit arrondi */
         }
 
         h2 { 
@@ -89,6 +115,7 @@
 
         p {
             line-height: 1.6;
+            margin: 0 0 10px 0;
         }
 
         button {
@@ -103,6 +130,7 @@
             cursor: pointer; 
             width: 100%; 
             margin-top: auto; /* Aligne le bouton en bas */
+            border-radius: var(--radius-btn); /* Bords ronds appliqués */
             transition: all 0.2s ease;
         }
 
@@ -127,47 +155,52 @@
         /* Responsive fixes */
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
+            main { padding: 30px 15px; }
+            .main-wrapper { margin: 10px auto; border-radius: 10px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Cooptations Center</h1>
-        <p>Welcome, please choose a section</p>
-    </header>
+    
+    <div class="main-wrapper">
+        <header>
+            <h1>Cooptations Center</h1>
+            <p>Welcome, please choose a section</p>
+        </header>
 
-    <main>
-        <section>
-            <div>
-                <p id="date-inscription" class="deadline">Loading...</p>
-                <h2>Student Sign Up</h2>
-                <p>Register here to participate in this cooptation session</p>
-            </div>
-            <button id="btn-signup">Sign Up</button>
-        </section>
+        <main>
+            <section>
+                <div>
+                    <p id="date-inscription" class="deadline">Loading...</p>
+                    <h2>Student Sign Up</h2>
+                    <p>Register here to participate in this cooptation session</p>
+                </div>
+                <button id="btn-signup">Sign Up</button>
+            </section>
 
-        <section>
-            <div>
-                <p id="date-voeux" class="deadline">Loading...</p>
-                <h2>Student Wishes</h2>
-                <p>Submit your wishes and preferences as a student</p>
-            </div>
-            <button id="btn-wishes">Student Wishes</button>
-        </section>
+            <section>
+                <div>
+                    <p id="date-voeux" class="deadline">Loading...</p>
+                    <h2>Student Wishes</h2>
+                    <p>Submit your wishes and preferences as a student</p>
+                </div>
+                <button id="btn-wishes">Student Wishes</button>
+            </section>
 
-        <section>
-            <div>
-                <p class="deadline"></p>
-                <h2>Association Wishes</h2>
-                <p>Section to submit your recruitment choices as an association</p>
-            </div>
-            <button onclick="location.href='login-asso.html'">Association Wishes</button>
-        </section>
-    </main>
+            <section>
+                <div>
+                    <p class="deadline">Admin access</p>
+                    <h2>Association Wishes</h2>
+                    <p>Section to submit your recruitment choices as an association</p>
+                </div>
+                <button onclick="location.href='login-asso.html'">Association Wishes</button>
+            </section>
+        </main>
 
-    <footer>
-        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
-    </footer>
+        <footer>
+            <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
+        </footer>
+    </div>
 
     <script>
         // Fonction pour charger et afficher les dates limites au démarrage
