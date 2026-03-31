@@ -5,93 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishes Portal - Associations</title>
     <style>
+        /* --- RED, BLACK & WHITE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;
-            --bg-card: #161b22;
-            --blue-electric: #2f81f7;
-            --blue-soft: #58a6ff;
-            --text-main: #c9d1d9;
-            --text-bright: #ffffff;
-            --border: #30363d;
+            --bg-body-outer: #f4f4f4; /* Gris clair extérieur */
+            --bg-deep-red: #b91c1c;   /* Rouge intense */
+            --bg-card: #000000;       /* Noir pur */
+            --accent-white: #ffffff;  /* Blanc */
+            --border: #ffffff;        /* Bordures blanches */
+            
+            /* Arrondis */
+            --radius-main: 20px;
+            --radius-card: 15px;
+            --radius-btn: 8px;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-body-outer);
+            color: var(--accent-white);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* --- CONTENEUR PRINCIPAL CENTRÉ --- */
+        .main-wrapper {
+            background-color: var(--bg-deep-red);
+            max-width: 800px;
+            width: 95%;
+            margin: 40px auto;
+            border-radius: var(--radius-main);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            flex: 1;
         }
 
         header {
             padding: 40px 20px;
             text-align: center;
-            border-bottom: 1px solid var(--border);
-            background: linear-gradient(to bottom, #161b22, #0d1117);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+            border-bottom: 2px solid var(--border);
         }
 
-        header h1 { color: var(--blue-electric); margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1.8rem; }
+        header h1 { 
+            color: var(--accent-white); 
+            font-size: 1.8rem; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
 
-        main { flex: 1; max-width: 800px; margin: 40px auto; width: 90%; display: flex; flex-direction: column; gap: 30px; }
+        main {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            flex: 1;
+        }
 
+        /* --- CARTES NOIRES --- */
         section {
             background: var(--bg-card);
             padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            border: 3px solid var(--border);
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
         }
 
         h2 {
             font-size: 1.1rem;
-            color: var(--blue-soft);
+            color: var(--accent-white);
             margin: 0 0 20px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-left: 4px solid var(--blue-electric);
+            border-left: 4px solid var(--accent-white);
             padding-left: 15px;
+            font-weight: 800;
         }
 
         .selection-etudiant p {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--text-bright);
-            background: rgba(47, 129, 247, 0.1);
+            color: var(--accent-white);
+            background: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 8px;
-            border: 1px dashed var(--blue-electric);
+            border: 1px dashed var(--accent-white);
             margin: 0;
         }
 
-        .voeu { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; gap: 20px; }
-        .voeu label { font-weight: bold; flex: 0 0 100px; }
+        /* --- FORMULAIRE DE VOEUX --- */
+        .voeu { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            gap: 20px; 
+        }
+        
+        .voeu label { 
+            font-weight: bold; 
+            flex: 0 0 100px; 
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
 
         select {
             flex: 1;
-            background-color: var(--bg-deep);
+            background-color: #1a1a1a;
             border: 1px solid var(--border);
-            color: var(--text-main);
+            color: var(--accent-white);
             padding: 10px 15px;
             border-radius: 6px;
             outline: none;
+            cursor: pointer;
         }
 
+        select:focus {
+            border-color: #cccccc;
+        }
+
+        /* --- BOUTON BLANC --- */
         #export-csv {
             width: 100%;
-            background-color: var(--blue-electric);
-            color: white;
+            background-color: var(--accent-white);
+            color: var(--bg-card);
             border: none;
             padding: 15px;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: var(--radius-btn);
+            font-weight: 900;
+            font-size: 1rem;
             cursor: pointer;
             text-transform: uppercase;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: 10px;
         }
 
-        footer { text-align: center; padding: 30px 20px; background-color: #161b22; border-top: 1px solid var(--border); margin-top: 50px; }
+        #export-csv:hover {
+            background-color: #dddddd;
+            transform: translateY(-2px);
+        }
+
+        #status-msg { 
+            margin-top: 15px; 
+            text-align: center; 
+            font-weight: bold; 
+            min-height: 1.2em; 
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            text-align: center; 
+            padding: 30px 20px; 
+            background-color: var(--bg-card); 
+            border-top: 2px solid var(--border); 
+            color: var(--accent-white);
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .main-wrapper { margin: 10px auto; }
+            .voeu { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .voeu label { flex: none; }
+            select { width: 100%; }
+        }
     </style>
     
     <script>
@@ -121,39 +199,54 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1>Wishes Center</h1>
-    </header>
 
-    <main>
-        <section class="selection-etudiant">
-            <h2>Student Session</h2>
-            <p id="etudiant-selectionne1">Loading data...</p>
-            <p id="etudiant-selectionne2" style="display:none;"></p>
-        </section>
+    <div class="main-wrapper">
+        <header>
+            <h1>Wishes Center</h1>
+        </header>
 
-        <section class="voeux-section">
-            <h2>Your 5 Choices of Association</h2>
-            <div class="voeu"><label for="voeu1">Choice 1</label><select id="voeu1"></select></div>
-            <div class="voeu"><label for="voeu2">Choice 2</label><select id="voeu2"></select></div>
-            <div class="voeu"><label for="voeu3">Choice 3</label><select id="voeu3"></select></div>
-            <div class="voeu"><label for="voeu4">Choice 4</label><select id="voeu4"></select></div>
-            <div class="voeu"><label for="voeu5">Choice 5</label><select id="voeu5"></select></div>
-            <button id="export-csv">Register my choices</button>
-            <p id="status-msg"></p>
-        </section>
-    </main>
+        <main>
+            <section class="selection-etudiant">
+                <h2>Student Session</h2>
+                <p id="etudiant-selectionne1">Loading data...</p>
+                <p id="etudiant-selectionne2" style="display:none;"></p>
+            </section>
 
-    <footer>
-        <p>© <span id="year"></span> — Em-lyon Students Corporation Council</p>
-    </footer>
+            <section class="voeux-section">
+                <h2>Your 5 Choices of Association</h2>
+                <div class="voeu">
+                    <label for="voeu1">Choice 1</label>
+                    <select id="voeu1"></select>
+                </div>
+                <div class="voeu">
+                    <label for="voeu2">Choice 2</label>
+                    <select id="voeu2"></select>
+                </div>
+                <div class="voeu">
+                    <label for="voeu3">Choice 3</label>
+                    <select id="voeu3"></select>
+                </div>
+                <div class="voeu">
+                    <label for="voeu4">Choice 4</label>
+                    <select id="voeu4"></select>
+                </div>
+                <div class="voeu">
+                    <label for="voeu5">Choice 5</label>
+                    <select id="voeu5"></select>
+                </div>
+                
+                <button id="export-csv">Register my choices</button>
+                <p id="status-msg"></p>
+            </section>
+        </main>
+
+        <footer>
+            <p>© <span id="year"></span> — Em-lyon Students Corporation Council</p>
+        </footer>
+    </div>
 
     <script src="script etudiant.js"></script>
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
-</html>
-
-
 
