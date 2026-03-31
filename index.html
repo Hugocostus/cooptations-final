@@ -5,24 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cooptation Portal - Home</title>
     <style>
-        /* --- RED, BLACK & WHITE DESIGN SYSTEM --- */
         :root {
-            /* Couleurs principales */
-            --bg-body-outer: #f4f4f4; /* Gris très clair pour le hors-cadre */
-            --bg-deep-red: #b91c1c;   /* Rouge intense pour le cadre principal */
-            
-            /* Couleurs des éléments internes */
-            --bg-card: #000000;       /* Noir pur pour les cartes */
-            --accent-white: #ffffff;  /* Blanc pour le texte et accents */
-            --border: #ffffff;        /* Bordures blanches */
-            
-            /* Arrondis */
-            --radius-main: 20px;      /* Arrondi du grand cadre rouge */
-            --radius-card: 15px;      /* Arrondi des cartes noires */
-            --radius-btn: 8px;        /* Arrondi des boutons */
+            --bg-body-outer: #f4f4f4;
+            --bg-deep-red: #b91c1c;
+            --bg-card: #000000;
+            --accent-white: #ffffff;
+            --border: #ffffff;
+            --radius-main: 20px;
+            --radius-card: 15px;
+            --radius-btn: 8px;
         }
 
-        /* Le fond de la page est maintenant gris clair */
         body {
             background-color: var(--bg-body-outer);
             color: var(--accent-white);
@@ -30,18 +23,17 @@
             margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* --- CONTENEUR PRINCIPAL CENTRÉ (Cadre Rouge) --- */
         .main-wrapper {
             background-color: var(--bg-deep-red);
             max-width: 1200px;
-            width: 95%; /* Légère marge sur les côtés sur mobile */
-            margin: 40px auto; /* Centré horizontalement, marge haut/bas */
+            width: 95%;
+            margin: 40px auto;
             border-radius: var(--radius-main);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Ombre douce pour le relief */
-            overflow: hidden; /* Pour que le header/footer respectent l'arrondi */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            flex: 1; /* Prend toute la hauteur disponible dans le body */
+            flex: 1;
         }
 
         header {
@@ -64,20 +56,17 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 10px;
-            color: var(--accent-white);
         }
 
         main {
             flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; 
-            padding: 50px; /* Espace à l'intérieur du cadre rouge */
+            gap: 30px; padding: 50px;
         }
 
-        /* --- CARTES NOIRES --- */
         section {
             background: var(--bg-card); 
             padding: 40px 30px; 
-            border-radius: var(--radius-card); /* Bords ronds appliqués */
+            border-radius: var(--radius-card);
             border: 3px solid var(--border); 
             text-align: center;
             transition: all 0.3s ease; 
@@ -91,7 +80,6 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
-        /* Style pour la date limite */
         .deadline {
             font-size: 0.85rem;
             color: var(--accent-white);
@@ -102,7 +90,7 @@
             background: var(--bg-deep-red);
             padding: 5px 10px;
             display: inline-block;
-            border-radius: 4px; /* Petit arrondi */
+            border-radius: 4px;
         }
 
         h2 { 
@@ -113,10 +101,7 @@
             font-weight: 800;
         }
 
-        p {
-            line-height: 1.6;
-            margin: 0 0 10px 0;
-        }
+        p { line-height: 1.6; margin: 0 0 10px 0; }
 
         button {
             background-color: var(--accent-white); 
@@ -129,18 +114,14 @@
             letter-spacing: 1px;
             cursor: pointer; 
             width: 100%; 
-            margin-top: auto; /* Aligne le bouton en bas */
-            border-radius: var(--radius-btn); /* Bords ronds appliqués */
+            margin-top: auto;
+            border-radius: var(--radius-btn);
             transition: all 0.2s ease;
         }
 
         button:hover {
             background-color: #dddddd;
             transform: scale(1.02);
-        }
-
-        button:active {
-            transform: scale(0.98);
         }
 
         footer { 
@@ -152,7 +133,6 @@
             font-weight: bold;
         }
 
-        /* Responsive fixes */
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
             main { padding: 30px 15px; }
@@ -189,7 +169,7 @@
 
             <section>
                 <div>
-                    <p id="asso" class="deadline">Loading...</p>
+                    <p id="date-asso" class="deadline">Loading...</p>
                     <h2>Association Wishes</h2>
                     <p>Section to submit your recruitment choices as an association</p>
                 </div>
@@ -203,7 +183,6 @@
     </div>
 
     <script>
-        // Fonction pour charger et afficher les dates limites au démarrage
         async function loadDeadlines() {
             try {
                 const response = await fetch('status.txt');
@@ -211,21 +190,15 @@
                 const lines = text.split('\n');
 
                 lines.forEach(line => {
+                    const parts = line.split('|');
+                    const deadlineText = parts[1] ? parts[1].trim() : "No deadline set";
+                    
                     if (line.toLowerCase().includes('inscription')) {
-                        const parts = line.split('|');
-                        if (parts[1]) document.getElementById('date-inscription').textContent = parts[1].trim();
-                        else document.getElementById('date-inscription').textContent = "No deadline set";
-                    }
-                    if (line.toLowerCase().includes('voeux')) {
-                        const parts = line.split('|');
-                        if (parts[1]) document.getElementById('date-voeux').textContent = parts[1].trim();
-                        else document.getElementById('date-voeux').textContent = "No deadline set";
-                    }
-                    }
-                    if (line.toLowerCase().includes('voeux')) {
-                        const parts = line.split('|');
-                        if (parts[1]) document.getElementById('date-asso').textContent = parts[1].trim();
-                        else document.getElementById('date-asso').textContent = "No deadline set";
+                        document.getElementById('date-inscription').textContent = deadlineText;
+                    } else if (line.toLowerCase().includes('voeux')) {
+                        document.getElementById('date-voeux').textContent = deadlineText;
+                        // On remplit aussi la date asso si la ligne voeux est la référence
+                        document.getElementById('date-asso').textContent = deadlineText;
                     }
                 });
             } catch (err) {
@@ -233,7 +206,6 @@
             }
         }
 
-        // Fonction de redirection sécurisée
         async function checkStatusAndRedirect(key, targetUrl) {
             try {
                 const response = await fetch('status.txt');
@@ -266,7 +238,6 @@
             checkStatusAndRedirect('voeux', 'login.html');
         });
 
-        // Initialisation
         loadDeadlines();
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
