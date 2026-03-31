@@ -5,193 +5,211 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login - Portal</title>
     <style>
-        /* --- DARK & BLUE DESIGN SYSTEM --- */
+        /* --- RED, BLACK & WHITE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Main background */
-            --bg-card: #161b22;       /* Card background */
-            --blue-electric: #2f81f7; /* Primary blue */
-            --blue-soft: #58a6ff;     /* Accent blue */
-            --text-main: #c9d1d9;     /* Light gray text */
-            --text-bright: #ffffff;   /* White text */
-            --border: #30363d;        /* Borders */
+            --bg-body-outer: #f4f4f4; /* Gris clair extérieur */
+            --bg-deep-red: #b91c1c;   /* Rouge intense */
+            --bg-card: #000000;       /* Noir pur */
+            --accent-white: #ffffff;  /* Blanc */
+            --border: #ffffff;        /* Bordures blanches */
+            
+            /* Arrondis */
+            --radius-main: 20px;
+            --radius-card: 15px;
+            --radius-btn: 8px;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-body-outer);
+            color: var(--accent-white);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            margin: 0;
+            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* --- CONTENEUR PRINCIPAL CENTRÉ --- */
+        .main-wrapper {
+            background-color: var(--bg-deep-red);
+            max-width: 500px; /* Format compact pour le login */
+            width: 95%;
+            margin: 60px auto;
+            border-radius: var(--radius-main);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* --- MAIN CONTENT --- */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+            border-bottom: 2px solid var(--border);
+        }
+
+        header h1 { 
+            color: var(--accent-white); 
+            font-size: 1.8rem; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
         main {
-            flex: 1;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
 
-        /* --- LOGIN CARD --- */
+        /* --- CARTE DE LOGIN --- */
         .login-box {
             background: var(--bg-card);
             width: 100%;
-            max-width: 380px;
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            padding: 35px;
+            border-radius: var(--radius-card);
+            border: 3px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             text-align: center;
         }
 
         h2 {
-            color: var(--blue-electric);
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+            color: var(--accent-white);
+            font-size: 1.4rem;
+            margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            font-weight: 800;
         }
 
-        /* --- INPUT GROUPS --- */
+        /* --- GROUPES D'INPUTS --- */
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
         label {
             display: block;
             font-size: 0.85rem;
-            margin-bottom: 5px;
-            color: var(--blue-soft);
+            margin-bottom: 8px;
+            color: var(--accent-white);
             font-weight: 600;
+            text-transform: uppercase;
         }
 
         input {
             width: 100%;
             box-sizing: border-box;
-            background-color: var(--bg-deep);
+            background-color: #1a1a1a;
             border: 1px solid var(--border);
-            color: var(--text-bright);
+            color: var(--accent-white);
             padding: 12px 15px;
             border-radius: 6px;
             font-size: 1rem;
             outline: none;
-            transition: all 0.2s ease;
+            transition: border 0.2s;
         }
 
         input:focus {
-            border-color: var(--blue-electric);
-            box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.2);
+            border-color: #cccccc;
         }
 
-        /* --- ACTION BUTTON --- */
+        /* --- BOUTON DE CONNEXION BLANC --- */
         #login-btn {
             width: 100%;
-            background-color: var(--blue-electric);
-            color: white;
+            background-color: var(--accent-white);
+            color: var(--bg-card);
             border: none;
-            padding: 14px;
-            border-radius: 6px;
-            font-weight: bold;
+            padding: 15px;
+            border-radius: var(--radius-btn);
+            font-weight: 900;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            margin-top: 15px;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: 10px;
             text-transform: uppercase;
         }
 
         #login-btn:hover {
-            background-color: #1f6feb;
+            background-color: #dddddd;
             transform: translateY(-2px);
         }
 
-        /* --- STATUS & NAVIGATION --- */
         #login-status {
             margin-top: 20px;
             font-size: 0.9rem;
             min-height: 1.2em;
-            color: #f85149;
+            color: #ff9999; /* Rouge clair pour l'erreur sur fond noir */
+            font-weight: bold;
         }
 
         .footer-links {
-            margin-top: 30px;
-            border-top: 1px solid var(--border);
+            margin-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.2);
             padding-top: 20px;
         }
 
         .back-link {
-            color: var(--text-main);
+            color: var(--accent-white);
             text-decoration: none;
             font-size: 0.85rem;
-            transition: color 0.2s;
+            font-weight: 600;
         }
 
         .back-link:hover {
-            color: var(--blue-soft);
+            text-decoration: underline;
         }
 
         /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 30px 20px;
-            background-color: #161b22;
-            border-top: 1px solid var(--border);
+            background-color: var(--bg-card);
+            border-top: 2px solid var(--border);
+            color: var(--accent-white);
+            font-weight: bold;
         }
 
-        footer p {
-            font-size: 0.9rem;
-            color: #8b949e;
-            margin: 5px 0;
-        }
-
-        footer a {
-            color: var(--blue-soft);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+        @media (max-width: 600px) {
+            .main-wrapper { margin: 20px auto; }
+            .login-box { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <main>
-        <div class="login-box">
-            <h2>Login</h2>
+    <div class="main-wrapper">
+        <header>
+            <h1>Portal Access</h1>
+        </header>
 
-            <div class="input-group">
-                <label for="email">Student Email</label>
-                <input type="email" id="email" placeholder="first.last@school.com" required>
+        <main>
+            <div class="login-box">
+                <h2>Login</h2>
+
+                <div class="input-group">
+                    <label for="email">Student Email</label>
+                    <input type="email" id="email" placeholder="first.last@school.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="numero">Student ID</label>
+                    <input type="text" id="numero" placeholder="e.g.: 22104567" required>
+                </div>
+
+                <button id="login-btn">Log In</button>
+
+                <p id="login-status"></p>
+
+                <div class="footer-links">
+                    <a href="index.html" class="back-link">← Back to Portal</a>
+                </div>
             </div>
+        </main>
 
-            <div class="input-group">
-                <label for="numero">Student ID</label>
-                <input type="text" id="numero" placeholder="e.g.: 22104567" required>
-            </div>
-
-            <button id="login-btn">Log In</button>
-
-            <p id="login-status"></p>
-
-            <div class="footer-links">
-                <a href="index.html" class="back-link">← Back to Portal</a>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
-        <p>
-            <a href="faq.html">Need help? (FAQ)</a> | 
-            <a href="rgpd.html">Data Policy</a>
-        </p>
-    </footer>
+        <footer>
+            <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
+        </footer>
+    </div>
 
     <script src="login.js"></script>
     <script>
