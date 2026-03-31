@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cooptation Portal - Home</title>
     <style>
-        /* --- DARK & BLUE DESIGN SYSTEM --- */
         :root {
-            --bg-deep: #0d1117;       /* Main background */
-            --bg-card: #161b22;       /* Card background */
-            --blue-electric: #2f81f7; /* Primary blue */
-            --blue-soft: #58a6ff;     /* Accent blue */
-            --text-main: #c9d1d9;     /* Light gray text */
-            --text-bright: #ffffff;   /* White text */
-            --border: #30363d;        /* Borders */
+            --bg-deep: #0d1117;
+            --bg-card: #161b22;
+            --blue-electric: #2f81f7;
+            --blue-soft: #58a6ff;
+            --text-main: #c9d1d9;
+            --text-bright: #ffffff;
+            --border: #30363d;
         }
 
         body {
@@ -27,7 +26,6 @@
             min-height: 100vh;
         }
 
-        /* --- HEADER --- */
         header {
             padding: 60px 20px;
             text-align: center;
@@ -50,7 +48,6 @@
             margin: 0 auto;
         }
 
-        /* --- NAVIGATION GRID --- */
         main {
             flex: 1;
             display: grid;
@@ -94,7 +91,6 @@
             flex-grow: 1;
         }
 
-        /* --- BUTTONS --- */
         button {
             background-color: var(--blue-electric);
             color: white;
@@ -118,7 +114,6 @@
             transform: scale(0.98);
         }
 
-        /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -144,12 +139,6 @@
             color: var(--blue-electric);
             text-decoration: underline;
         }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.6rem; }
-            main { margin: 20px auto; }
-        }
     </style>
 </head>
 <body>
@@ -164,7 +153,7 @@
                 <h2>Student Sign Up</h2>
                 <p>Register here to participate in this cooptation session</p>
             </div>
-            <button onclick="location.href='inscription.html'">Sign Up</button>
+            <button id="btn-signup">Sign Up</button>
         </section>
 
         <section>
@@ -193,6 +182,18 @@
     </footer>
 
     <script>
+        // === GESTION DES INSCRIPTIONS ===
+        // Remplacez "open" par "close" pour fermer l'accès au formulaire
+        const STATUT_INSCRIPTION = "open"; 
+
+        document.getElementById("btn-signup").addEventListener("click", function() {
+            if (STATUT_INSCRIPTION === "open") {
+                window.location.href = 'inscription.html';
+            } else {
+                alert("🚫 Inscription fermée : Les inscriptions ne sont pas encore ouvertes ou sont désormais closes.");
+            }
+        });
+
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
