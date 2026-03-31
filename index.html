@@ -189,7 +189,7 @@
 
             <section>
                 <div>
-                    <p class="deadline">Admin access</p>
+                    <p id="asso" class="deadline">Loading...</p>
                     <h2>Association Wishes</h2>
                     <p>Section to submit your recruitment choices as an association</p>
                 </div>
@@ -220,6 +220,12 @@
                         const parts = line.split('|');
                         if (parts[1]) document.getElementById('date-voeux').textContent = parts[1].trim();
                         else document.getElementById('date-voeux').textContent = "No deadline set";
+                    }
+                    }
+                    if (line.toLowerCase().includes('voeux')) {
+                        const parts = line.split('|');
+                        if (parts[1]) document.getElementById('date-asso').textContent = parts[1].trim();
+                        else document.getElementById('date-asso').textContent = "No deadline set";
                     }
                 });
             } catch (err) {
