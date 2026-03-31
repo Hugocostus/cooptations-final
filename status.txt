@@ -1,2 +1,2 @@
-inscription : CLOSE
-voeux : CLOSE
+inscription : OPEN | Deadline: 15/04/2026
+voeux : CLOSE | Deadline: 30/04/2026
