@@ -1,2 +1,2 @@
-inscription : OPEN
+inscription : CLOSE
 voeux : OPEN
