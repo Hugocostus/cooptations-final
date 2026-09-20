@@ -2,7 +2,7 @@
           ⚙️ GLOBAL VARIABLES
    ================================ */
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxCQMgPVc0XZy9qxTh5CB2thjFNVU3SLmbEUNJWSYzBsvTtnkTZFX08X8a3v9y06E1m4Q/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbw6yfWJ26quYCU0AQcXjRgpUdZ837-NUW26RqsQddvaZE_BYUf4583SKaSZ-jD3yQ1sKA/exec";
 
 let etudiantConnecte = null; // Will contain the object {Prenom, Nom, Numero}
 
