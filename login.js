@@ -1,4 +1,4 @@
-const AUTH_API = "https://script.google.com/macros/s/AKfycbwOzUN89SrhsRlOBoDrc7UKjJFgEh9ojMFZmc89G4EM0tcpR_aZ-VxIzaYzO7R8hpvv/exec";
+const AUTH_API = "https://script.google.com/macros/s/AKfycbw6yfWJ26quYCU0AQcXjRgpUdZ837-NUW26RqsQddvaZE_BYUf4583SKaSZ-jD3yQ1sKA/exec";
 
 document.getElementById("login-btn").addEventListener("click", async () => {
     const Adresse = document.getElementById("email").value.trim();
