@@ -30,7 +30,7 @@ async function envoyerInfos(prenom, nom, numero, email) {
         const result = await response.text();
 
         if (result === "OK") {
-            statusMsg.textContent = "✅ Registration recorded! Check your email.";
+            statusMsg.textContent = "✅ Registration recorded!";
             statusMsg.style.color = "#4ade80"; // Vert succès
             document.getElementById("form-etudiant").reset(); // Vide le formulaire
         } else if (result === "NUMERO_DEJA_PRIS") {
