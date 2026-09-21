@@ -117,7 +117,7 @@ async function sauvegarderVoeux(voeux) {
             body: JSON.stringify(payload)
         });
 
-        statusMsg.textContent = "✅ Choices saved, a confirmation email has been sent.";
+        statusMsg.textContent = "✅ Choices saved.";
 
     } catch (err) {
         console.error(err);
