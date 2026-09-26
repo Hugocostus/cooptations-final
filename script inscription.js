@@ -1,5 +1,5 @@
 // === API URL ===
-const API_COOPT_URL = "https://script.google.com/macros/s/AKfycbzYyvdkRqcRNj9xWWC0Gks1pq9GZbSzaHb1IsLzgF5gWoPP99owK7xCDrprP8D5CXVHKQ/exec";
+const API_COOPT_URL = "https://script.google.com/macros/s/AKfycbxGuiOsecA44nZDD-d0P1d3Kodr7OK3x9zqts1gbzeoAndl-VE12U28D5-8SL9UrCkzVQ/exec";
 
 // === Main function ===
 async function envoyerInfos(prenom, nom, numero, email) {
