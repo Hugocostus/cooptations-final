@@ -1,5 +1,5 @@
 // === Global Variables ===
-const API_URL = "https://script.google.com/macros/s/AKfycbzYyvdkRqcRNj9xWWC0Gks1pq9GZbSzaHb1IsLzgF5gWoPP99owK7xCDrprP8D5CXVHKQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwOtnNemL3lcYKwRbcNkH33t3U7JAF1TJLX-0_gJ8zboiRBIL1zJzwEj91iN0wXaCVFfg/exec/exec";
 let etudiants = [];
 
 // 🔥 Keep selected students here
