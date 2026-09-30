@@ -133,6 +133,18 @@
             font-weight: bold;
         }
 
+        .footer-link {
+            color: var(--accent-white);
+            text-decoration: underline;
+            font-size: 0.9rem;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
             main { padding: 30px 15px; }
@@ -149,15 +161,6 @@
         </header>
 
         <main>
-            <section>
-                <div>
-                    <p id="date-inscription" class="deadline">Loading...</p>
-                    <h2>Student Sign Up</h2>
-                    <p>Register here to participate in this cooptation session</p>
-                </div>
-                <button id="btn-signup">Sign Up</button>
-            </section>
-
             <section>
                 <div>
                     <p id="date-voeux" class="deadline">Loading...</p>
@@ -179,6 +182,7 @@
 
         <footer>
             <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
+            <p><a href="rgpd.html" class="footer-link">Politique de confidentialité (RGPD)</a></p>
         </footer>
     </div>
 
@@ -193,12 +197,11 @@
                     const parts = line.split('|');
                     const deadlineText = parts[1] ? parts[1].trim() : "No deadline set";
                     
-                    if (line.toLowerCase().includes('inscription')) {
-                        document.getElementById('date-inscription').textContent = deadlineText;
-                    } else if (line.toLowerCase().includes('voeux')) {
-                        document.getElementById('date-voeux').textContent = deadlineText;
-                        // On remplit aussi la date asso si la ligne voeux est la référence
-                        document.getElementById('date-asso').textContent = deadlineText;
+                    if (line.toLowerCase().includes('voeux')) {
+                        const dateVoeuxEl = document.getElementById('date-voeux');
+                        const dateAssoEl = document.getElementById('date-asso');
+                        if (dateVoeuxEl) dateVoeuxEl.textContent = deadlineText;
+                        if (dateAssoEl) dateAssoEl.textContent = deadlineText;
                     }
                 });
             } catch (err) {
@@ -229,10 +232,6 @@
                 alert("Server connection error.");
             }
         }
-
-        document.getElementById("btn-signup").addEventListener("click", () => {
-            checkStatusAndRedirect('inscription', 'inscription.html');
-        });
 
         document.getElementById("btn-wishes").addEventListener("click", () => {
             checkStatusAndRedirect('voeux', 'login.html');
