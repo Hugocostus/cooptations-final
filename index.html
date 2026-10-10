@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cooptation Portal - Home</title>
+    <title>Data Policy - Associations Portal</title>
     <style>
         :root {
             --bg-body-outer: #f4f4f4;
@@ -20,7 +20,11 @@
             background-color: var(--bg-body-outer);
             color: var(--accent-white);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .main-wrapper {
@@ -37,17 +41,45 @@
         }
 
         header {
-            padding: 60px 20px; text-align: center;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
             border-bottom: 2px solid var(--border);
+            position: relative;
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            text-align: left;
+        }
+
+        .back-link {
+            display: inline-block;
+            background-color: var(--accent-white);
+            color: var(--bg-card);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-btn);
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .back-link:hover {
+            background-color: #dddddd;
+            transform: scale(1.02);
         }
 
         header h1 { 
             color: var(--accent-white); 
-            font-size: 2.5rem; 
+            font-size: 2.3rem; 
             margin: 0; 
             text-transform: uppercase; 
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             font-weight: 900;
         }
 
@@ -59,69 +91,85 @@
         }
 
         main {
-            flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; padding: 50px;
+            flex: 1;
+            padding: 40px 50px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
         section {
             background: var(--bg-card); 
-            padding: 40px 30px; 
+            padding: 30px; 
             border-radius: var(--radius-card);
             border: 3px solid var(--border); 
-            text-align: center;
             transition: all 0.3s ease; 
-            display: flex; 
-            flex-direction: column;
         }
 
         section:hover { 
-            transform: translateY(-5px); 
             background: #111111;
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
-        .deadline {
-            font-size: 0.85rem;
-            color: var(--accent-white);
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: var(--bg-deep-red);
-            padding: 5px 10px;
-            display: inline-block;
-            border-radius: 4px;
-        }
-
         h2 { 
             color: var(--accent-white); 
-            font-size: 1.6rem; 
+            font-size: 1.4rem; 
             margin: 0 0 15px 0; 
             text-transform: uppercase;
             font-weight: 800;
-        }
-
-        p { line-height: 1.6; margin: 0 0 10px 0; }
-
-        button {
-            background-color: var(--accent-white); 
-            color: var(--bg-card); 
-            border: none;
-            padding: 16px 20px; 
-            font-weight: 900;
-            font-size: 1rem;
-            text-transform: uppercase;
             letter-spacing: 1px;
-            cursor: pointer; 
-            width: 100%; 
-            margin-top: auto;
-            border-radius: var(--radius-btn);
-            transition: all 0.2s ease;
+            border-bottom: 2px solid var(--bg-deep-red);
+            padding-bottom: 8px;
+            display: inline-block;
         }
 
-        button:hover {
-            background-color: #dddddd;
-            transform: scale(1.02);
+        p { 
+            line-height: 1.6; 
+            margin: 0 0 12px 0; 
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: none;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--bg-deep-red);
+            font-size: 1.5rem;
+            position: absolute;
+            left: -20px;
+            top: -4px;
+        }
+
+        strong {
+            color: var(--accent-white);
+            font-weight: 700;
+        }
+
+        .contact-box {
+            background: #111111;
+            padding: 20px;
+            border-radius: var(--radius-btn);
+            border: 2px solid var(--bg-deep-red);
+            margin-top: 15px;
+        }
+
+        .contact-box a {
+            color: var(--accent-white);
+            text-decoration: underline;
+            font-weight: bold;
         }
 
         footer { 
@@ -133,12 +181,17 @@
             font-weight: bold;
         }
 
+        footer p {
+            margin: 8px 0;
+        }
+
         .footer-link {
             color: var(--accent-white);
             text-decoration: underline;
             font-size: 0.9rem;
             opacity: 0.85;
             transition: opacity 0.2s ease;
+            margin: 0 10px;
         }
 
         .footer-link:hover {
@@ -146,98 +199,80 @@
         }
 
         @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
-            main { padding: 30px 15px; }
+            header h1 { font-size: 1.6rem; }
+            main { padding: 25px 15px; }
             .main-wrapper { margin: 10px auto; border-radius: 10px; }
+            section { padding: 20px; }
         }
     </style>
 </head>
 <body>
-    
+
     <div class="main-wrapper">
         <header>
-            <h1>Cooptations Center</h1>
-            <p>Welcome, please choose a section</p>
+            <div class="nav-container">
+                <a href="index.html" class="back-link">← Back to Portal</a>
+            </div>
+            <h1>Data Protection Policy (GDPR)</h1>
+            <p>Transparency & Personal Data Security</p>
         </header>
 
         <main>
             <section>
-                <div>
-                    <p id="date-voeux" class="deadline">Loading...</p>
-                    <h2>Student Wishes</h2>
-                    <p>Submit your wishes and preferences as a student</p>
-                </div>
-                <button id="btn-wishes">Student Wishes</button>
+                <p>In accordance with the <strong>General Data Protection Regulation (GDPR)</strong>, this page details how the data collected on this portal is processed by the Student Corporation Council.</p>
             </section>
 
             <section>
-                <div>
-                    <p id="date-asso" class="deadline">Loading...</p>
-                    <h2>Association Wishes</h2>
-                    <p>Section to submit your recruitment choices as an association</p>
+                <h2>1. Data Controller</h2>
+                <p>Data processing is carried out by the <strong>emlyon Students Corporation Council</strong>, responsible for managing the cooptation processes.</p>
+            </section>
+
+            <section>
+                <h2>2. Data Collected</h2>
+                <ul>
+                    <li><strong>Identity:</strong> First Name, Last Name.</li>
+                    <li><strong>Identifiers:</strong> Student ID number.</li>
+                    <li><strong>Contact:</strong> Email address (student or association).</li>
+                    <li><strong>Choices:</strong> Association wishes and cooptation lists.</li>
+                    <li><strong>Timestamps:</strong> Date and time of form submissions.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>3. Purposes of Processing</h2>
+                <ul>
+                    <li><strong>Registration Management:</strong> Recording users in the system.</li>
+                    <li><strong>Authentication:</strong> Securing access to personal areas.</li>
+                    <li><strong>Collection of Wishes:</strong> Centralizing preferences for the cooptation process.</li>
+                    <li><strong>Communication:</strong> Sending confirmations and summaries via email.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>4. Retention and Security</h2>
+                <p>Data is kept for the duration of the current year's cooptation process and archived for a period of <strong>2 years</strong>. It is transmitted via secure protocols and stored in databases with restricted access.</p>
+            </section>
+
+            <section>
+                <h2>5. Your Rights</h2>
+                <p>You have the right to access, rectify, and delete your personal data.</p>
+                <div class="contact-box">
+                    <p>To exercise these rights, please contact the Data Protection Officer:</p>
+                    <p><strong>Email:</strong> <a href="mailto:cooptations@corpo-emlyon.com">cooptations@corpo-emlyon.com</a></p>
                 </div>
-                <button onclick="location.href='login-asso.html'">Association Wishes</button>
             </section>
         </main>
 
         <footer>
             <p>© <span id="year"></span> — emlyon Students Corporation Council</p>
-            <p><a href="rgpd.html" class="footer-link">Politique de confidentialité (RGPD)</a></p>
+            <p>
+                <a href="faq.html" class="footer-link">Need help? (FAQ)</a> | 
+                <a href="rgpd.html" class="footer-link">Data Policy</a>
+            </p>
         </footer>
     </div>
 
     <script>
-        async function loadDeadlines() {
-            try {
-                const response = await fetch('status.txt');
-                const text = await response.text();
-                const lines = text.split('\n');
-
-                lines.forEach(line => {
-                    const parts = line.split('|');
-                    const deadlineText = parts[1] ? parts[1].trim() : "No deadline set";
-                    
-                    if (line.toLowerCase().includes('voeux')) {
-                        const dateVoeuxEl = document.getElementById('date-voeux');
-                        const dateAssoEl = document.getElementById('date-asso');
-                        if (dateVoeuxEl) dateVoeuxEl.textContent = deadlineText;
-                        if (dateAssoEl) dateAssoEl.textContent = deadlineText;
-                    }
-                });
-            } catch (err) {
-                console.error("Erreur lors du chargement des dates", err);
-            }
-        }
-
-        async function checkStatusAndRedirect(key, targetUrl) {
-            try {
-                const response = await fetch('status.txt');
-                const text = await response.text();
-                const lines = text.split('\n');
-                let isOpened = false;
-
-                lines.forEach(line => {
-                    const mainPart = line.split('|')[0];
-                    if (mainPart.toLowerCase().includes(key.toLowerCase()) && mainPart.toUpperCase().includes('OPEN')) {
-                        isOpened = true;
-                    }
-                });
-
-                if (isOpened) {
-                    window.location.href = targetUrl;
-                } else {
-                    alert("🚫 ACCESS DENIED: This section is currently closed.");
-                }
-            } catch (err) {
-                alert("Server connection error.");
-            }
-        }
-
-        document.getElementById("btn-wishes").addEventListener("click", () => {
-            checkStatusAndRedirect('voeux', 'login.html');
-        });
-
-        loadDeadlines();
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
