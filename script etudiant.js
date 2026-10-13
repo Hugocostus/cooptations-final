@@ -8,7 +8,8 @@ let etudiantConnecte = null; // Will contain the object {Prenom, Nom, Numero}
 
 /* List of associations */
 const associations = [
-    "BDA", "BDE", "BDI", "BDX", "DECLIC", "GOURMETS", "FRONT ROW", "NOISE", "RACING",
+    "ASTUCE", "BDA", "BDI", "BDS", "BDX", "CU", "CV", "DECLIC", "RACING",
+    "SOLI", "BDE", "BDI", "BDX", "DECLIC", "GOURMETS", "FRONT ROW", "NOISE", "RACING",
     "SOLI"
 ];
 
